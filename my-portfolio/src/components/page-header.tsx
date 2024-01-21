@@ -46,7 +46,7 @@ export default function PageHeader() {
             initial={{ y: -75, opacity: 0 }}
             animate={{ y: 0  , opacity: 1 }}
         >
-            <div className='w-full mx-[0.5rem] my-[0rem]'>
+            <div className='text-nowrap mx-[0.25rem] my-[0rem] sm:mx-[0.5rem]'>
                 <p className='text-2xl font-bold text-white text-opacity-85 dark:text-opacity-70'>
                     Cameron Clay
                 </p>
@@ -61,7 +61,7 @@ export default function PageHeader() {
                 //Absolute positioning refers to positioning an element relative to its nearest positioned ancestor (i.e. the nearest parent element with a position value of relative, absolute, or fixed). 
             }
             <nav className='flex justify-end w-full pr-[0.5rem]'>
-                <ul className='flex flex-wrap gap-x-[0.5rem] gap-y-[0.5rem] text-[0.75rem] font-medium'>
+                <ul className='flex flex-wrap gap-x-[0.25rem] gap-y-[0.25rem] sm:gap-x-[0.5rem] sm:gap-y-[0.5rem] text-[0.75rem] font-medium'>
                     {LINKS.map((link) => (
                         <li
                             className='relative flex justify-center sm:min-w-[8rem] h-[3.5rem]'
@@ -120,7 +120,7 @@ export default function PageHeader() {
                 </ul>
             </nav>
 
-            <div className='flex flex-shrink-0 mx-[0.5rem] h-[3.5rem] w-[3.5rem]'>
+            <div className='flex flex-shrink-0 mx-[0.25rem] sm:mx-[0.5rem] h-[3.5rem] w-[3.5rem]'>
                 <DarkMode/> 
             </div>
         </motion.header>
