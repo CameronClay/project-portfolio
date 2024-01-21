@@ -40,7 +40,7 @@ export const PROJECTS_DATA = [
              - Supports inheritance, polymorphism, and multithreading
             `,
         tags: ['C++', 'Assembly', 'CMake', 'Git'],
-        previewImageUrl: '/assets/Preview_Compiler.png',
+        previewImageUrl  : '/assets/Preview_Compiler.png',
         fullImageUrl     : '/assets/Full_Compiler.png'
     },
     {
@@ -51,7 +51,7 @@ export const PROJECTS_DATA = [
              - Supports multithreading
             `,
         tags: ['C++', 'Assembly', 'CMake', 'Git'],
-        previewImageUrl: '/assets/Preview_ASM_VM.png',
+        previewImageUrl  : '/assets/Preview_ASM_VM.png',
         fullImageUrl     : '/assets/Full_ASM_VM.png'
     },
     {
@@ -61,7 +61,7 @@ export const PROJECTS_DATA = [
              - Supports shared whiteboard
             `,
         tags: ['C++', 'Qt', 'Win32 API', 'CMake', 'WNLIB', 'Git'],
-        previewImageUrl: '/assets/Preview_WNLIB_Client.png',
+        previewImageUrl  : '/assets/Preview_WNLIB_Client.png',
         fullImageUrl     : '/assets/Full_WNLIB_Client.png'
     },
     {
@@ -70,26 +70,26 @@ export const PROJECTS_DATA = [
             `- TCP networking library which served as the base for writing a Client-Server chat application
             `,
         tags: ['C++', 'Win32 API', 'CMake', 'IO Completion Ports (IOCP)', 'Git'],
-        previewImageUrl: '/assets/Preview_WNLIB_Server.png',
+        previewImageUrl  : '/assets/Preview_WNLIB_Server.png',
         fullImageUrl     : '/assets/Full_WNLIB_Server.png'
     },
     {
-        title: 'Type-erased function container library]',
+        title: 'Type-erased function container library',
         description:
             `- Library which enables the ability to conditionally call functions at compile time based on the parameters passed, and enables those functions to be stored in statically-typed containers (such as an array/vector/arraylist)
             `,
         tags: ['C++', 'Template metaprogramming', 'Git'],
-        previewImageUrl: '/assets/Preview_FunctionAny.png',
+        previewImageUrl  : '/assets/Preview_FunctionAny.png',
         fullImageUrl     : '/assets/Full_FunctionAny.png'
     },
     {
         title: 'Discord bot',
         description:
-            `- Elo bot for a SC2 arcade game, allows server members to join a queue to play against each other and
+            `- Elo bot for a Starcraft 2 arcade game, allows server members to join a queue to play against each other and
             generates a balanced team matchup based on player skill levels
             `,
         tags: ['Python', 'Discord.py', 'PostgreSQL', 'Git'],
-        previewImageUrl: '/assets/Preview_HexBot.png',
+        previewImageUrl  : '/assets/Preview_HexBot.png',
         fullImageUrl     : '/assets/Full_HexBot.png'
     },
 ] as const;
