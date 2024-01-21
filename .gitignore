@@ -1,17 +1,17 @@
 # dependencies
-./my-portfolio/node_modules
-./my-portfolio/.pnp
+my-portfolio/node_modules
+my-portfolio/.pnp
 .pnp.js
 
 # testing
-./my-portfolio/coverage
+my-portfolio/coverage
 
 # next.js
-./my-portfolio/.next/
-./my-portfolio/out/
+my-portfolio/.next/
+my-portfolio/out/
 
 # production
-./my-portfolio/build
+my-portfolio/build
 
 # misc
 .DS_Store
