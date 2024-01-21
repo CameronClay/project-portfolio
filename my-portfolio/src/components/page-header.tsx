@@ -53,6 +53,7 @@ export default function PageHeader() {
             </div>
 
             {
+                //The <nav> HTML element represents a section of a page whose purpose is to provide navigation links, either within the current document or to other documents. Common examples of navigation sections are menus, tables of contents, and indexes.
                 //navbar width is width of all the links (flex items) combined
                 //why does motion.li need relative positioning to work??
                 //possibly because top property is inherited from navbar on the motion.li? nope it seems...
@@ -60,7 +61,7 @@ export default function PageHeader() {
                 //Absolute positioning refers to positioning an element relative to its nearest positioned ancestor (i.e. the nearest parent element with a position value of relative, absolute, or fixed). 
             }
             <nav className='flex justify-end w-full pr-[0.5rem]'>
-                <ul className='flex flex-wrap gap-x-[0.5rem] gap-y-[0.5rem] text-[0.9rem] font-medium'>
+                <ul className='flex flex-wrap gap-x-[0.5rem] gap-y-[0.5rem] text-[0.75rem] font-medium'>
                     {LINKS.map((link) => (
                         <li
                             className='relative flex justify-center sm:min-w-[8rem] h-[3.5rem]'
@@ -98,6 +99,8 @@ export default function PageHeader() {
                                     //Absolute-positioned elements are completely taken out of the regular flow of the web page.
                                     //Absolute positioning refers to positioning an element relative to its nearest positioned ancestor (i.e. the nearest parent element with a position value of relative, absolute, or fixed
                                     //They are not positioned based on their usual place in the document flow, but based on the position of their ancestor.
+
+                                    //-z-[15] needed to put the active section blob behind the link text ({link.name})
                                 }
                                 {link.name === activeSection && (
                                     <motion.span
