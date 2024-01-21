@@ -34,8 +34,8 @@ export default function Project({
             }}
             className='group mb-[0.75rem] sm:mb-[2rem] last:mb-[0rem]'
         >
-            <section className='bg-gray-100 max-w-[42rem] border border-black/5 rounded-lg overflow-hidden sm:pr-[2rem] relative sm:h-[25rem] hover:bg-gray-200 transition dark:text-white dark:bg-white/[10%] dark:hover:bg-white-20'>
-                <div className='pt-[1rem] pb-[1.75rem] px-[1.25rem] sm:pl-[2.5rem] sm:pr-[0.5rem] sm:pt-[2.5rem] sm:max-w-[50%] flex flex-col h-full'>
+            <section className='max-w-[42rem] border border-black/5 rounded-lg overflow-hidden sm:pr-[2rem] relative sm:h-[25rem] bg-gray-100 hover:bg-gray-200 transition dark:text-white dark:bg-white/[10%] dark:hover:bg-white/[15%]'>
+                <div className='flex flex-col h-full pt-[1rem] pb-[1.75rem] px-[1.25rem] sm:pl-[2.5rem] sm:pr-[0.5rem] sm:pt-[2.5rem] sm:max-w-[50%]'>
                     <h3 className='text-2xl font-semibold'>{title}</h3>
                     {
                         //whitespace-pre-line displays \n as aline break instead of as plain text
@@ -57,16 +57,21 @@ export default function Project({
                 {
                     //absolute position so list of skills can be at the bottom of the image
                 }
-                <Link href={fullImageUrl} target='_blank' title="Click to open full image">
+                <Link 
+                    href={fullImageUrl} 
+                    target='_blank' 
+                    title='Click to open full image' 
+                    className='absolute w-full h-full top-[2rem] sm:-right-[10rem] sm:h-[auto] sm:max-w-[22.5rem]
+                            transition
+
+                            sm:hover:scale-[1.25]
+                            sm:hover:-translate-x-[60%]'
+                >
                     <img
                         src={previewImageUrl}
                         alt={`Project ${title}`}
                         fetchPriority='high'
-                        className='absolute hidden sm:block top-[2rem] -right-[10rem] w-[28.25rem] rounded-t-lg shadow-2xl
-                            transition
-
-                            hover:scale-[1.2]
-                            hover:-translate-x-[47%]'
+                        className='hidden sm:block w-full h-full py-[1rem]'
                     />
                 </Link>  
             </section>
