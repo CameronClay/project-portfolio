@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html.dark {
+    --line-color: rgba(255, 255, 255, 0.2);
+}
+
+.borderBlack {
+    @apply border border-black/[20%] dark:border-white/[20%] ;
+}
+
+.emailInput {
+    @apply text-base rounded-xl borderBlack dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none;
+}
+
+.emailLabel {
+    @apply text-left font-semibold text-gray-700 dark:text-white/80;
+}
