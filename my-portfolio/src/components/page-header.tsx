@@ -41,7 +41,7 @@ export default function PageHeader() {
         //     // background for navbar -- doesnt need to be fixed position because this component is contained in top-bar
         // }
 
-        <motion.div
+        <motion.header
             className='flex flex-row z-[999] relative items-center justify-start rounded-none'
             initial={{ y: -75, opacity: 0 }}
             animate={{ y: 0  , opacity: 1 }}
@@ -123,6 +123,6 @@ export default function PageHeader() {
             <div className='flex flex-shrink-0 mx-[0.5rem] h-[3.5rem] w-[3.5rem]'>
                 <DarkMode/> 
             </div>
-        </motion.div>
+        </motion.header>
     );
 }

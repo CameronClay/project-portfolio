@@ -35,13 +35,7 @@ export default function RootLayout({
         <html lang='en' className='!scroll-smooth'>
             <body className={`${inter.className} relative`}>
                 <ContextProviderElement>
-                    <TopBar>
-                        <PageHeader/>
-                    </TopBar>
-                    {
-                        //cannot put margin on topbar because it has position fixed
-                    }
-                    <div className='bg-gray-50 text-gray-950 relative pt-[5rem] sm:pt-[6rem] dark:bg-zinc-800 dark:text-gray-50 dark:text-opacity-90'>
+                    <div className='bg-gray-50 text-gray-950 relative dark:bg-zinc-800 dark:text-gray-50 dark:text-opacity-90'>
                         {
                         /* 
                             // two divs are for two different colors at the top of the page
@@ -60,6 +54,10 @@ export default function RootLayout({
                             //Toaster element is for react-hot-toaster (alert display) 
                         */
                         }
+
+                        <TopBar>
+                            <PageHeader/>
+                        </TopBar>
 
                         {children}
 
