@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { LINKS } from '@src/constants/section-data';
 import { useActiveSectionContext } from '@src/context/active-section-context';
 import DarkMode from '@src/components/dark-mode';
+import APIDropdown from '@src/components/api-dropdown';
 
 export default function PageHeader() {
     const { activeSection, setActiveSection, setTimeOfLastClick } =
@@ -76,7 +77,7 @@ export default function PageHeader() {
 
                             <Link
                                 className={clsx(
-                                    'text-2xl flex items-center h-full dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800 transition',
+                                    'flex items-center text-2xl h-full dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800',
                                     {
                                         'text-zinc-900 dark:text-zinc-900':
                                             activeSection === link.name,
@@ -119,6 +120,7 @@ export default function PageHeader() {
                     ))}
                 </ul>
             </nav>
+            <APIDropdown/>
 
             <div className='flex flex-shrink-0 mx-[0.25rem] sm:mx-[0.5rem] h-[3.5rem] w-[3.5rem]'>
                 <DarkMode/> 

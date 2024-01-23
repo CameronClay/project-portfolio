@@ -47,7 +47,7 @@ export default function Intro() {
                 <Link
                     // title='Contact Me'
                     href='#contact'
-                    className='group bg-gray-900 dark:bg-slate-700 text-white px-[1.75rem] py-[0.75rem] flex items-center gap-[0.5rem] rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition'
+                    className='flex items-center gap-[0.5rem] rounded-full outline-none px-[1.75rem] py-[0.75rem] bg-gray-900 dark:bg-slate-700 text-white focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition'
                     onClick={()=>{
                         setActiveSection(Section.CONTACT);
                         setTimeOfLastClick(Date.now());
@@ -57,19 +57,22 @@ export default function Intro() {
                     <MdEmail className='opacity-70'/>
                 </Link>
                 
-                <a
+                <Link
                     // title='Download Resume'
-                    className='group bg-white px-[1.75rem] py-[0.75rem] flex items-center gap-[0.5rem] rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer borderBlack dark:bg-zinc-700'
+                    className='flex items-center gap-[0.5rem] rounded-full outline-none px-[1.75rem] py-[0.75rem] bg-white focus:scale-110 hover:scale-110 active:scale-105 cursor-pointer borderBlack dark:bg-zinc-700 transition'
                     href='/downloads/Resume.pdf'
                     download
                 >
                     Download Resume
                     <MdDownload className='opacity-70' />
-                </a>
+                </Link>
 
+                {
+                    //next/link only creates an a tag (important for Search Engine Optimization (SEO)) if a string componenet is passed in for children
+                }
                 <a 
                     title='LinkedIn'
-                    className='bg-white p-4 text-gray-700 hover:text-gray-950 flex items-center gap-[0.5rem] rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-zinc-700 dark:text-white/60'
+                    className='flex items-center gap-[0.5rem] rounded-full outline-none bg-white p-[1rem] text-gray-700 hover:text-gray-950 focus:scale-[1.15] hover:scale-[1.15] active:scale-105 cursor-pointer borderBlack dark:bg-zinc-700 dark:text-white/60 transition'
                     href={CONTACT_INFO.linkedin}
                     target='_blank'
                 >
@@ -78,7 +81,7 @@ export default function Intro() {
 
                 <a
                     title='GitHub'
-                    className='bg-white p-4 text-gray-700 hover:text-gray-950 flex items-center gap-[0.5rem] text-[1.35rem] rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-zinc-700 dark:text-white/60'
+                    className='flex items-center gap-[0.5rem] rounded-full outline-none bg-white p-[1rem] text-gray-700 hover:text-gray-950 text-[1.35rem] focus:scale-[1.15] hover:scale-[1.15] active:scale-105 cursor-pointer borderBlack dark:bg-zinc-700 dark:text-white/60 transition'
                     href={CONTACT_INFO.github}
                     target='_blank'
                 >
