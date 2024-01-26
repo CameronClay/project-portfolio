@@ -2,11 +2,11 @@
 
 import React from 'react';
 
-import SectionHeading from '../section-heading';
-import { PROJECTS_DATA } from '@src/constants/section-data';
+import SectionHeading from '../../section-heading';
+import { PROJECTS_DATA } from '@src/constants/home/section-data';
 import Project from '../project';
 import { useSectionInView } from '@src/lib/hooks';
-import { Section } from '@src/constants/section-data';
+import { Section } from '@src/constants/home/section-data';
 
 export default function Projects() {
     const { ref } = useSectionInView(Section.PROJECTS, 0.28);

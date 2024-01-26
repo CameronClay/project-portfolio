@@ -7,7 +7,7 @@ import nodemailer from 'nodemailer';
 import { render } from "@react-email/render";
 import { validateInput, getErrorMessage } from '@src/lib/utils/validation';
 import ContactMeEmail from '@src/components/contact-me-email';
-import { EMAIL_FORM_INFO, EMAIL_INFO } from '@src/constants/email-constants';
+import { EMAIL_FORM_INFO, EMAIL_INFO } from '@src/constants/home/email-constants';
 
 function buildEmailDataFromFormData(formData : FormData) {
     const senderName  = formData.get('inputSenderName') as string | null;

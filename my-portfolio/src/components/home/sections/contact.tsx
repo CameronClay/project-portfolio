@@ -5,8 +5,8 @@ import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
 import { useSectionInView } from '@src/lib/hooks';
 import { sendEmail } from '@src/server-actions/sendEmail';
-import { EMAIL_FORM_INFO, EMAIL_INFO } from '@src/constants/email-constants';
-import { Section } from '@src/constants/section-data';
+import { EMAIL_FORM_INFO, EMAIL_INFO } from '@src/constants/home/email-constants';
+import { Section } from '@src/constants/home/section-data';
 import SectionHeading from '@src/components/section-heading';
 import SendBtn from '@src/components/send-btn';
 

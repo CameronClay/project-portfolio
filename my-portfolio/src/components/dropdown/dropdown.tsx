@@ -100,7 +100,7 @@ export function DropdownButton({ classNameEtc, title, children }: DropdownButton
 
 type DropdownItemProps = {
     href         : string;
-    target      ?: '_blank' | '_parent' | '_self | _top'
+    target      ?: '_blank' | '_parent' | '_self' | '_top';
     onClick     ?: () => void;
     classNameEtc?: string;
     children     : React.ReactNode;

@@ -9,8 +9,8 @@ import { BsLinkedin } from 'react-icons/bs';
 
 import { useSectionInView } from '@src/lib/hooks';
 import { useActiveSectionContext } from '@src/context/active-section-context';
-import { CONTACT_INFO } from '@src/constants/contact-info';
-import { Section } from '@src/constants/section-data';
+import { Section } from '@src/constants/home/section-data';
+import { CONTACT_INFO } from '@src/constants/home/contact-info';
 import SectionHeading from '@src/components/section-heading';
 
 export default function Intro() {

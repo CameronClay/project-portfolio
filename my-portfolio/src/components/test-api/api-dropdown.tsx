@@ -21,7 +21,7 @@ export default function APIDropdown() {
                     classNameEtc='w-[10rem] text-lg bg-zinc-100 dark:bg-zinc-800'
                 >
                     <DropdownItem 
-                        href='/api'
+                        href='/test-api'
                         target='_parent'
                         classNameEtc='text-2xl h-full dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800'
                     >

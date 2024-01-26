@@ -1,5 +1,5 @@
 import React from 'react';
-import { CONTACT_INFO } from '@src/constants/contact-info';
+import { CONTACT_INFO } from '@src/constants/home/contact-info';
 
 export default function PageFooter() {
     return (

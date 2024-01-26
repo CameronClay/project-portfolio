@@ -2,7 +2,7 @@
 import { Inter } from 'next/font/google';
 
 import '@src/app/globals.css';
-import { CONTACT_INFO } from '@src/constants/contact-info'
+import { CONTACT_INFO } from '@src/constants/home/contact-info'
 
 // choose font
 const inter = Inter({ subsets: ['latin'] });

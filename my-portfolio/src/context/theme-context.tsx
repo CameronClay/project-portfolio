@@ -77,7 +77,9 @@ export function useTheme() {
     const context = useContext(ThemeContext);
 
     if (context === null) {
-        throw new Error(`${useTheme.name} must be used within an ${ThemeContextProvider.name}`);
+        let error = new Error();
+        error.message =`${useTheme.name} must be used within an ${ThemeContextProvider.name}. Trace: ${error.stack}`;
+        throw error;
     }
 
     return context;

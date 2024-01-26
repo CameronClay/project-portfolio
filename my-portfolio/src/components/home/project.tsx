@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { PROJECTS_DATA } from '@src/constants/section-data';
+import { PROJECTS_DATA } from '@src/constants/home/section-data';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 

@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { SKILLS_DATA } from '@src/constants/section-data';
+import { SKILLS_DATA } from '@src/constants/home/section-data';
 import { useSectionInView } from '@src/lib/hooks';
-import { Section } from '@src/constants/section-data';
+import { Section } from '@src/constants/home/section-data';
 import SectionHeading from '@src/components/section-heading';
 
 const fadeInAnimationVariants = {

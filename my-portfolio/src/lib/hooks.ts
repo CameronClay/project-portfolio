@@ -1,7 +1,7 @@
 import { useInView } from 'react-intersection-observer';
 import { useActiveSectionContext } from '@src/context/active-section-context';
+import { Section } from '@src/constants/home/section-data';
 import { useEffect } from 'react';
-import { Section } from '@src/constants/section-data';
 // import { SectionName } from './types';
 
 //sets active section in header when user scrolls to it manually

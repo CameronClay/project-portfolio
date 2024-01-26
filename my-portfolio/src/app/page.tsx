@@ -1,15 +1,15 @@
-import Contact from '@src/components/sections/contact';
-import Intro from '@src/components/sections/intro';
-import Projects from '@src/components/sections/projects';
+import Contact from '@src/components/home/sections/contact';
+import Intro from '@src/components/home/sections/intro';
+import Projects from '@src/components/home/sections/projects';
 import SectionDivider from '@src/components/section-divider';
-import Skills from '@src/components/sections/skills';
+import Skills from '@src/components/home/sections/skills';
 // import Experience from '@src/components/experience';
 
-import PageHeader from '@src/components/page-header';
-import PageFooter from '@/src/components/page-footer';
+import PageHeader from '@src/components/home/page-header';
+import PageFooter from '@src/components/page-footer';
 import MyToaster from '@src/components/mytoaster';
 import TopBar from '@src/components/top-bar';
-import ContextProviderElement from '@src/context/context-provider-element';
+import ContextProviderElement from '@src/context/home/context-provider-element';
 
 export default function Home() {
 	return (
@@ -43,7 +43,6 @@ export default function Home() {
 					<SectionDivider />
 					<Projects />
 					<Skills />
-					{/* <Experience /> */}
 					<Contact />
 				</main>
 
