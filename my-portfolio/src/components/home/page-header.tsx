@@ -121,7 +121,7 @@ export default function PageHeader() {
                 </ul>
             </nav>
             
-            <APIDropdown/>
+            {/* <APIDropdown/> */}
 
             <div className='flex flex-shrink-0 mx-[0.25rem] sm:mx-[0.5rem] h-[3.5rem] w-[3.5rem]'>
                 <DarkMode/> 
