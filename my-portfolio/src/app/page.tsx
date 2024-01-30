@@ -10,6 +10,7 @@ import PageFooter from '@src/components/page-footer';
 import MyToaster from '@src/components/mytoaster';
 import TopBar from '@src/components/top-bar';
 import ContextProviderElement from '@src/context/home/context-provider-element';
+import ImageViewer from '@src/components/image-viewer';
 
 export default function Home() {
 	return (
@@ -37,6 +38,8 @@ export default function Home() {
 				<TopBar>
 					<PageHeader/>
 				</TopBar>
+
+				<ImageViewer/>
 
 				<main className='flex flex-col items-center pl-[1rem] pr-[1rem]'>
 					<Intro />

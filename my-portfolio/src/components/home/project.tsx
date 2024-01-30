@@ -1,9 +1,10 @@
 'use client';
 
 import { useRef } from 'react';
-import { PROJECTS_DATA } from '@src/constants/home/section-data';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
+import { useImageViewerContext } from '@src/context/image-viewer-context';
+import { PROJECTS_DATA } from '@src/constants/home/section-data';
 
 type ProjectProps = (typeof PROJECTS_DATA)[number];
 
@@ -21,6 +22,7 @@ export default function Project({
     });
     const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
     const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
+    const imageViewerContext = useImageViewerContext();
 
     //tracking-wider changes text spacing
     //leading-relaxed modifies the line height
@@ -57,7 +59,7 @@ export default function Project({
                 {
                     //absolute position so list of skills can be at the bottom of the image
                 }
-                <Link 
+                {/* <Link 
                     href={fullImageUrl} 
                     target='_blank' 
                     title='Click to open full image' 
@@ -66,14 +68,28 @@ export default function Project({
 
                             sm:hover:scale-[1.25]
                             sm:hover:-translate-x-[45%]'
+                > */}
+                <button
+                    className='absolute w-full h-full top-[2rem] sm:-right-[7rem] sm:h-[auto] sm:max-w-[22.5rem]
+                            transition
+
+                            sm:hover:scale-[1.25]
+                            sm:hover:-translate-x-[45%]'
+                    onClick={()=> {
+                        imageViewerContext.setImageAlt(title);
+                        imageViewerContext.setImageSrc(fullImageUrl);
+                        imageViewerContext.setVisible(true);
+                    }}
                 >
                     <img
+                        title='Click to open full image'
                         src={previewImageUrl}
                         alt={`Project ${title}`}
                         fetchPriority='high'
                         className='hidden sm:block w-full h-full py-[1rem]'
+                        tabIndex={0}
                     />
-                </Link>  
+                </button>  
             </section>
         </motion.div>
     )

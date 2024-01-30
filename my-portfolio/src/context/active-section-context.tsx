@@ -1,6 +1,5 @@
 'use client';
 
-import { Section } from '@src/constants/home/section-data';
 import React, { useState, createContext, useContext } from 'react';
 
 type ActiveSectionContextProviderProps = {

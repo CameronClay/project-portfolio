@@ -1,42 +1,76 @@
 'use client';
 
-import React from 'react';
-import Image from 'next/image';
+import React, { useCallback, useRef } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { useImageViewerContext } from '@src/context/image-viewer-context'
+import { useOutsideClick } from 'outsideclick-react';
+import { useScroll, useTransform } from 'framer-motion';
 
 export default function ImageViewer() {
-    const {isVisible, setVisible, imageSrc, imageAlt} = useImageViewerContext();
+    const imageViewerContext = useImageViewerContext();
     
     const close = () => {
-        setVisible(false);
+        imageViewerContext.setVisible(false);
     };
+
+    const handleOutsideClick = (e : HTMLElement) => {
+        close();
+    }
+    const ref = useOutsideClick(handleOutsideClick);
+    const imageRef = useRef<HTMLImageElement>(null);
+
+    // const { scrollY } = useScroll({
+    //     target: ref,
+    // });
+    // const scaleProgress = useTransform(scrollY, [0, 1], [0.8, 1]);
+
+    // const onUpdate = useCallback(() => {
+    //     if (imageRef.current) {
+    //         imageRef.current.style.transform = `scale(${scaleProgress})`;
+    //     }
+    // }, [scaleProgress]);
 
     return (
         <div
-            className='w-[30rem] h-[30rem] border-black/10 border-[0.125rem] bg-black'
+            ref={ref}
+            className=''
         >
-            {isVisible && (
+            {imageViewerContext.isVisible && (
                 <div
-                    className=''
+                    className='fixed flex left-1/2 flex-col items-center justify-center -translate-x-1/2 z-50 bg-black'
                 >
-                    <button
-                        title='Close Image Viewer'
-                        onClick={close}
-                        className=''
+                    <div
+                        className='flex flex-row items-center justify-start w-full h-[1rem] sm:h-[2rem] bg-gray-700 mb-[1rem] mx-[1rem]'
                     >
-                        <IoMdClose/>
-                    </button>
+                        <div className='text-nowrap mx-[0.25rem] my-[0rem] sm:mx-[0.5rem]'>
+                            <p className='text-2xl font-bold text-white text-opacity-85 dark:text-opacity-70'>
+                                Image Viewer
+                            </p>
+                        </div>
 
-                    <Image
-                        src={imageSrc}
-                        alt={imageAlt}
-                        width={500}
-                        height={500}
-                        className=''
+                        <div
+                            className='flex justify-end w-full pl-[0.25rem]'
+                        >
+                            <button
+                                title='Close Image Viewer'
+                                onClick={close}
+                                className='flex items-center justify-center w-[2rem] h-[2rem] top-[0.5rem] hover:bg-white'
+                            >
+                                <IoMdClose size={24}/>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <img
+                        ref={imageRef}
+                        src={imageViewerContext.imageSrc}
+                        alt={imageViewerContext.imageAlt}
+                        fetchPriority='high'
+                        className='px-[1rem] pb-[1rem]'
                     >
                         
-                    </Image>
+                    </img>
                 </div>
             )}
         </div>
