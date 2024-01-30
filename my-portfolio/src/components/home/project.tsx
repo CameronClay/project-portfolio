@@ -40,7 +40,7 @@ export default function Project({
                 <div className='flex flex-col h-full pt-[1rem] pb-[1.75rem] px-[1.25rem] sm:pl-[2.5rem] sm:pr-[0.5rem] sm:pt-[2.5rem] sm:max-w-[60%]'>
                     <h3 className='text-2xl font-semibold'>{title}</h3>
                     {
-                        //whitespace-pre-line displays \n as aline break instead of as plain text
+                        //whitespace-pre-line displays \n as a line break instead of as plain text
                     }
                     <p className='mt-[0.5rem] leading-relaxed text-gray-700 dark:text-white/70 whitespace-pre-line'>{description}</p>
 

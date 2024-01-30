@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { useImageViewerContext } from '@src/context/image-viewer-context'
 import { useOutsideClick } from 'outsideclick-react';
@@ -13,11 +13,22 @@ export default function ImageViewer() {
         imageViewerContext.setVisible(false);
     };
 
+    //make click outside of element close it
     const handleOutsideClick = (e : HTMLElement) => {
         close();
     }
     const ref = useOutsideClick(handleOutsideClick);
     const imageRef = useRef<HTMLImageElement>(null);
+
+    //disable page scroll when element is visible
+    useEffect(() => {
+        if (imageViewerContext.isVisible) {
+            document.body.style.overflow = 'hidden';
+        } 
+        else {
+            document.body.style.overflow = 'scroll';
+        }
+    }, [imageViewerContext.isVisible]);
 
     // const { scrollY } = useScroll({
     //     target: ref,
@@ -54,7 +65,7 @@ export default function ImageViewer() {
                             <button
                                 title='Close Image Viewer'
                                 onClick={close}
-                                className='flex items-center justify-center w-[2rem] h-[2rem] top-[0.5rem] hover:bg-white'
+                                className='flex items-center justify-center w-[2rem] h-[2rem] top-[0.5rem] text-gray-900 hover:bg-gray-400'
                             >
                                 <IoMdClose size={24}/>
                             </button>
