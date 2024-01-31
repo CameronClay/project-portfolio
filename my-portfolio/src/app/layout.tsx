@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 
 import '@src/app/globals.css';
 import { CONTACT_INFO } from '@src/constants/home/contact-info'
+import React from 'react';
 
 // choose font
 const inter = Inter({ subsets: ['latin'] });
@@ -26,10 +27,12 @@ export default function RootLayout({
 }) {
     //! denotes an important rule in css, it will override ALL previous styling rules for that specific property on that element
     return (
-        <html lang='en' className='!scroll-smooth'>
-            <body className={`${inter.className}`}>
-                {children}
-            </body>
-        </html>
+        <React.StrictMode>
+            <html lang='en' className='!scroll-smooth'>
+                <body className={`${inter.className}`}>
+                    {children}
+                </body>
+            </html>
+        </React.StrictMode>
     );
 }

@@ -1,13 +1,16 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { WheelEvent, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { useImageViewerContext } from '@src/context/image-viewer-context'
 import { useOutsideClick } from 'outsideclick-react';
-import { useScroll, useTransform } from 'framer-motion';
+import { MdOutlineFilterCenterFocus, MdOutlineZoomOut, MdZoomIn } from 'react-icons/md';
+// import { MdOutlineZoomOut, MdZoomIn } from 'react-icons/md';
+// import { useScroll, useTransform } from 'framer-motion';
 
 export default function ImageViewer() {
     const imageViewerContext = useImageViewerContext();
+    const { isVisible } = imageViewerContext;
     
     const close = () => {
         imageViewerContext.setVisible(false);
@@ -18,7 +21,6 @@ export default function ImageViewer() {
         close();
     }
     const ref = useOutsideClick(handleOutsideClick);
-    const imageRef = useRef<HTMLImageElement>(null);
 
     //disable page scroll when element is visible
     useEffect(() => {
@@ -30,16 +32,71 @@ export default function ImageViewer() {
         }
     }, [imageViewerContext.isVisible]);
 
-    // const { scrollY } = useScroll({
-    //     target: ref,
-    // });
-    // const scaleProgress = useTransform(scrollY, [0, 1], [0.8, 1]);
+    const [scale, _setScale] = useState(1);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
 
-    // const onUpdate = useCallback(() => {
-    //     if (imageRef.current) {
-    //         imageRef.current.style.transform = `scale(${scaleProgress})`;
-    //     }
-    // }, [scaleProgress]);
+    const setScale = (scale : number) => {
+        _setScale(Math.max(Math.min(10, scale), 0.1));
+    }
+
+    const imageRef = useRef<HTMLImageElement>(null);
+    const imageContainerRef = useRef<HTMLDivElement>(null);
+    const onZoomIn = () => {
+        setScale(scale + 0.1);
+    };
+    const onZoomOut = () => {
+        setScale(scale - 0.1);
+    };
+
+    const onMouseScroll = (event : WheelEvent<HTMLImageElement>) => {
+        setScale(scale + event.deltaY * 0.00125);
+    }
+
+    const onCenterImage = () => {
+        setPosition({ x: 0, y: 0 });
+    };
+
+    useEffect(() => {
+        const image = imageRef.current;
+        let isDragging = false;
+        let prevPosition = {x: 0, y: 0};
+
+        const onMouseDown = (event : MouseEvent) => {
+            isDragging = true;
+            prevPosition = {x: event.clientX, y: event.clientY}
+        }
+
+        const onMouseMove = (event : MouseEvent) => {
+            if(!isDragging) {
+                return;
+            }
+
+            const deltaX = event.clientX - prevPosition.x;
+            const deltaY = event.clientY - prevPosition.y;
+            prevPosition = { x: event.clientX, y: event.clientY };
+            setPosition((position) => {
+                return {x: position.x + deltaX, y: position.y + deltaY};
+            })
+        }
+
+        const onMouseUp = (event : MouseEvent) => {
+            isDragging = false;
+        }
+
+        image?.addEventListener('mousedown', onMouseDown);
+        image?.addEventListener('mousemove', onMouseMove);
+        image?.addEventListener('mouseup', onMouseUp);
+        return () => { //return cleanup function
+            image?.removeEventListener('mousedown', onMouseDown);
+            image?.removeEventListener('mousemove', onMouseMove);
+            image?.removeEventListener('mouseup', onMouseUp);
+        }
+    }, [imageRef, scale, isVisible])
+
+    useEffect(() => {
+        setPosition({ x: 0, y: 0 });
+        setScale(1);
+    }, [isVisible]);
 
     return (
         <div
@@ -48,10 +105,10 @@ export default function ImageViewer() {
         >
             {imageViewerContext.isVisible && (
                 <div
-                    className='fixed flex left-1/2 flex-col items-center justify-center -translate-x-1/2 z-50 bg-black'
+                    className='fixed flex left-1/2 flex-col items-center justify-center -translate-x-1/2 z-50 bg-black overflow-hidden'
                 >
                     <div
-                        className='flex flex-row items-center justify-start w-full h-[1rem] sm:h-[2rem] bg-gray-700 mb-[1rem] mx-[1rem]'
+                        className='flex flex-row items-center justify-start w-full h-[1rem] sm:h-[2rem] bg-gray-700 px-[0.25rem]'
                     >
                         <div className='text-nowrap mx-[0.25rem] my-[0rem] sm:mx-[0.5rem]'>
                             <p className='text-2xl font-bold text-white text-opacity-85 dark:text-opacity-70'>
@@ -72,16 +129,53 @@ export default function ImageViewer() {
                         </div>
                     </div>
 
-
-                    <img
-                        ref={imageRef}
-                        src={imageViewerContext.imageSrc}
-                        alt={imageViewerContext.imageAlt}
-                        fetchPriority='high'
-                        className='px-[1rem] pb-[1rem]'
+                    <div
+                        className='flex flex-row items-center justify-start w-full h-[1rem] sm:h-[2rem] bg-gray-700 mb-[1rem] px-[0.5rem] gap-x-[0.25rem] border-y-[1px] border-gray-400'
                     >
-                        
-                    </img>
+                        <button
+                            title='Center Image'
+                            onClick={onCenterImage}
+                            className='flex text-center items-center justify-center h-full text-5xl text-gray-900 hover:bg-gray-400'
+                        >
+                            <MdOutlineFilterCenterFocus size={32}/>
+                        </button>
+
+                        <button
+                            title='Zoom In'
+                            onClick={onZoomIn}
+                            className='flex text-center items-center justify-center h-full text-5xl text-gray-900 hover:bg-gray-400'
+                        >
+                           <MdZoomIn size={32}/>
+                        </button>
+
+                        <button
+                            title='Zoom Out'
+                            onClick={onZoomOut}
+                            className='flex text-center items-center justify-center h-full text-5xl text-gray-900 hover:bg-gray-400'
+                        >
+                          <MdOutlineZoomOut size={32}/>
+                        </button>
+                    </div>
+
+                    <div
+                        onWheel={onMouseScroll}
+                        ref={imageContainerRef}
+                        className='w-full h-full overflow-hidden'
+                    >
+                        <img
+                            ref={imageRef}
+                            src={imageViewerContext.imageSrc}
+                            alt={imageViewerContext.imageAlt}
+                            fetchPriority='high'
+                            className='px-[1rem] pb-[1rem] cursor-move'
+                            style={{
+                                transform: `translate(${position.x}px, ${position.y}px) scale(${scale}) `
+                            }}
+                            draggable={false}
+                        >
+                            
+                        </img>
+                    </div>
                 </div>
             )}
         </div>
