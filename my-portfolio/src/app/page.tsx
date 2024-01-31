@@ -5,6 +5,7 @@ import SectionDivider from '@src/components/section-divider';
 import Skills from '@src/components/home/sections/skills';
 // import Experience from '@src/components/experience';
 
+import PageContainer from '@src/components/home/page-container'
 import PageHeader from '@src/components/home/page-header';
 import PageFooter from '@src/components/page-footer';
 import MyToaster from '@src/components/mytoaster';
@@ -15,7 +16,7 @@ import ImageViewer from '@src/components/image-viewer';
 export default function Home() {
 	return (
 		<ContextProviderElement>
-			<div className='bg-gray-50 text-gray-950 relative dark:bg-zinc-800 dark:text-gray-50 dark:text-opacity-90'>
+			<PageContainer>
 				{
 				/* 
 					// two divs are for two different colors at the top of the page
@@ -51,7 +52,7 @@ export default function Home() {
 
 				<PageFooter/>
 				<MyToaster/>
-			</div>
+			</PageContainer>
 		</ContextProviderElement>
 	);
 }

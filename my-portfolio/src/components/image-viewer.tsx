@@ -108,7 +108,7 @@ export default function ImageViewer() {
                     className='fixed flex left-1/2 flex-col items-center justify-center -translate-x-1/2 z-50 bg-black overflow-hidden'
                 >
                     <div
-                        className='flex flex-row items-center justify-start w-full h-[1rem] sm:h-[2rem] bg-gray-700 px-[0.25rem]'
+                        className='flex flex-row items-center justify-start w-full h-[2rem] bg-gray-700 px-[0.25rem]'
                     >
                         <div className='text-nowrap mx-[0.25rem] my-[0rem] sm:mx-[0.5rem]'>
                             <p className='text-2xl font-bold text-white text-opacity-85 dark:text-opacity-70'>
@@ -130,7 +130,7 @@ export default function ImageViewer() {
                     </div>
 
                     <div
-                        className='flex flex-row items-center justify-start w-full h-[1rem] sm:h-[2rem] bg-gray-700 mb-[1rem] px-[0.5rem] gap-x-[0.25rem] border-y-[1px] border-gray-400'
+                        className='flex flex-row items-center justify-start w-full h-[2rem] bg-gray-700 mb-[1rem] px-[0.5rem] gap-x-[0.25rem] border-y-[1px] border-gray-400'
                     >
                         <button
                             title='Center Image'
@@ -169,7 +169,7 @@ export default function ImageViewer() {
                             fetchPriority='high'
                             className='px-[1rem] pb-[1rem] cursor-move'
                             style={{
-                                transform: `translate(${position.x}px, ${position.y}px) scale(${scale}) `
+                                transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`
                             }}
                             draggable={false}
                         >
