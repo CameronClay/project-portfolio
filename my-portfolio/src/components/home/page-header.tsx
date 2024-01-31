@@ -47,7 +47,7 @@ export default function PageHeader() {
             initial={{ y: -75, opacity: 0 }}
             animate={{ y: 0  , opacity: 1 }}
         >
-            <div className='text-wrap sm:text-nowrap mx-[0.25rem] my-[0rem] sm:mx-[0.5rem]'>
+            <div className='text-wrap lg:text-nowrap mx-[0.25rem] my-[0rem] lg:mx-[0.5rem]'>
                 <p className='text-2xl font-bold text-white text-opacity-85 dark:text-opacity-70'>
                     Cameron Clay
                 </p>
@@ -65,7 +65,7 @@ export default function PageHeader() {
                 <ul className='flex flex-wrap gap-x-[0.25rem] gap-y-[0.25rem] sm:gap-x-[0.5rem] sm:gap-y-[0.5rem] text-[0.75rem] font-medium transition'>
                     {LINKS.map((link) => (
                         <li
-                            className='relative flex justify-center sm:min-w-[8rem] h-[3.5rem]'
+                            className='relative flex justify-center px-[0.25rem] md:px-[0rem] md:min-w-[7rem] lg:min-w-[8rem] h-[3.5rem]'
                             key={link.link}
                         >
                             {

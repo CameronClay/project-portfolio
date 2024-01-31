@@ -46,7 +46,7 @@ export default function PageHeader() {
             initial={{ y: -75, opacity: 0 }}
             animate={{ y: 0  , opacity: 1 }}
         >
-            <div className='text-nowrap mx-[0.25rem] my-[0rem] sm:mx-[0.5rem]'>
+            <div className='text-wrap md:text-nowrap mx-[0.25rem] my-[0rem] sm:mx-[0.5rem]'>
                 <p className='text-2xl font-bold text-white text-opacity-85 dark:text-opacity-70'>
                     Cameron Clay
                 </p>
@@ -64,7 +64,7 @@ export default function PageHeader() {
                 <ul className='flex flex-wrap gap-x-[0.25rem] gap-y-[0.25rem] sm:gap-x-[0.5rem] sm:gap-y-[0.5rem] text-[0.75rem] font-medium'>
                     {LINKS.map((link) => (
                         <li
-                            className='relative flex justify-center sm:min-w-[8rem] h-[3.5rem]'
+                            className='relative flex justify-center xl:min-w-[8rem] h-[3.5rem]'
                             key={link.link}
                         >
                             {
@@ -123,7 +123,7 @@ export default function PageHeader() {
             <Link
                 href={'/'}
                 target='_parent'
-                className='flex items-center justify-center sm:min-w-[8rem] h-[3.5rem] text-2xl dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800 bg-slate-400 dark:bg-slate-800'
+                className='flex items-center justify-center xl:min-w-[8rem] h-[3.5rem] text-2xl dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800 bg-slate-400 dark:bg-slate-800'
             >
                 Home
             </Link>
