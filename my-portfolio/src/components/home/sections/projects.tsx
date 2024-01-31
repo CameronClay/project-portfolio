@@ -19,7 +19,7 @@ export default function Projects() {
         >
             <SectionHeading>My Projects</SectionHeading>
             <p className='text-center pb-5'>
-                * <span className='font-semibold'>Hover</span> over image to see a fuller view or <span className='font-semibold'>click</span> on it to open it in a new tab
+                * <span className='font-semibold'>Hover</span> over image to see a fuller view or <span className='font-semibold'>click</span> on it to see the full-sized image
             </p>
             <div>
                 {
