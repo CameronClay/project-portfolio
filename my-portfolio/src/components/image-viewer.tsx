@@ -109,7 +109,7 @@ export default function ImageViewer() {
         >
             {imageViewerContext.isVisible && (
                 <div
-                    className='fixed flex left-1/2 flex-col items-center justify-center -translate-x-1/2 z-50 bg-black overflow-hidden'
+                    className='fixed flex w-full sm:w-[initial] left-1/2 flex-col items-center justify-center -translate-x-1/2 z-50 bg-black overflow-hidden'
                 >
                     <div
                         className='flex flex-row items-center justify-start w-full h-[2rem] bg-gray-700 px-[0.25rem]'
