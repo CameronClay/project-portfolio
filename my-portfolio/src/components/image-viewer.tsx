@@ -55,6 +55,10 @@ export default function ImageViewer() {
     const onCenterImage = () => {
         setPosition({ x: 0, y: 0 });
     };
+    const onResetImage = () => {
+        setScale(1);
+        setPosition({ x: 0, y: 0 });
+    };
 
     useEffect(() => {
         const image = imageRef.current;
@@ -133,8 +137,8 @@ export default function ImageViewer() {
                         className='flex flex-row items-center justify-start w-full h-[2rem] bg-gray-700 mb-[1rem] px-[0.5rem] gap-x-[0.25rem] border-y-[1px] border-gray-400'
                     >
                         <button
-                            title='Center Image'
-                            onClick={onCenterImage}
+                            title='Center Image and Reset Scale'
+                            onClick={onResetImage}
                             className='flex text-center items-center justify-center h-full text-5xl text-gray-900 hover:bg-gray-400'
                         >
                             <MdOutlineFilterCenterFocus size={32}/>
