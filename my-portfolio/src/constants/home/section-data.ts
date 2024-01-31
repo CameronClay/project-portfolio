@@ -28,7 +28,6 @@ export const LINKS = [
         name: Section.CONTACT,
         link: '#contact',
     },
-
 ] as const;
 
 export const PROJECTS_DATA = [

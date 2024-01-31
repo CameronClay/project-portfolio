@@ -62,7 +62,7 @@ export default function PageHeader() {
                 //Absolute positioning refers to positioning an element relative to its nearest positioned ancestor (i.e. the nearest parent element with a position value of relative, absolute, or fixed). 
             }
             <nav className='flex justify-end w-full pr-[0.5rem]'>
-                <ul className='flex flex-wrap gap-x-[0.25rem] gap-y-[0.25rem] sm:gap-x-[0.5rem] sm:gap-y-[0.5rem] text-[0.75rem] font-medium'>
+                <ul className='flex flex-wrap gap-x-[0.25rem] gap-y-[0.25rem] sm:gap-x-[0.5rem] sm:gap-y-[0.5rem] text-[0.75rem] font-medium transition'>
                     {LINKS.map((link) => (
                         <li
                             className='relative flex justify-center sm:min-w-[8rem] h-[3.5rem]'
@@ -77,7 +77,7 @@ export default function PageHeader() {
 
                             <Link
                                 className={clsx(
-                                    'flex items-center justify-center text-2xl w-full h-full dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800',
+                                    'flex items-center justify-center text-2xl w-full h-full dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800 transition',
                                     {
                                         'text-zinc-900 dark:text-zinc-900':
                                             activeSection === link.name,

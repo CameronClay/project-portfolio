@@ -28,7 +28,7 @@ export default function Intro() {
                 initial={{opacity: 0, y: 100}}
                 animate={{opacity: 1, y: 0}}
                 transition={{
-                    delay: 0.1
+                    delay: 0.3
                 }}
             >
                 {

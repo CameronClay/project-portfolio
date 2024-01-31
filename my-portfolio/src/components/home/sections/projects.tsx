@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { motion } from 'framer-motion';
 
 import SectionHeading from '../../section-heading';
 import { PROJECTS_DATA } from '@src/constants/home/section-data';
@@ -12,10 +13,15 @@ export default function Projects() {
     const { ref } = useSectionInView(Section.PROJECTS, 0.28);
 
     return (
-        <section 
+        <motion.section      
             id='projects'
             ref={ref}
             className='scroll-mt-[7rem] mb-[7rem]'
+            initial={{opacity: 0, y: 100}}
+            animate={{opacity: 1, y: 0}}
+            transition={{
+                delay: 0.125
+            }}
         >
             <SectionHeading>My Projects</SectionHeading>
             <p className='text-center pb-5'>
@@ -35,6 +41,6 @@ export default function Projects() {
                     ))
                 }
             </div>
-        </section>
+        </motion.section>
     )
 }

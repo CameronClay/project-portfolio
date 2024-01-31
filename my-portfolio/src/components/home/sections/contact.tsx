@@ -19,7 +19,7 @@ export default function Contact() {
         <motion.section
             id='contact'
             ref={ref}
-            className='mb-[5rem] sm:mb-[7rem] w-[min(100%,38rem)] text-center'
+            className='mb-[5rem] sm:mb-[7rem] w-[min(100%,38rem)] text-center transition'
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1 }}
@@ -30,7 +30,7 @@ export default function Contact() {
             {
                 //negative margin to reduce space between SectionHeading and paragraph
             }
-            <p className='text-gray-700 -mt-[1.5rem] dark:text-white/80'>
+            <p className='text-gray-700 -mt-[1.5rem] dark:text-white/80 transition'>
                 Please contact me at <a className='underline' href={`mailto:${EMAIL_INFO.to}`}>{EMAIL_INFO.to}</a>{' '}
                 or by using the form below.
             </p>
@@ -39,7 +39,7 @@ export default function Contact() {
                 //action that takes function only exists in Next.js
             }
             <form
-                className='mt-[2.0rem] flex flex-col dark:text-black'
+                className='mt-[2.0rem] flex flex-col dark:text-black transition'
                 action={
                     async (formData) => {
                         const { data, error } = await sendEmail(formData, url);
@@ -52,7 +52,7 @@ export default function Contact() {
                     }
                 }       
             >
-                <p className='text-left mb-[1rem] font-semibold italic text-gray-700 dark:text-white/80'>
+                <p className='text-left mb-[1rem] font-semibold italic text-gray-700 dark:text-white/80 transition'>
                     An asterisk (<span className='font-bold'>*</span>) indicates a required field
                 </p>
 
