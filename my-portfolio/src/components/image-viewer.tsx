@@ -119,7 +119,7 @@ export default function ImageViewer() {
                     <div
                         className='flex flex-row items-center justify-start w-full h-[2rem] bg-gray-700 px-[0.25rem]'
                     >
-                        <div className='text-nowrap mx-[0.25rem] my-[0rem] sm:mx-[0.5rem]'>
+                        <div className='text-nowrap whitespace-nowrap mx-[0.25rem] my-[0rem] sm:mx-[0.5rem]'>
                             <p className='text-2xl font-bold text-white text-opacity-85 dark:text-opacity-70'>
                                 Image Viewer
                             </p>
@@ -154,7 +154,7 @@ export default function ImageViewer() {
                             onClick={onZoomIn}
                             className='flex text-center items-center justify-center h-full text-5xl text-gray-900 hover:bg-gray-400'
                         >
-                        <MdZoomIn size={32}/>
+                            <MdZoomIn size={32}/>
                         </button>
 
                         <button
@@ -162,7 +162,7 @@ export default function ImageViewer() {
                             onClick={onZoomOut}
                             className='flex text-center items-center justify-center h-full text-5xl text-gray-900 hover:bg-gray-400'
                         >
-                        <MdOutlineZoomOut size={32}/>
+                            <MdOutlineZoomOut size={32}/>
                         </button>
                     </div>
 
