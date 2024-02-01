@@ -16,7 +16,7 @@ export default function Projects() {
         <motion.section      
             id='projects'
             ref={ref}
-            className='scroll-mt-[7rem] mb-[7rem]'
+            className='scroll-mt-[7rem] mb-[5rem] sm:mb-[7rem]'
             initial={{opacity: 0, y: 100}}
             animate={{opacity: 1, y: 0}}
             transition={{
