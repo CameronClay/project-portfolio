@@ -5,8 +5,13 @@ import { IoMdClose } from 'react-icons/io';
 import { useImageViewerContext } from '@src/context/image-viewer-context'
 import { useOutsideClick } from 'outsideclick-react';
 import { MdOutlineFilterCenterFocus, MdOutlineZoomOut, MdZoomIn } from 'react-icons/md';
+import clsx from 'clsx';
 // import { MdOutlineZoomOut, MdZoomIn } from 'react-icons/md';
 // import { useScroll, useTransform } from 'framer-motion';
+
+function isOverflown(element : HTMLElement) {
+    return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
+}
 
 export default function ImageViewer() {
     const imageViewerContext = useImageViewerContext();
@@ -109,7 +114,7 @@ export default function ImageViewer() {
         >
             {imageViewerContext.isVisible && (
                 <div
-                    className='fixed flex w-full sm:w-[initial] left-1/2 flex-col items-center justify-center -translate-x-1/2 z-50 bg-black overflow-hidden'
+                    className='fixed left-1/2 -translate-x-1/2 z-50 bg-black overflow-hidden w-[max-content] max-w-[100vw]'
                 >
                     <div
                         className='flex flex-row items-center justify-start w-full h-[2rem] bg-gray-700 px-[0.25rem]'
@@ -149,7 +154,7 @@ export default function ImageViewer() {
                             onClick={onZoomIn}
                             className='flex text-center items-center justify-center h-full text-5xl text-gray-900 hover:bg-gray-400'
                         >
-                           <MdZoomIn size={32}/>
+                        <MdZoomIn size={32}/>
                         </button>
 
                         <button
@@ -157,14 +162,14 @@ export default function ImageViewer() {
                             onClick={onZoomOut}
                             className='flex text-center items-center justify-center h-full text-5xl text-gray-900 hover:bg-gray-400'
                         >
-                          <MdOutlineZoomOut size={32}/>
+                        <MdOutlineZoomOut size={32}/>
                         </button>
                     </div>
 
                     <div
                         onWheel={onMouseScroll}
                         ref={imageContainerRef}
-                        className='w-full h-full overflow-hidden'
+                        className='h-full overflow-hidden'
                     >
                         <img
                             ref={imageRef}
