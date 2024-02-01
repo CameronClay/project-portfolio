@@ -114,7 +114,7 @@ export default function ImageViewer() {
         >
             {imageViewerContext.isVisible && (
                 <div
-                    className='fixed left-1/2 -translate-x-1/2 z-50 bg-black overflow-hidden w-[max-content] max-w-[100vw]'
+                    className='fixed left-1/2 -translate-x-1/2 z-50 bg-black overflow-hidden w-[max-content] max-w-[100vw] h-[max-content] max-h-[100vh]'
                 >
                     <div
                         className='flex flex-row items-center justify-start w-full h-[2rem] bg-gray-700 px-[0.25rem]'
@@ -169,7 +169,7 @@ export default function ImageViewer() {
                     <div
                         onWheel={onMouseScroll}
                         ref={imageContainerRef}
-                        className='h-full overflow-hidden'
+                        className='max-h-[100vh] overflow-hidden'
                     >
                         <img
                             ref={imageRef}
