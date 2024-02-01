@@ -1,11 +1,10 @@
 'use client';
 
-import React, { WheelEvent, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { WheelEvent, useEffect, useRef, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { useImageViewerContext } from '@src/context/image-viewer-context'
 import { useOutsideClick } from 'outsideclick-react';
 import { MdOutlineFilterCenterFocus, MdOutlineZoomOut, MdZoomIn } from 'react-icons/md';
-import clsx from 'clsx';
 // import { MdOutlineZoomOut, MdZoomIn } from 'react-icons/md';
 // import { useScroll, useTransform } from 'framer-motion';
 
