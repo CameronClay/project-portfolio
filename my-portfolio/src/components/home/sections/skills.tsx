@@ -42,7 +42,8 @@ export default function Skills() {
                             initial='initial'
                             whileInView='animate'
                             viewport={{
-                                once: true
+                                once: true,
+                                amount: 'all'            
                             }}
                             custom={index} //used to pass index to animate function in fadeInAnimationVariants
                         >

@@ -14,8 +14,8 @@ export default function PageFooter() {
             <p className='text-xs'>
                 Built using React and Next.js (App Router & Server Actions),
                 TypeScript, Tailwind CSS,
-                Framer Motion, Resend & nodemailer,
-                React Intersection Observer, and OutsideClick React.
+                Framer-Motion, React-Email & Nodemailer,
+                React-Intersection-Observer, and OutsideClick-React.
             </p>
         </footer>
     );
