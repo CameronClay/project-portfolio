@@ -3,7 +3,7 @@ import { CONTACT_INFO } from '@src/constants/home/contact-info';
 
 export default function PageFooter() {
     return (
-        <footer className='pb-[1.75rem] px-[1rem] text-center text-gray-700 dark:text-gray-300'>
+        <footer className='py-[1.5rem] px-[1rem] text-center bg-zinc-700 dark:bg-zinc-900 text-white text-opacity-90 dark:text-opacity-80'>
             {
                 //block: Displays an element as a block element (like <p>). It starts on a new line, and takes up the whole width
                 //small/span are by default inline (block changes that)
