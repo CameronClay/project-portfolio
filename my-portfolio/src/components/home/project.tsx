@@ -4,14 +4,15 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { useImageViewerContext } from '@src/context/image-viewer-context';
-import { PROJECTS_DATA } from '@src/constants/home/section-data';
+import { PROJECTS_DATA, Skill } from '@src/constants/home/section-data';
 
 type ProjectProps = (typeof PROJECTS_DATA)[number];
 
 export default function Project({
     title,
     description,
-    tags,
+    topSkills,
+    otherSkills,
     previewImageUrl,
     fullImageUrl
 } : ProjectProps) {
@@ -49,8 +50,25 @@ export default function Project({
                     }
                     <ul className='flex flex-wrap mt-[1rem] gap-[0.5rem] sm:mt-auto'>
                         {
-                            tags.map((tag, index) => (
-                                <li className='bg-black/[0.7] px-[0.75rem] py-[0.26rem] text-[0.7rem] uppercase tracking-wider rounded-full text-white dark:text-white/70 border-[0.125rem] border-gray-900  dark:border-white/40' key={index}>{tag}</li>
+                            topSkills.map((tag, index) => (
+                                <li className=
+                                    'dark:bg-black/[0.7] bg-black/[0.7] px-[0.75rem] py-[0.26rem] text-[0.7rem] uppercase tracking-wider rounded-full text-white dark:text-white/70 border-[0.125rem] border-gray-900 dark:border-white/40' 
+                                    key={index}
+                                >
+                                    {tag}
+                                </li>
+                            ))
+                        }
+                    </ul>
+                    <ul className='flex flex-wrap gap-[0.5rem] mt-[0.5rem]'>
+                        {
+                            otherSkills.map((tag, index) => (
+                                <li className=
+                                    'dark:bg-gray-950/[0.6] bg-gray-950/[0.6] px-[0.75rem] py-[0.26rem] text-[0.7rem] uppercase tracking-wider rounded-full text-white dark:text-white/70 border-[0.125rem] border-gray-900 dark:border-white/40' 
+                                    key={index}
+                                >
+                                    {tag}
+                                </li>
                             ))
                         }
                     </ul>
