@@ -65,7 +65,7 @@ export default function PageHeader() {
                 <ul className='flex flex-wrap gap-x-[0.25rem] gap-y-[0.25rem] sm:gap-x-[0.5rem] sm:gap-y-[0.5rem] text-[0.75rem] font-medium transition'>
                     {LINKS.map((link) => (
                         <li
-                            className='relative flex justify-center px-[0.25rem] md:px-[0rem] md:min-w-[7rem] lg:min-w-[8rem] h-[3.5rem]'
+                            className='relative flex justify-center px-[0.25rem] md:px-[0rem] md:min-w-[7rem] lg:min-w-[8rem] h-[3.25rem]'
                             key={link.link}
                         >
                             {
@@ -123,7 +123,7 @@ export default function PageHeader() {
             
             {/* <APIDropdown/> */}
 
-            <div className='flex flex-shrink-0 mx-[0.25rem] sm:mx-[0.5rem] h-[3.5rem] w-[3.5rem]'>
+            <div className='flex flex-shrink-0 mx-[0.25rem] sm:mx-[0.5rem] h-[3.25rem] w-[3.25rem]'>
                 <DarkMode/> 
             </div>
         </motion.header>
