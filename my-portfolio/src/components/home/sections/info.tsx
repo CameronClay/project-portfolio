@@ -9,8 +9,8 @@ import { CONTACT_INFO } from '@src/constants/home/contact-info';
 import SectionHeading from '@src/components/section-heading';
 import InfoBar from '@src/components/info-bar';
 
-export default function Intro() {
-    const { ref } = useSectionInView(Section.INTRO, 0.5);
+export default function Info() {
+    const { ref } = useSectionInView(Section.INFO, 0.5);
 
     //The html <section> tag defines a section in a document. Basically the same as div but with more semantic meaning.
     return (

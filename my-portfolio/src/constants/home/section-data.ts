@@ -1,5 +1,5 @@
 export enum Section {
-    INTRO          = 'Intro',
+    INFO          = 'Info',
     PROJECTS       = 'Projects',
     SKILLS         = 'Skills',
     // EXPERIENCE     = 'Experience',
@@ -9,8 +9,8 @@ export enum Section {
 //determines name of each section and what is appended to the url
 export const LINKS = [
     {
-        name: Section.INTRO,
-        link: '#intro',
+        name: Section.INFO,
+        link: '#info',
     },
     {
         name: Section.PROJECTS,

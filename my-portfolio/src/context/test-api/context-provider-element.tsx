@@ -7,7 +7,7 @@ import { Section } from '@src/constants/api/section-data';
 export default function ContextProviderElement({children} : {children: React.ReactNode}) {
     return (
         <ThemeContextProvider>
-            <ActiveSectionContextProvider defaultSection={Section.INTRO}>
+            <ActiveSectionContextProvider defaultSection={Section.INFO}>
                 {children}
             </ActiveSectionContextProvider>
         </ThemeContextProvider>

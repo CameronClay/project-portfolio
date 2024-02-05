@@ -1,5 +1,5 @@
 import Contact from '@src/components/home/sections/contact';
-import Intro from '@src/components/home/sections/intro';
+import Info from '@src/components/home/sections/info';
 import Projects from '@src/components/home/sections/projects';
 import SectionDivider from '@src/components/section-divider';
 import Skills from '@src/components/home/sections/skills';
@@ -43,7 +43,7 @@ export default function Home() {
 				<ImageViewer/>
 
 				<main className='flex flex-col items-center pl-[1rem] pr-[1rem]'>
-					<Intro />
+					<Info />
 					<SectionDivider />
 					<Projects />
 					<Skills />

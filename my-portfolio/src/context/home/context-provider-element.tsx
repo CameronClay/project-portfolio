@@ -9,7 +9,7 @@ export default function ContextProviderElement({children} : {children: React.Rea
     return (
         <ThemeContextProvider>
             <ImageViewerContextProvider>
-                <ActiveSectionContextProvider defaultSection={Section.INTRO}>
+                <ActiveSectionContextProvider defaultSection={Section.INFO}>
                     {children}
                 </ActiveSectionContextProvider>
             </ImageViewerContextProvider>
