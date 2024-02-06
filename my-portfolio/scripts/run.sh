@@ -1,1 +1,1 @@
-docker run -d -p 3000:3000 my-portfolio:latest
+docker run -d --name my-portfolio -p 3000:3000 my-portfolio:latest
