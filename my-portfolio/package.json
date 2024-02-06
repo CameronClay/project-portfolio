@@ -1,7 +1,7 @@
 {
-  "name": "next-portfolio-2",
-  "version": "0.1.0",
-  "private": true,
+  "name": "project-portfolio",
+  "version": "1.0.0",
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
