@@ -107,7 +107,7 @@ export const PROJECTS_DATA = [
         fullImageUrl     : '/assets/Full_WNLIB_Server.png'
     },
     {
-        title: 'Type-erased function container library',
+        title: 'Dynamic functions library',
         description:
             `- Library which enables the ability to conditionally call functions at compile time based on the parameters passed, and enables those functions to be stored in statically-typed containers (such as an array/vector/arraylist)
             `,
