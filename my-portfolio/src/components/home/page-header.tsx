@@ -77,21 +77,21 @@ export default function PageHeader() {
 
                             <Link
                                 className={clsx(
-                                    'flex items-center justify-center text-2xl w-full h-full dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800 transition',
+                                    'flex items-center justify-center text-2xl w-full h-full dark:text-zinc-300 hover:bg-slate-400 hover:dark:bg-slate-600 transition',
                                     {
-                                        'text-zinc-900 dark:text-zinc-900':
+                                        'dark:text-red-800 text-red-800 underline':
                                             activeSection === link.name,
                                     }
                                 )}
                                 href={link.link}
                                 onClick={() => {
                                     setActiveSection(link.name);
-                                    setTimeOfLastClick(Date.now());
+                                    // setTimeOfLastClick(Date.now());
                                 }}
                             >
                                 {link.name}
 
-                                {
+                                {/* {
                                     //conditional rendered background blob for the active section in the header
                                     //how this works is when the section is changed the span will be removed and a new one will come into view
                                     //scrolling changing the section is done with the intersection observer api (react-intersection-observer package in react)
@@ -105,7 +105,7 @@ export default function PageHeader() {
                                 }
                                 {link.name === activeSection && (
                                     <motion.span
-                                        className='absolute h-full bg-slate-300 inset-0 -z-[15] dark:bg-slate-400'
+                                        className='absolute h-full inset-0 -z-[15] bg-slate-300 dark:bg-slate-400'
                                         // className='absolute rounded-full bg-slate-200 inset-0 -z-[15] dark:bg-zinc-500 top-[12.5%] bottom-[12.5%]'
                                         layoutId='activeSection'
                                         transition={{
@@ -114,7 +114,7 @@ export default function PageHeader() {
                                             damping: 40,
                                         }}
                                     />
-                                )}
+                                )} */}
                             </Link>
                         </li>
                     ))}

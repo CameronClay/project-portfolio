@@ -85,7 +85,7 @@ export default function PageHeader() {
                                 href={link.link}
                                 onClick={() => {
                                     setActiveSection(link.name);
-                                    setTimeOfLastClick(Date.now());
+                                    // setTimeOfLastClick(Date.now());
                                 }}
                             >
                                 {link.name}

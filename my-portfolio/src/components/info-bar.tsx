@@ -30,10 +30,10 @@ export default function InfoBar() {
             <Link
                 // title='Contact Me'
                 href='#contact'
-                className='flex items-center gap-[0.5rem] rounded-full outline-none px-[1.75rem] py-[0.75rem] bg-gray-900 dark:bg-slate-700 text-white focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition'
+                className='flex items-center gap-[0.5rem] outline-none px-[1.75rem] py-[0.75rem] bg-gray-900 dark:bg-slate-700 text-white focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition borderBlack'
                 onClick={()=>{
                     setActiveSection(Section.CONTACT);
-                    setTimeOfLastClick(Date.now());
+                    // setTimeOfLastClick(Date.now());
                 }}
             >
                 Contact Me
@@ -42,7 +42,7 @@ export default function InfoBar() {
             
             <Link
                 // title='Download Resume'
-                className='flex items-center gap-[0.5rem] rounded-full outline-none px-[1.75rem] py-[0.75rem] bg-white focus:scale-110 hover:scale-110 active:scale-105 cursor-pointer borderBlack dark:bg-zinc-700 transition'
+                className='flex items-center gap-[0.5rem] outline-none px-[1.75rem] py-[0.75rem] bg-white focus:scale-110 hover:scale-110 active:scale-105 cursor-pointer borderBlack dark:bg-zinc-700 transition'
                 href='/downloads/Resume.pdf'
                 download
             >
@@ -55,7 +55,7 @@ export default function InfoBar() {
             }
             <a 
                 title='LinkedIn'
-                className='flex items-center gap-[0.5rem] rounded-full outline-none bg-white p-[1rem] text-gray-700 hover:text-gray-950 focus:scale-[1.15] hover:scale-[1.15] active:scale-105 cursor-pointer borderBlack dark:bg-zinc-700 dark:text-white/60 transition'
+                className='flex items-center gap-[0.5rem] outline-none bg-white p-[1rem] text-gray-700 hover:text-gray-950 focus:scale-[1.15] hover:scale-[1.15] active:scale-105 cursor-pointer borderBlack dark:bg-zinc-700 dark:text-white/60 transition'
                 href={CONTACT_INFO.linkedin}
                 target='_blank'
             >
@@ -64,7 +64,7 @@ export default function InfoBar() {
 
             <a
                 title='GitHub'
-                className='flex items-center gap-[0.5rem] rounded-full outline-none bg-white p-[1rem] text-gray-700 hover:text-gray-950 text-[1.35rem] focus:scale-[1.15] hover:scale-[1.15] active:scale-105 cursor-pointer borderBlack dark:bg-zinc-700 dark:text-white/60 transition'
+                className='flex items-center gap-[0.5rem] outline-none bg-white p-[0.90rem] text-gray-700 hover:text-gray-950 text-[1.35rem] focus:scale-[1.15] hover:scale-[1.15] active:scale-105 cursor-pointer borderBlack dark:bg-zinc-700 dark:text-white/60 transition'
                 href={CONTACT_INFO.github}
                 target='_blank'
             >
