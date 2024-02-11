@@ -33,7 +33,7 @@ export default function InfoBar() {
                 className='flex items-center gap-[0.5rem] outline-none px-[1.75rem] py-[0.75rem] bg-gray-900 dark:bg-slate-700 text-white focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition borderBlack'
                 onClick={()=>{
                     setActiveSection(Section.CONTACT);
-                    // setTimeOfLastClick(Date.now());
+                    setTimeOfLastClick(Date.now());
                 }}
             >
                 Contact Me
