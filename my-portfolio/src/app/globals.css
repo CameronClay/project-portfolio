@@ -11,9 +11,9 @@ html.dark {
 }
 
 .emailInput {
-    @apply text-base rounded-xl borderBlack dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none;
+    @apply text-base rounded-xl borderBlack bg-gray-100 hover:bg-gray-200 text-black dark:text-white dark:bg-white dark:bg-opacity-[10%] dark:focus:bg-opacity-[25%] transition-all dark:outline-none;
 }
 
 .emailLabel {
-    @apply text-left font-semibold text-gray-700 dark:text-white/80;
+    @apply text-left font-semibold text-gray-700 dark:text-white/80 focus-within:text-red-400 dark:focus-within:text-red-400;
 }

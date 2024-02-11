@@ -60,43 +60,48 @@ export default function Contact() {
                     //html5 input elements
                 }
                 <label
-                    className='emailLabel'
+                    className='flex flex-col emailLabel'
                 >
-                    Name: <span className='font-bold'>*</span>
+                    <p>
+                        Name: <span className='font-bold'>*</span>
+                    </p>
+                    <input 
+                        name='inputSenderName'
+                        type='text'
+                        required={true}
+                        maxLength={EMAIL_FORM_INFO.name.maxLength}
+                        className='h-[3.5rem] mb-[0.625rem] p-[0.75rem] emailInput group' 
+                    />
                 </label>
-                <input 
-                    name='inputSenderName'
-                    type='text'
-                    required={true}
-                    maxLength={EMAIL_FORM_INFO.name.maxLength}
-                    className='h-[3.5rem] mb-[0.625rem] p-[0.75rem] emailInput' 
-                />
 
                 <label
-                    className='emailLabel'
+                    className='flex flex-col emailLabel'
                 >
-                    Email: <span className='font-bold'>*</span>
+                    <p>
+                        Email: <span className='font-bold'>*</span>
+                    </p>
+                    <input 
+                        name='inputSenderEmail'
+                        type='email'
+                        required={true}
+                        maxLength={EMAIL_FORM_INFO.email_address.maxLength}
+                        className='h-[3.5rem] mb-[0.625rem] p-[0.75rem] emailInput' 
+                    />
                 </label>
-                <input 
-                    name='inputSenderEmail'
-                    type='email'
-                    required={true}
-                    maxLength={EMAIL_FORM_INFO.email_address.maxLength}
-                    className='h-[3.5rem] mb-[0.625rem] p-[0.75rem] emailInput' 
-                />
 
                 <label
-                    className='emailLabel'
+                    className='flex flex-col emailLabel'
                 >
-                    Message: <span className='font-bold'>*</span>
+                    <p>
+                        Message: <span className='font-bold'>*</span>
+                    </p>
+                    <textarea 
+                        name='textAreaMessage'
+                        required={true}
+                        maxLength={EMAIL_FORM_INFO.message.maxLength}
+                        className='h-[13rem] mb-[0.5rem] p-[0.75rem] emailInput'
+                    />
                 </label>
-                
-                <textarea 
-                    name='textAreaMessage'
-                    required={true}
-                    maxLength={EMAIL_FORM_INFO.message.maxLength}
-                    className='h-[13rem] mb-[0.5rem] p-[0.75rem] emailInput'
-                />
                 <SendBtn />
             </form>
         </motion.section>
