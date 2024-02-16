@@ -3,13 +3,13 @@
 import React, { useState, createContext, useContext } from 'react';
 
 type ActiveSectionContextProviderProps = {
-    defaultSection: any;
+    defaultSection: string;
     children: React.ReactNode;
 };
 
 type ActiveSectionContextType = {
-    activeSection: any;
-    setActiveSection: React.Dispatch<React.SetStateAction<any>>;
+    activeSection: string;
+    setActiveSection: React.Dispatch<React.SetStateAction<string>>;
     timeOfLastClick: number;
     setTimeOfLastClick: React.Dispatch<React.SetStateAction<number>>; //used to disable the inView check for each section temporarily when a user clicks on a button in the header
 };
@@ -21,7 +21,7 @@ const ActiveSectionContext =
 export default function ActiveSectionContextProvider({
     defaultSection, children,
 }: ActiveSectionContextProviderProps) {
-    const [activeSection, setActiveSection] = useState<any>(defaultSection);
+    const [activeSection, setActiveSection] = useState<string>(defaultSection);
     const [timeOfLastClick, setTimeOfLastClick] = useState(0); // keep track of this to disable the page-header background animation temporarily when user clicks on a link
 
     return (
