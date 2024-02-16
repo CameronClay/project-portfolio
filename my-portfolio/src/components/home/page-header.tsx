@@ -79,7 +79,7 @@ export default function PageHeader() {
                                 className={clsx(
                                     'flex items-center justify-center text-2xl w-full h-full dark:text-zinc-300 hover:bg-slate-400 hover:dark:bg-slate-600 transition',
                                     {
-                                        'dark:text-red-800 text-red-800':
+                                        '!dark:text-red-800 !text-red-800':
                                             activeSection === link.name,
                                     }
                                 )}
