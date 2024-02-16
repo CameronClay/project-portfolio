@@ -1,6 +1,10 @@
 import React from 'react';
-import { CONTACT_INFO } from '@src/constants/home/contact-info';
+// import { CONTACT_INFO } from '@src/constants/home/contact-info';
 import { FaGithubSquare } from 'react-icons/fa';
+import { GrTooltip } from "react-icons/gr";
+import { IoIosInformation } from "react-icons/io";
+import { FcInfo } from "react-icons/fc";
+import { BiSolidInfoCircle } from "react-icons/bi";
 
 export default function PageFooter() {
     return (
@@ -13,14 +17,14 @@ export default function PageFooter() {
                 className='flex flex-col items-center justify-center w-full gap-[0.5rem] py-[1.25rem] whitespace-wrap text-wrap lg:text-nowrap lg:whitespace-nowrap '
             >
                 <p className='text-xs'>
-                    Built using React and Next.js (App Router & Server Actions),
+                    Built using React and <span className='underline' title='App Router, and Server Actions'>Next.js <BiSolidInfoCircle className='inline text-blue-500' size={20}/></span>,
                     TypeScript, Tailwind CSS,
-                    Framer-Motion, React-Email & Nodemailer,
-                    React-Intersection-Observer, and OutsideClick-React.
+                    Framer-Motion, React-Email, Nodemailer,
+                    and <span className='underline' title='React-Intersection-Observer, and OutsideClick-React'>more <BiSolidInfoCircle className='inline text-blue-500' size={20}/></span>.
                 </p>
-                <p className='text-xs'>
+                {/* <p className='text-xs'>
                     &copy; {`2024 ${CONTACT_INFO.name}`}. All rights reserved.
-                </p>
+                </p> */}
             </div>
             <div
                 className='flex justify-end'
