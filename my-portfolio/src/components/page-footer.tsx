@@ -1,9 +1,6 @@
 import React from 'react';
 // import { CONTACT_INFO } from '@src/constants/home/contact-info';
 import { FaGithubSquare } from 'react-icons/fa';
-import { GrTooltip } from "react-icons/gr";
-import { IoIosInformation } from "react-icons/io";
-import { FcInfo } from "react-icons/fc";
 import { BiSolidInfoCircle } from "react-icons/bi";
 
 export default function PageFooter() {
