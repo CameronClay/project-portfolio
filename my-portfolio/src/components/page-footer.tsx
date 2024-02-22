@@ -29,7 +29,7 @@ export default function PageFooter() {
             >
                 <a
                     title='View on GitHub'
-                    className='flex items-center justify-center outline-none w-[2.75rem] h-[2.75rem] bg-white p-[0.25rem] text-gray-700 hover:text-gray-950 hover:bg-gray-400 hover:dark:bg-gray-900 text-[1.35rem] active:scale-[1.05] cursor-pointer borderBlack dark:bg-zinc-700 dark:text-white/60 transition'
+                    className='select-none flex items-center justify-center outline-none w-[2.75rem] h-[2.75rem] bg-white p-[0.25rem] text-gray-700 hover:text-gray-950 hover:bg-gray-400 hover:dark:bg-gray-900 text-[1.35rem] active:scale-[1.05] cursor-pointer borderBlack dark:bg-zinc-700 dark:text-white/60 transition'
                     href='https://github.com/CameronClay/project-portfolio'
                     target='_blank'
                 >

@@ -77,7 +77,7 @@ export default function PageHeader() {
 
                             <Link
                                 className={clsx(
-                                    'flex items-center justify-center text-2xl w-full h-full dark:text-zinc-300 hover:bg-slate-400 hover:dark:bg-slate-600 transition',
+                                    'select-none flex items-center justify-center text-2xl w-full h-full dark:text-zinc-300 hover:bg-slate-400 hover:dark:bg-slate-600 transition',
                                     {
                                         '!text-red-700 dark:!text-amber-100':
                                             activeSection === link.name,
