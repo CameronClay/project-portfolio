@@ -7,6 +7,7 @@ import { BsLinkedin } from 'react-icons/bs';
 import { useActiveSectionContext } from '@src/context/active-section-context';
 import { CONTACT_INFO } from '@src/constants/home/contact-info';
 import { Section } from '@src/constants/home/section-data';
+import { InfoBtn, InfoBtnBasic } from '@src/components/info-btn';
 
 export default function InfoBar() {
     const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
@@ -27,10 +28,10 @@ export default function InfoBar() {
 
                 //active: is breakpoint for link when being clicked on, hover is when hovering over with mouse
             }
-            <Link
+            <InfoBtn
                 // title='Contact Me'
                 href='#contact'
-                className='flex items-center gap-[0.5rem] outline-none px-[1.75rem] py-[0.75rem] bg-gray-900 dark:bg-slate-700 text-white focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition borderBlack'
+                classNameEtc='!bg-slate-600 dark:!bg-slate-700 !text-white'
                 onClick={()=>{
                     setActiveSection(Section.CONTACT);
                     setTimeOfLastClick(Date.now());
@@ -38,38 +39,36 @@ export default function InfoBar() {
             >
                 Contact Me
                 <MdEmail className='opacity-70'/>
-            </Link>
+            </InfoBtn>
             
-            <Link
+            <InfoBtn
                 // title='Download Resume'
-                className='flex items-center gap-[0.5rem] outline-none px-[1.75rem] py-[0.75rem] bg-white focus:scale-110 hover:scale-110 active:scale-105 cursor-pointer borderBlack dark:bg-zinc-700 transition'
+                classNameEtc='bg-white dark:bg-zinc-700'
                 href='/downloads/Resume.pdf'
                 download
             >
                 Download Resume
                 <MdDownload className='opacity-70' />
-            </Link>
+            </InfoBtn>
 
             {
                 //next/link only creates an a tag (important for Search Engine Optimization (SEO)) if a string componenet is passed in for children
             }
-            <a 
+            <InfoBtnBasic 
                 title='LinkedIn'
-                className='flex items-center gap-[0.5rem] outline-none bg-white p-[1rem] text-gray-700 hover:text-gray-950 focus:scale-[1.15] hover:scale-[1.15] active:scale-105 cursor-pointer borderBlack dark:bg-zinc-700 dark:text-white/60 transition'
                 href={CONTACT_INFO.linkedin}
                 target='_blank'
             >
                 <BsLinkedin />
-            </a>
+            </InfoBtnBasic>
 
-            <a
+            <InfoBtnBasic
                 title='GitHub'
-                className='flex items-center gap-[0.5rem] outline-none bg-white p-[0.90rem] text-gray-700 hover:text-gray-950 text-[1.35rem] focus:scale-[1.15] hover:scale-[1.15] active:scale-105 cursor-pointer borderBlack dark:bg-zinc-700 dark:text-white/60 transition'
                 href={CONTACT_INFO.github}
                 target='_blank'
             >
                 <FaGithubSquare />
-            </a>
+            </InfoBtnBasic>
         </div>
     )
 }

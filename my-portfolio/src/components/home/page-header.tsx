@@ -79,7 +79,7 @@ export default function PageHeader() {
                                 className={clsx(
                                     'flex items-center justify-center text-2xl w-full h-full dark:text-zinc-300 hover:bg-slate-400 hover:dark:bg-slate-600 transition',
                                     {
-                                        '!dark:text-red-800 !text-red-800':
+                                        '!text-red-700 dark:!text-amber-100':
                                             activeSection === link.name,
                                     }
                                 )}
@@ -105,7 +105,7 @@ export default function PageHeader() {
                                 }
                                 {link.name === activeSection && (
                                     <motion.span
-                                        className='absolute h-[0.125rem] z-[15] bottom-0 left-0 right-0 dark:bg-red-800 bg-red-800'
+                                        className='absolute h-[0.125rem] z-[15] bottom-0 left-0 right-0 dark:bg-amber-100 bg-red-700'
                                         // className='absolute rounded-full bg-slate-200 inset-0 -z-[15] dark:bg-zinc-500 top-[12.5%] bottom-[12.5%]'
                                         layoutId='activeSection'
                                         transition={{

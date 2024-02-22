@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react'
 import IsOpenContextProvider, {useIsOpenContext} from '@src/components/dropdown/isopen-context';
 import { useOutsideClick } from "outsideclick-react";
+import { LinkTarget } from '@src/constants/components/constants';
 
 type DropdownContainerProps = {
     classNameEtc?: string;
@@ -100,7 +101,7 @@ export function DropdownButton({ classNameEtc, title, children }: DropdownButton
 
 type DropdownItemProps = {
     href         : string;
-    target      ?: '_blank' | '_parent' | '_self' | '_top';
+    target      ?: LinkTarget;
     onClick     ?: () => void;
     classNameEtc?: string;
     children     : React.ReactNode;
