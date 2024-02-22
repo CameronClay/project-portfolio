@@ -1,7 +1,6 @@
 import React from 'react';
 // import { CONTACT_INFO } from '@src/constants/home/contact-info';
 import { FaGithubSquare } from 'react-icons/fa';
-import { BiSolidInfoCircle } from "react-icons/bi";
 import InfoLabel from '@src/components/info-label';
 
 export default function PageFooter() {
@@ -15,7 +14,8 @@ export default function PageFooter() {
                 className='flex flex-col items-center justify-center w-full gap-[0.5rem] py-[1.25rem] whitespace-wrap text-wrap lg:text-nowrap lg:whitespace-nowrap '
             >
                 <p className='text-xs'>
-                    Built using React and <InfoLabel text='Next.js' tooltip='App Router, and Server Actions' iconSize={20} iconStyle='text-blue-500'/>
+                    Built using React and{' '}
+                    <InfoLabel text='Next.js' tooltip='App Router, and Server Actions' iconSize={20} iconStyle='text-blue-500'/>
                     TypeScript, Tailwind CSS,
                     Framer-Motion, React-Email, Nodemailer,
                     and <InfoLabel text='more' tooltip='React-Intersection-Observer, and OutsideClick-React' iconSize={20} iconStyle='text-blue-500'/>
