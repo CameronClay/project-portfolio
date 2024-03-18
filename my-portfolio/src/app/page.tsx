@@ -53,6 +53,6 @@ export default function Home() {
 				<PageFooter/>
 				<MyToaster/>
 			</PageContainer>
-		</ContextProviderElement>
+		</ContextProviderElement>	
 	);
 }
