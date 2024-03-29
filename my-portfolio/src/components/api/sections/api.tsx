@@ -3,89 +3,117 @@
 import React from 'react';
 import { Section } from '@src/constants/api/section-data';
 import { useSectionInView } from '@src/lib/hooks';
+import APIEndpoint, { RESTMethodType } from '@src/components/api/api-endpoint';
 
 export default function MyAPI() {
-    const { ref } = useSectionInView(Section.API, 0.5);
+    const { ref } = useSectionInView(Section.API, 0.65);
 
     return (
         <section
             id='api'
             ref={ref}
-            className='scroll-mt-[5rem]'
+            className='scroll-mt-[5rem] mb-[2rem]'
         >
             <p className='text-2xl font-bold px-[0.125rem]'>
                 API
             </p>
 
-            <div className='flex flex-col justify-start m-[0.5rem] border-[0.125rem] p-[0.5rem] borderBlack100'>
-                <div className='flex flex-row justify-start'>
-                    <p className='text-2xl text-red-500 font-bold'>
-                        POST
-                    </p>
-                    <p className='flex flex-wrap justify-end w-full text-2xl'>
-                        /api/login
-                    </p>
-                </div>
+            <APIEndpoint
+                method={RESTMethodType.GET}
+                endpoint='/api/public/test-endpoint'
+                description='Test endpoint with sample data. Does not require logged in user (Authentication not required).'
+                paramaters={[]}
+            >
 
-                <hr className='mt-[0.5rem] mb-[1rem] bg-white dark:bg-black'/>
+            </APIEndpoint>
 
-                <p className='mb-[1rem]'>
-                    Parameters (<span className='font-bold'>*</span> Indicates required):
-                </p>
-                <div className='flex flex-row'>
-                    <ul className='flex flex-col justify-start'>
-                        <li className='flex flexrow'>
-                            <p className='mr-[2rem] text-nowrap'>
-                                username: String (*)
-                            </p>
+            <APIEndpoint
+                method={RESTMethodType.POST}
+                endpoint='/api/public/register'
+                description='Register user and cache JWT token in cookies for future requests.'
+                paramaters={[
+                    {
+                        name: 'username',
+                        type: 'String',
+                        required: true,
+                        inputId: 'username'
+                    },
+                    {
+                        name: 'password',
+                        type: 'String',
+                        required: true,
+                        inputId: 'password'
+                    }
+                ]}
+            >
 
-                            <input 
-                                name='inputUsername'
-                                type='text'
-                                required={true}
-                                maxLength={80}
-                                className='h-[1rem] mb-[0.625rem] p-[0.75rem] emailInput group' 
-                            />
-                        </li>
-                        <li className='flex flexrow'>
-                            <p className='mr-[2rem] text-nowrap'>
-                                password: String (*)
-                            </p>
+            </APIEndpoint>
 
-                            <input 
-                                name='inputPassword'
-                                type='password'
-                                required={true}
-                                maxLength={80}
-                                className='h-[1rem] mb-[0.625rem] p-[0.75rem] emailInput group' 
-                            />
-                        </li>
-                    </ul>
+            <APIEndpoint
+                method={RESTMethodType.POST}
+                endpoint='/api/public/login'
+                description='Login user and cache JWT token in cookies for future requests.'
+                paramaters={[
+                    {
+                        name: 'username',
+                        type: 'String',
+                        required: true,
+                        inputId: 'username'
+                    },
+                    {
+                        name: 'password',
+                        type: 'String',
+                        required: true,
+                        inputId: 'password'
+                    }
+                ]}
+            >
 
-                    <div className='flex justify-end w-full'>
-                        <button className='borderBlack'>
-                            Try Me
-                        </button>
-                    </div>
-                </div>
-            </div>
+            </APIEndpoint>
 
-            <div className='flex flex-col justify-start m-[0.5rem] p-[0.5rem] borderBlack100'>
-                <div className='flex flex-row justify-start'>
-                    <p className='text-2xl text-red-500 font-bold'>
-                        GET
-                    </p>
-                    <p className='flex flex-wrap justify-end w-full text-2xl'>
-                        /api/users
-                    </p>
-                </div>
-                
-                <hr className='mt-[0.5rem] mb-[1rem] bg-white dark:bg-black'/>
+            <APIEndpoint
+                method={RESTMethodType.GET}
+                endpoint='/api/private/test-endpoint2'
+                description='Test endpoint with sample data. Requires logged in user (Authentication required).'
+                paramaters={[]}
+            >
 
-                <p className='italic font-bold'>
-                    Authentication Required
-                </p>
-            </div>
+            </APIEndpoint>
+            
+            <APIEndpoint
+                method={RESTMethodType.GET}
+                endpoint='/api/private/users'
+                description='Retreive a list of all users. Requires logged in user with admin permissions (Authentication required).'
+                paramaters={[]}
+            >
+
+            </APIEndpoint>
+
+
+            <APIEndpoint
+                method={RESTMethodType.GET}
+                endpoint='/api/private/user/<id>'
+                description='Retreive user information from user_id. Requires logged in user with admin permissions (Authentication required).'
+                paramaters={[ 
+                    {
+                        name: 'user_id',
+                        type: 'Integer',
+                        required: true,
+                        inputId: 'username'
+                    }
+                ]}
+            >
+
+            </APIEndpoint>
+
+            <APIEndpoint
+                method={RESTMethodType.GET}
+                endpoint='/api/private/stats'
+                description='Retreive basic website statistics. Requires logged in user with admin permissions (Authentication required).'
+                paramaters={[]}
+            >
+
+            </APIEndpoint>
         </section>
     )
 }
