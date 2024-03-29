@@ -9,7 +9,7 @@ export default function APIDropdown() {
                 toggleBtn={
                     <DropdownButton
                         title='Test API'
-                        classNameEtc='w-[6rem] h-[3.5rem] text-2xl dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800 bg-slate-400 dark:bg-slate-800'
+                        classNameEtc='w-[6rem] h-[3.25rem] text-2xl dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800 bg-slate-400 dark:bg-slate-800'
                     >
                         API
                         <MdKeyboardArrowDown size={24}/>
@@ -21,11 +21,11 @@ export default function APIDropdown() {
                     classNameEtc='w-[10rem] text-lg bg-zinc-100 dark:bg-zinc-800'
                 >
                     <DropdownItem 
-                        href='/test-api'
+                        href='/api-info'
                         target='_parent'
                         classNameEtc='text-2xl h-full dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800'
                     >
-                        Test API
+                        API
                     </DropdownItem>
                 </DropdownItemsList>
             </DropdownContainer>

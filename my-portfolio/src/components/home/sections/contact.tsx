@@ -7,7 +7,7 @@ import { useSectionInView } from '@src/lib/hooks';
 import { sendEmail } from '@src/server-actions/sendEmail';
 import { EMAIL_FORM_INFO, EMAIL_INFO } from '@src/constants/home/email-constants';
 import { Section } from '@src/constants/home/section-data';
-import SectionHeading from '@src/components/section-heading';
+import SectionHeading from '@src/components/home/section-heading';
 import SendBtn from '@src/components/send-btn';
 
 export default function Contact() {

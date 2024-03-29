@@ -3,9 +3,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-import SectionHeading from '../../section-heading';
+import SectionHeading from '@src/components/home/section-heading';
 import { PROJECTS_DATA } from '@src/constants/home/section-data';
-import Project from '../project';
+import Project from '@src/components/home/project';
 import { useSectionInView } from '@src/lib/hooks';
 import { Section } from '@src/constants/home/section-data';
 

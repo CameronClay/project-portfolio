@@ -5,7 +5,8 @@ import SectionDivider from '@src/components/section-divider';
 import Skills from '@src/components/home/sections/skills';
 // import Experience from '@src/components/experience';
 
-import PageContainer from '@src/components/home/page-container'
+import PageContainer from '@src/components/home/page-container';
+import SectionContainer from '@src/components/home/section-container';
 import PageHeader from '@src/components/home/page-header';
 import PageFooter from '@src/components/page-footer';
 import MyToaster from '@src/components/mytoaster';
@@ -42,13 +43,13 @@ export default function Home() {
 
 				<ImageViewer/>
 
-				<main className='flex flex-col items-center pl-[1rem] pr-[1rem]'>
+				<SectionContainer>
 					<Info />
 					<SectionDivider />
 					<Projects />
 					<Skills />
 					<Contact />
-				</main>
+				</SectionContainer>
 
 				<PageFooter/>
 				<MyToaster/>
