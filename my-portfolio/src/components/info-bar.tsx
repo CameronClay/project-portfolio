@@ -44,7 +44,7 @@ export default function InfoBar() {
             <InfoBtn
                 // title='Download Resume'
                 classNameEtc='bg-white dark:bg-zinc-700'
-                href='/downloads/Resume.pdf'
+                href='/downloads/Resume_CameronClay.pdf'
                 download
             >
                 Download Resume
