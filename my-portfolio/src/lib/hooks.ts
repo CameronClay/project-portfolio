@@ -13,7 +13,7 @@ export function useSectionInView(sectionName : string, threshold = 0.75) {
     //when you want to synchronize state with an external system you use useEffect
     //does not get rendered (it would if not inside useEffect)
     useEffect(() => {
-        if (inView && (Date.now() - timeOfLastClick) > 1000) {
+        if (inView && Date.now() - timeOfLastClick > 1000) {
             setActiveSection(sectionName);
         }
     }, [inView, timeOfLastClick, sectionName, setActiveSection])
