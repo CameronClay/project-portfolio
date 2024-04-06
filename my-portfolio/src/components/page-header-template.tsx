@@ -5,7 +5,7 @@ import Link from 'next/link';
 import clsx from 'clsx'; //clsxx helps with conditionally applying classes
 import { motion } from 'framer-motion';
 
-import { useActiveSectionContext } from '@src/context/active-section-context';
+import { useActiveSectionContext } from '@src/context/home/active-section-context';
 import DarkMode from '@src/components/dark-mode';
 import { SectionType } from '@src/constants/section-type';
 

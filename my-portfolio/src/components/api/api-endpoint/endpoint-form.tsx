@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useResponseTextContext } from '@src/context/api-endpoint-context';
+import { useResponseTextContext } from '@src/context/api/api-endpoint-context';
 import Form, { FormInputProps } from '@src/components/form';
 import clsx from 'clsx';
 

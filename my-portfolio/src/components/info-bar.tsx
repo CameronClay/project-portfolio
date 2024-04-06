@@ -4,7 +4,7 @@ import { FaGithubSquare } from 'react-icons/fa';
 import { MdEmail, MdDownload } from "react-icons/md";
 import { BsLinkedin } from 'react-icons/bs';
 
-import { useActiveSectionContext } from '@src/context/active-section-context';
+import { useActiveSectionContext } from '@src/context/home/active-section-context';
 import { CONTACT_INFO } from '@src/constants/home/contact-info';
 import { Section } from '@src/constants/home/section-data';
 import { InfoBtn, InfoBtnBasic } from '@src/components/info-btn';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormInputProps } from '@src/components/form';
 import APIEndpointBase from '@src/components/api/api-endpoint/endpoint-base';
-import APIEndpointContextProvider from '@src/context/api-endpoint-context';
+import APIEndpointContextProvider from '@src/context/api/api-endpoint-context';
 import { RESTMethodType } from '@src/constants/api/constants';
 
 export type APIEndpointParams = {
