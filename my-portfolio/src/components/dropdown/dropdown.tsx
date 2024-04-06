@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import React from 'react'
+import React from 'react';
 import IsOpenContextProvider, {useIsOpenContext} from '@src/components/dropdown/isopen-context';
 import { useOutsideClick } from "outsideclick-react";
 import { LinkTarget } from '@src/constants/components/constants';
@@ -42,30 +42,6 @@ export function DropdownContainer({ toggleBtn, classNameEtc, children }: Dropdow
     )
 }
 
-type DropdownItemsListProps = {
-    classNameEtc?: string;
-    children     : React.ReactNode;
-}
-
-export function DropdownItemsList({ classNameEtc, children }: DropdownItemsListProps) {
-    let className = 'absolute right-[0rem] mt-[0.25rem] rounded-lg shadow-lg'
-    if (classNameEtc){
-        className = `${className} ${classNameEtc}`
-    }
-
-    return (
-        <div className={className}>
-            {
-                //role: ARIA roles can be used to describe elements that don't natively exist in HTML or exist but don't yet have full browser support.
-                //By default, many semantic elements in HTML have a role; for example, <input type="radio"> has the "radio" role.
-            }
-            <ul role='menu' aria-orientation='vertical' aria-labelledby='options-menu'>
-                {children}
-            </ul>
-        </div>
-    );
-}
-
 type DropdownButtonProps = {
     title       ?: string;
     classNameEtc?: string;
@@ -75,7 +51,7 @@ type DropdownButtonProps = {
 export function DropdownButton({ classNameEtc, title, children }: DropdownButtonProps) {
     const {toggle} = useIsOpenContext();
     
-    let className = 'inline-flex items-center justify-center px-[1rem] py-[0.5rem]'
+    let className = 'inline-flex items-center justify-center sm:px-[1rem] py-[0.5rem]'
     if (classNameEtc) {
         className = `${className} ${classNameEtc}`
     }
@@ -100,6 +76,7 @@ export function DropdownButton({ classNameEtc, title, children }: DropdownButton
 }
 
 type DropdownItemProps = {
+    id           : string;
     href         : string;
     target      ?: LinkTarget;
     onClick     ?: () => void;
@@ -107,7 +84,7 @@ type DropdownItemProps = {
     children     : React.ReactNode;
 }
 
-export function DropdownItem({ href, target='_blank', onClick, classNameEtc, children }: DropdownItemProps) {
+export function DropdownItem({ id, href, target='_blank', onClick, classNameEtc, children }: DropdownItemProps) {
     const {close} = useIsOpenContext();
 
     let className = 'block px-[1rem] py-[0.5rem]'
@@ -118,6 +95,7 @@ export function DropdownItem({ href, target='_blank', onClick, classNameEtc, chi
     return (
         <li>
             <Link
+                id={id}
                 href={href}
                 target={target}
                 className={className}

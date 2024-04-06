@@ -10,10 +10,10 @@ import { ObjectId } from 'mongodb';
 // }
 
 export class Stat {
-    constructor(public ip : string, public date : Date, public id? : number) {
-        this.ip = ip;
-        this.date = date;
-        this.id = id;
+    constructor(public ip : string, public date : number, public id? : number) {
+        // this.ip = ip;
+        // this.date = date;
+        // this.id = id;
     }
 }
 
@@ -30,7 +30,7 @@ export async function get_stat(entry_id : string) {
     return stat
 }
 
-export async function create_stat(ip : string, date : number) {
+export async function create_stat(date : number, ip : string) {
     const client = await clientPromise;
     const db = client.db("portfolio");
     const result = (await db.collection<Stat>("stats").insertOne({

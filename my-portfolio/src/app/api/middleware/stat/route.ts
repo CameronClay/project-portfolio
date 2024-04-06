@@ -12,8 +12,6 @@ export async function POST(request : Request) {
 
     let response = await stats_db.create_stat(date, ip);
 
-    console.log('Stat created successfully: ' + ip + " " + date);
-
     return NextResponse.json({ user: {
         id      : response.insertedId.toString(),
         message : 'Stat created successfully'

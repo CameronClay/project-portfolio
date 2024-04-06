@@ -1,5 +1,6 @@
 import React from 'react';
-import { Dropdown, DropdownButton, DropdownContainer, DropdownItemsList, DropdownItem } from '@src/components/dropdown/dropdown';
+import { Dropdown, DropdownButton, DropdownContainer, DropdownItem } from '@src/components/dropdown/dropdown';
+import { DropdownItemsList } from '@src/components/dropdown/dropdown-itemslist';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 export default function APIDropdown() {
@@ -9,23 +10,33 @@ export default function APIDropdown() {
                 toggleBtn={
                     <DropdownButton
                         title='Test API'
-                        classNameEtc='w-[6rem] h-[3.25rem] text-2xl dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800 bg-slate-400 dark:bg-slate-800'
+                        classNameEtc='h-[3.25rem] text-2xl dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-800 bg-slate-400 dark:bg-slate-800 transition'
                     >
                         API
                         <MdKeyboardArrowDown size={24}/>
                     </DropdownButton>
                 }
-                classNameEtc='pl-[0.5rem] pr-[0.25rem]'
+                classNameEtc='pl-[0.5rem] pr-[0.25rem] transition'
             >
                 <DropdownItemsList 
                     classNameEtc='w-[10rem] text-lg bg-zinc-100 dark:bg-zinc-800'
                 >
-                    <DropdownItem 
-                        href='/api-info'
+                    <DropdownItem
+                        id='public-api' 
+                        href='/api-info/public'
                         target='_parent'
-                        classNameEtc='text-2xl h-full dark:text-zinc-300 hover:text-red-400 dark:hover:text-red-800'
+                        classNameEtc='dropdownItem'
                     >
-                        API
+                        Public API
+                    </DropdownItem>
+
+                    <DropdownItem
+                        id='admin-api' 
+                        href='/api-info/admin'
+                        target='_parent'
+                        classNameEtc='dropdownItem'
+                    >
+                        Admin API
                     </DropdownItem>
                 </DropdownItemsList>
             </DropdownContainer>

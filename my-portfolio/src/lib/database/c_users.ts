@@ -9,11 +9,11 @@ import { ObjectId, type WithId } from 'mongodb'
 // }
 
 export class User {
-    constructor(public username : string, public password : string, public is_admin : boolean, public id? : number) {
-        this.username = username;
-        this.password = password;
-        this.is_admin = is_admin;
-        this.id = id;
+    constructor(public username : string, public password : string, public is_admin : boolean, public id? : string) {
+        // this.username = username;
+        // this.password = password;
+        // this.is_admin = is_admin;
+        // this.id = id;
     }
 }
 
@@ -25,10 +25,13 @@ export async function get_users() {
 }
 
 export async function get_user(user_id : string) {
-    console.log(user_id);
     const client = await clientPromise;
     const db = client.db("portfolio");
-    const user = (await db.collection<User>("users").findOne({_id: new ObjectId(user_id)})) as User | null;
+    const user = (await db.collection<User>("users").findOne({
+        _id: new ObjectId(user_id)
+    }, {
+         projection: { username: 1 } 
+    })) as User | null;
     return user;
 }
 
@@ -51,14 +54,18 @@ export async function create_user(username : string, password : string, is_admin
     return result;
 }
 
-export async function update_user(user_id : string, username : string, password : string) {
+export async function update_user(user_id : string, new_username : string | null, new_password : string | null) {
     const client = await clientPromise;
     const db = client.db("portfolio");
+    let update : any = {};
+    if(new_username != null) {
+        update["username"] = new_username;
+    }
+    if(new_password != null) {
+        update["password"] = new_password;
+    }
     let result = await db.collection<User>("users").updateOne({_id: new ObjectId(user_id)}, {
-        $set: {
-            username: username,
-            password: password
-        }
+        $set: update
     });
     return result;
 }
@@ -66,7 +73,7 @@ export async function update_user(user_id : string, username : string, password 
 export async function update_user_by_username(username : string, new_username : string | null, new_password : string | null) {
     const client = await clientPromise;
     const db = client.db("portfolio");
-    let update : object = {};
+    let update : any = {};
     if(new_username != null) {
         update["username"] = new_username;
     }
@@ -78,6 +85,14 @@ export async function update_user_by_username(username : string, new_username : 
     });
     return result;
 }
+
+export async function delete_user(user_id : string) {
+    const client = await clientPromise;
+    const db = client.db("portfolio");
+    const result = (await db.collection<User>("users").deleteOne({_id: new ObjectId(user_id)}));
+    return result;
+}
+
 
 export async function delete_user_by_username(username : string) {
     const client = await clientPromise;
