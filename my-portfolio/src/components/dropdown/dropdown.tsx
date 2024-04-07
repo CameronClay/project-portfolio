@@ -49,9 +49,9 @@ type DropdownButtonProps = {
 }
 
 export function DropdownButton({ classNameEtc, title, children }: DropdownButtonProps) {
-    const {toggle} = useIsOpenContext();
+    const { toggle } = useIsOpenContext();
     
-    let className = 'inline-flex items-center justify-center sm:px-[1rem] py-[0.5rem]'
+    let className = 'inline-flex items-center justify-center px-[0.25rem] sm:px-[1rem] py-[0.5rem]'
     if (classNameEtc) {
         className = `${className} ${classNameEtc}`
     }

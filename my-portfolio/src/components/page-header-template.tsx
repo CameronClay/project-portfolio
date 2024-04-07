@@ -65,7 +65,7 @@ export default function PageHeaderTemplate({ links, children } : PageHeaderProps
                 //actually it seems to have to do with absolute positioning of the motion.span
                 //Absolute positioning refers to positioning an element relative to its nearest positioned ancestor (i.e. the nearest parent element with a position value of relative, absolute, or fixed). 
             }
-            <nav className='flex justify-end w-full pr-[0.5rem]'>
+            <nav className='flex flex-row flex-wrap justify-end w-full pr-[0.5rem] mx-[0.25rem] gap-[0.5rem]'>
                 <ul className='flex flex-wrap gap-x-[0.25rem] gap-y-[0.25rem] sm:gap-x-[0.5rem] sm:gap-y-[0.5rem] text-[0.75rem] font-medium transition'>
                     {links.map((link) => (
                         <li
@@ -122,14 +122,18 @@ export default function PageHeaderTemplate({ links, children } : PageHeaderProps
                             </Link>
                         </li>
                     ))}
+                    <div
+                        className='flex flex-row flex-wrap gap-x-[0.5rem] gap-y-[0.25rem]'
+                    >
+                        {children}   
+
+                        <div className='flex flex-shrink-0 h-[3.25rem] w-[3.25rem]'>
+                            <DarkMode/> 
+                        </div>
+                    </div>
                 </ul>
             </nav>
 
-            {children}   
-
-            <div className='flex flex-shrink-0 mx-[0.25rem] sm:mx-[0.5rem] h-[3.25rem] w-[3.25rem]'>
-                <DarkMode/> 
-            </div>
         </motion.header>
     );
 }

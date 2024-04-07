@@ -16,7 +16,7 @@ export default function APIDropdown() {
                         <MdKeyboardArrowDown size={24}/>
                     </DropdownButton>
                 }
-                classNameEtc='pl-[0.5rem] pr-[0.25rem] transition'
+                classNameEtc=''
             >
                 <DropdownItemsList 
                     classNameEtc='w-[10rem] text-lg bg-zinc-100 dark:bg-zinc-800'
