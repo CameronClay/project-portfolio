@@ -26,6 +26,18 @@ html.dark {
     @apply text-2xl h-full dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-800;
 }
 
+.headerSectionBase {
+    @apply px-[0.25rem] md:px-[0rem] md:min-w-[7rem] lg:min-w-[8rem] h-[3.25rem];
+}
+
+.headerItemBase {
+    @apply h-[3.25rem] px-[0.25rem] md:px-[1rem];
+}
+
+.headerContainerSpacing {
+    @apply gap-x-[0.25rem] gap-y-[0.25rem] sm:gap-x-[0.5rem] sm:gap-y-[0.5rem];
+}
+
 /* react-tooltip config */
 /* :root {
     --rt-color-white: #fff;

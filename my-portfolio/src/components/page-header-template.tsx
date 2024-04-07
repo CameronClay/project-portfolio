@@ -66,10 +66,10 @@ export default function PageHeaderTemplate({ links, children } : PageHeaderProps
                 //Absolute positioning refers to positioning an element relative to its nearest positioned ancestor (i.e. the nearest parent element with a position value of relative, absolute, or fixed). 
             }
             <nav className='flex flex-row flex-wrap justify-end w-full pr-[0.5rem] mx-[0.25rem] gap-[0.5rem]'>
-                <ul className='flex flex-wrap gap-x-[0.25rem] gap-y-[0.25rem] sm:gap-x-[0.5rem] sm:gap-y-[0.5rem] text-[0.75rem] font-medium transition'>
+                <ul className='flex flex-wrap headerContainerSpacing text-[0.75rem] font-medium transition'>
                     {links.map((link) => (
                         <li
-                            className='relative flex justify-center px-[0.25rem] md:px-[0rem] md:min-w-[7rem] lg:min-w-[8rem] h-[3.25rem]'
+                            className='relative flex justify-center headerSectionBase'
                             key={link.link}
                         >
                             {
@@ -123,7 +123,7 @@ export default function PageHeaderTemplate({ links, children } : PageHeaderProps
                         </li>
                     ))}
                     <div
-                        className='flex flex-row flex-wrap gap-x-[0.5rem] gap-y-[0.25rem]'
+                        className='flex flex-row flex-wrap headerContainerSpacing'
                     >
                         {children}   
 
