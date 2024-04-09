@@ -1,5 +1,5 @@
 import React, { FormEvent } from 'react';
-import SubmitBtn from '@src/components/submit-btn';
+// import SubmitBtn from '@src/components/submit-btn';
 import { formdata_to_json } from '@src/lib/utils/form-utils';
 
 export type FormInputProps = {
@@ -12,13 +12,16 @@ export type FormInputProps = {
 
 export type FormProps = {
     header_text?: string,
-    btn_text: string
+    input_disp_width: string,
+    submit_btn: React.ReactNode,
     form_inputs: FormInputProps[],
     handle_submit: (forminfo : any) => Promise<any>,
-    refresh_on_submit: boolean
+    refresh_on_submit: boolean,
 }
 
-export default function Form({header_text, btn_text, form_inputs, handle_submit, refresh_on_submit} : FormProps) {
+//Note form submission is done manually here. Can also directly submit the form to the api endpoint. However, I wanted to learn how to do it manually to learn more about interacting with API endpoints.
+
+export default function Form({header_text, input_disp_width, submit_btn, form_inputs, handle_submit, refresh_on_submit} : FormProps) {
     const on_submit = async (event: FormEvent<HTMLFormElement>) => {
         if(!refresh_on_submit) {
             event.preventDefault(); //prevent page refresh
@@ -38,15 +41,15 @@ export default function Form({header_text, btn_text, form_inputs, handle_submit,
                 header_text ? <h3>{header_text}</h3> : null
             }
 
-            <div className='flex flex-row items-center'>
-                <ul className='flex flex-col justify-start w-full'>
+            <div className='flex flex-row flex-wrap'>
+                <ul className='flex flex-col justify-start'>
                     {
                         form_inputs.map((input: FormInputProps) => (
                             <li 
                                 className='flex flexrow flex-wrap' 
                                 key={input.input_id}
                             >
-                                <p className='mr-[2rem] text-nowrap'>
+                                <p className={`mr-[2rem] text-nowrap ${input_disp_width}`}>
                                     {input.name}
                                 </p>
         
@@ -65,10 +68,9 @@ export default function Form({header_text, btn_text, form_inputs, handle_submit,
                         ))
                     }
                 </ul>
+
+                {submit_btn}
                 
-                <div className='flex justify-end w-full pr-[0.25rem]'>
-                    <SubmitBtn text={btn_text}/>
-                </div>
             </div>
         </form>
     )

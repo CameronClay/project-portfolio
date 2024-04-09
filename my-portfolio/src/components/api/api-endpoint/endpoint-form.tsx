@@ -4,6 +4,8 @@ import React from 'react';
 import { useResponseTextContext } from '@src/context/api/api-endpoint-context';
 import Form, { FormInputProps } from '@src/components/form';
 import clsx from 'clsx';
+import SubmitBtn from '@src/components/submit-btn';
+import { usePathname, useRouter } from 'next/navigation';
 
 export type APIEndpointFormProps = {
     btn_text: string,
@@ -12,6 +14,9 @@ export type APIEndpointFormProps = {
 }
 
 export default function APIEndpointForm({ btn_text, parameters, get_response }: APIEndpointFormProps) {
+    const router = useRouter();
+    const url = usePathname();
+    const redirect_str = `/login/?redirect=${url}`
     const { set_response_text } = useResponseTextContext();
 
     const on_submit = async (forminfo : any) => {
@@ -22,10 +27,16 @@ export default function APIEndpointForm({ btn_text, parameters, get_response }: 
             status: response.status,
             data  : data
         }, null, 4));
+
+        if(response.status == 401 && data.auth_msg !== undefined) {
+            router.push(redirect_str);
+        }
     };
     
     return (
-        <div>
+        <div 
+            className=''
+        >
             <p 
                 className={clsx('mb-[1rem]',
                     {
@@ -37,10 +48,20 @@ export default function APIEndpointForm({ btn_text, parameters, get_response }: 
             </p>
 
             <Form
-                btn_text={btn_text}
+                submit_btn={
+                    //ml-auto positions the button the end of flexbox
+                    <div className='ml-auto pr-[0.25rem]'>
+                        <SubmitBtn text={btn_text}/>
+                    </div>
+
+                    // <div className='relative left-[100%] -translate-x-[100%] pr-[0.25rem]'>
+                    //     <SubmitBtn text={btn_text}/>
+                    // </div> 
+                }
                 form_inputs={parameters}
                 handle_submit={on_submit}
                 refresh_on_submit={false}
+                input_disp_width='w-[10rem]'
             />
         </div>
     )

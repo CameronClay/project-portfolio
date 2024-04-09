@@ -41,7 +41,6 @@ export async function verify_user_cookie(req: NextRequest) {
     } catch (err) {
         throw new AuthError('Invalid session/JWT token');
     }
-    req.cookies.set
 }
 
 export async function get_jwt_token(user_id: string, username: string, is_admin: boolean = false) {

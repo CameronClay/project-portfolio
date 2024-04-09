@@ -3,6 +3,7 @@
 import React from 'react';
 import { Section } from '@src/constants/api/section-data';
 import { useSectionInView } from '@src/lib/hooks';
+import Login from '@src/components/user/login';
 
 type ApiProps = {
     children: React.ReactNode
@@ -16,7 +17,7 @@ export default function Api({ children }: ApiProps) {
             id='api'
             ref={ref}
             className='scroll-mt-[5rem] mb-[2rem]'
-        >
+        >         
             <p className='text-2xl font-bold px-[0.125rem]'>
                 API
             </p>

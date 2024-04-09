@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import * as stats_db from '@src/lib/database/c_stats';
 
-export async function POST(request : Request) {
+export async function POST(request : NextRequest) {
     const data = await request.json();
     const date = data["date"];
     const ip   = data["ip"];

@@ -19,10 +19,14 @@ export async function POST(request : NextRequest) {
 
     let result = await users_db.create_user(username, generate(password));
 
-    return NextResponse.json({ user: {
-        id      : result.insertedId.toString(),
-        username: username
-    }}, { 
+    return NextResponse.json({ 
+            user: {
+                id      : result.insertedId.toString(),
+                username: username
+            },
+            message  : "Registration successful"
+        }, 
+    {    
         status: 200 }
     );
 }

@@ -68,7 +68,8 @@ async function verify_identity(request: NextRequest): Promise<NextResponse | nul
         }
         catch(err : unknown) {
             response = NextResponse.json({
-                message: (err as Error).toString()
+                message: 'Unauthorized',
+                auth_msg: (err as Error).toString() //set auth_msg only if jwt token is invalid or not present
             }, { status: 401 });
         }
     }
