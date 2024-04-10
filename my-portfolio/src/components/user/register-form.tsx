@@ -47,9 +47,9 @@ export default function RegisterForm() {
                     }
                     resp = await api_tmain.register(forminfo.username, forminfo.password);
 
-                    if(redirect_to) {
+                    if(redirect_to && resp.status == 200) {
                         // router.push(redirect_to);
-                        router.push(`/login${redirect_query}`);
+                        router.push(`/account/login${redirect_query}`);
                     }
 
                     return resp;
@@ -58,7 +58,7 @@ export default function RegisterForm() {
 
             <Link 
                 title="Login"
-                href={`/login${redirect_query}`}
+                href={`/account/login${redirect_query}`}
                 target='_parent'
                 className='block link'
             >

@@ -20,7 +20,7 @@ export function UserFormResponse() {
 
     return (
         (response_text !== undefined) && (response_text.length > 0) ? (
-            <p className='max-w-[20rem] text-wrap whitespace-pre-wrap break-words mt-[0.25rem] italic'>
+            <p className='max-w-[20rem] text-wrap whitespace-pre-wrap break-words mt-[0.25rem] italic text-red-600 dark:text-red-700'>
                 {response_text}
             </p>
         ) : null

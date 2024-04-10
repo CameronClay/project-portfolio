@@ -11,7 +11,7 @@ export default function EndpointLinks() {
         <div className=''>
             <Link 
                 title="Login"
-                href={`/login?redirect=${pathname}`} 
+                href={`/account/login?redirect=${pathname}`} 
                 target='_parent'
                 className='block link text-xl font-bold'
             >
@@ -20,7 +20,7 @@ export default function EndpointLinks() {
 
             <Link 
                 title="Register"
-                href={`/register?redirect=${pathname}`} 
+                href={`/account/register?redirect=${pathname}`} 
                 target='_parent'
                 className='block link text-xl font-bold'
             >

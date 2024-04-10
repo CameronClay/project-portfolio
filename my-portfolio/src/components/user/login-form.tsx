@@ -34,7 +34,7 @@ export default function LoginForm() {
                 ]}
                 get_response={async (forminfo : any) => {
                     const resp = await api_tmain.login(forminfo.username, forminfo.password);
-                    if(redirect_to) {
+                    if(redirect_to && resp.status == 200) {
                         router.push(redirect_to);
                     }
                     return resp;
@@ -43,7 +43,7 @@ export default function LoginForm() {
 
             <Link
                 title="Register"
-                href={`/register${redirect_query}`}
+                href={`/account/register${redirect_query}`}
                 target='_parent'
                 className='block link'
             >

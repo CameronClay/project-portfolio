@@ -3,7 +3,6 @@
 import React from 'react';
 import { Section } from '@src/constants/api/section-data';
 import { useSectionInView } from '@src/lib/hooks';
-import Login from '@src/components/user/login';
 
 type ApiProps = {
     children: React.ReactNode

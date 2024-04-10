@@ -7,16 +7,10 @@ import APIInfo from '@src/components/api/api-info';
 
 export default function AdminAPI() {
     return (
-        <APITemplate
-            section_container={
-                <SectionContainer>
-                    <APIInfo heading="Public API" description="REST API with JWT token Authentication."/>
-                    <APIPublic/>
-                </SectionContainer>
-            }
-        >
-                
-        </APITemplate>
+        <SectionContainer>
+            <APIInfo heading="Public API" description="REST API with JWT token Authentication."/>
+            <APIPublic/>
+        </SectionContainer>
     )
 }
 
