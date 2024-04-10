@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { expire_user_cookie } from '@src/lib/auth';
-import { validate_user_info } from '@src/lib/auth';
+import { expire_user_cookie, validate_user_info } from '@src/lib/auth';
 
 export async function POST(request : NextRequest) {
     const {jwt_info, response} = validate_user_info(request, false);

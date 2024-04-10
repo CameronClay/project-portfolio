@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as users_db from '@src/lib/database/c_users';
 import { generate, verify, Options } from 'password-hash';
-import { validate_user_info } from '@src/lib/auth';
+import { validate_user_info, expire_user_cookie } from '@src/lib/auth';
 
 //get user
 export async function GET(request : NextRequest) {
@@ -55,11 +55,15 @@ export async function DELETE(request : NextRequest) {
     const result = await users_db.delete_user_by_username(username);
 
     if(result.acknowledged && result.deletedCount > 0) {
-        return NextResponse.json({
+        let res = NextResponse.json({
             message: `User: ${username} sucessfully deleted`
         }, { 
             status: 200 }
         );
+
+        expire_user_cookie(res); //log out user
+
+        return res;
     }
     else {
         return NextResponse.json({

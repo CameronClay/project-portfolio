@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as users_db from '@src/lib/database/c_users';
 import { verify, Options } from 'password-hash';
-import { validate_user_info } from '@src/lib/auth';
+import { expire_user_cookie, validate_user_info } from '@src/lib/auth';
 
 //delete currently logged in user
 export async function DELETE(request : NextRequest) {
@@ -31,11 +31,15 @@ export async function DELETE(request : NextRequest) {
     const result = await users_db.delete_user(jwt_info.user_id);
 
     if(result.acknowledged && result.deletedCount > 0) {
-        return NextResponse.json({
+        let res = NextResponse.json({
             message: `User: ${jwt_info.username} sucessfully deleted`
         }, { 
             status: 200 }
         );
+
+        expire_user_cookie(res); //log out user
+
+        return res;
     }
     else {
         return NextResponse.json({
