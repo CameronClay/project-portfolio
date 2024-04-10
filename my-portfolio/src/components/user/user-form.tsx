@@ -15,6 +15,19 @@ export function UserFormSubmitBtnContainer({children}: {children: React.ReactNod
     )
 }
 
+export function UserResponseElement({children, classNameEtc}: {children: React.ReactNode, classNameEtc?: string}) {
+    let className = 'max-w-[20rem] text-wrap whitespace-pre-wrap break-words mt-[0.25rem] italic'
+    if(classNameEtc) {
+        className += ` ${classNameEtc}`
+    }
+
+    return (
+        <p className={className}>
+            {children}
+        </p>
+    )
+}
+
 export function UserFormResponse() {
     const { response_text, response_text_error } = useResponseTextContext();
 
@@ -22,17 +35,17 @@ export function UserFormResponse() {
         <div>
             {
                 (response_text !== undefined) && (response_text.length > 0) ? (
-                    <p className='max-w-[20rem] text-wrap whitespace-pre-wrap break-words mt-[0.25rem] italic text-green-600 dark:text-green-700'>
+                    <UserResponseElement classNameEtc='text-green-600 dark:text-green-700'>
                         {response_text}
-                    </p>
+                    </UserResponseElement>
                 ) : null
             }
 
             {
                 (response_text_error !== undefined) && (response_text_error.length > 0) ? (
-                    <p className='max-w-[20rem] text-wrap whitespace-pre-wrap break-words mt-[0.25rem] italic text-red-600 dark:text-red-700'>
+                    <UserResponseElement classNameEtc='text-red-600 dark:text-red-700'>
                         {response_text_error}
-                    </p>
+                    </UserResponseElement>
                 ) : null
             }
          
