@@ -16,7 +16,7 @@ export type APIEndpointFormProps = {
 export default function APIEndpointForm({ btn_text, parameters, get_response }: APIEndpointFormProps) {
     const router = useRouter();
     const url = usePathname();
-    const redirect_str = `/login/?redirect=${url}`
+    const redirect_str = `/account/login/?redirect=${url}`
     const { set_response_text } = useResponseTextContext();
 
     const on_submit = async (forminfo : any) => {

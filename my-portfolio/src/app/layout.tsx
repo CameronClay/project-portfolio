@@ -28,6 +28,24 @@ export default function RootLayout({
     return (
         <React.StrictMode>
             <html lang='en' className='!scroll-smooth'>
+                <head>
+                    {
+                        //prevent page flicker with server side rendering due to dark mode
+                    }
+                    <script dangerouslySetInnerHTML={{
+                        __html: `
+                            try {
+                                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                                    document.documentElement.classList.add('dark')
+                                } else {
+                                    document.documentElement.classList.remove('dark')
+                                }
+                            } catch (_) {}
+                        `
+                    }}/>
+
+                    {/* Other Meta Tags, Links, Etc... */}
+                </head>
                 <body className={`${inter.className}`}>
                     <PageContainer>
                         {children}
