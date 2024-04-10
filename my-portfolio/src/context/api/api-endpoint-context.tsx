@@ -9,6 +9,8 @@ type APIEndpointContextProviderProps = {
 type APIEndpointContextType = {
     response_text: string;
     set_response_text: React.Dispatch<React.SetStateAction<string>>;
+    response_text_error: string;
+    set_response_text_error: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const APIEndpointContext =
@@ -19,12 +21,15 @@ export default function APIEndpointContextProvider({
     children,
 }: APIEndpointContextProviderProps) {
     const [response_text, set_response_text] = useState('');
+    const [response_text_error, set_response_text_error] = useState('');
 
     return (
         <APIEndpointContext.Provider
             value={{ //first set of curly braces is so you can use javascript, second set is to denote an object
                 response_text,
                 set_response_text,
+                response_text_error,
+                set_response_text_error,
             }}
         >
             {children}
