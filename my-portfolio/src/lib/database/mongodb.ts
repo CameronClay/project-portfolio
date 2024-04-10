@@ -44,7 +44,59 @@ async function create_indexes() {
     await db.collection("users").createIndex({username: 1}, {unique: true})
 }
 
+async function schema_validation() {
+    const client = await clientPromise;
+    const db = client.db("portfolio");
+
+    await db.command({
+        "collMod": "users",
+        "validator": {
+            $jsonSchema: {
+                "bsonType": "object",
+                "description": "Document describing a user",
+                "required": ["username", "password", "is_admin"],
+                "properties": {
+                    "username": {
+                        "bsonType": "string",
+                        "description": "username is a required string"
+                    },
+                    "password": {
+                        "bsonType": "string",
+                        "description": "password is a required string"
+                    },
+                    "is_admin": {
+                        "bsonType": "bool",
+                        "description": "is_admin is a required bool"
+                    }
+                },
+            }
+        }
+    })
+
+    await db.command({
+        "collMod": "stats",
+        "validator": {
+            $jsonSchema: {
+                "bsonType": "object",
+                "description": "Document describing a stat",
+                "required": ["ip", "date"],
+                "properties": {
+                    "ip": {
+                        "bsonType": "string",
+                        "description": "ip is a required string"
+                    },
+                    "date": {
+                        "bsonType": "number",
+                        "description": "date is a required number"
+                    },
+                },
+            }
+        }
+    })
+}
+
 create_indexes()
+schema_validation()
 
 export default clientPromise
 

@@ -15,7 +15,7 @@ export default function APIEndpointResponse() {
                         <p>
                             Response:
                         </p>
-                        <p className='borderBlack100'>
+                        <p className='borderBlack100 text-wrap whitespace-pre-wrap break-words'>
                             {response_text}
                         </p>
                     </div>
