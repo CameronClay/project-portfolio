@@ -18,7 +18,8 @@ export default function PageFooter() {
                     <InfoLabel text='Next.js' tooltip='App Router, and Server Actions' iconSize={20} iconStyle='text-blue-500'/>
                     TypeScript, Tailwind CSS,
                     Framer-Motion, React-Email, Nodemailer,
-                    and <InfoLabel text='more' tooltip='React-Intersection-Observer, and OutsideClick-React' iconSize={20} iconStyle='text-blue-500'/>
+                    and <InfoLabel text='more' tooltip='React-Intersection-Observer, and OutsideClick-React' iconSize={20} iconStyle='text-blue-500'/>.
+                    {'   '}Features <span className='font-bold'>REST API</span> with JWT authentication using a MongoDB database.
                 </p>
                 {/* <p className='text-xs'>
                     &copy; {`2024 ${CONTACT_INFO.name}`}. All rights reserved.
