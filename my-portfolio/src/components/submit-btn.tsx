@@ -6,8 +6,8 @@ type SubmitBtnProps = {
     text: string
 }
 
-export default function SubmitBtn({ text }: SubmitBtnProps ) {
-    const { pending } = useFormStatus(); //this hook must be 1 scope deeper than contact form
+export default function SubmitBtn({ text }: SubmitBtnProps) {
+    const { pending } = useFormStatus(); //this hook must be 1 scope deeper than form since useFormStatus hook is only valid inside a form element
 
     //text here is a flex item
     //items-center alligns vertically
