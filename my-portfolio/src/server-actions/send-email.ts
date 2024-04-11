@@ -1,15 +1,12 @@
-'use server'; //makes exported functions server actions (applies to everything in this module)
+'use server'; //makes code run on the server only (applies to everything in this module)
 
-// import * as ReactDOMServer from 'react-dom/server';
-// import React from 'react';
-// import { Resend } from 'resend';
 import nodemailer from 'nodemailer';
 import { render } from "@react-email/render";
 import { validate_input, get_error_message } from '@src/lib/utils/validation';
 import ContactMeEmail from '@src/components/contact-me-email';
 import { EMAIL_FORM_INFO, EMAIL_INFO } from '@src/constants/home/email-constants';
 
-function buildEmailDataFromFormData(formData : FormData) {
+function build_emaildata_from_formdata(formData : FormData) {
     const senderName  = formData.get('inputSenderName') as string | null;
     const senderEmail = formData.get('inputSenderEmail') as string | null;
     const message     = formData.get('textAreaMessage') as string | null;
@@ -28,7 +25,7 @@ type ValidateEmaiLDataProps = {
 };
 
 //server side validation
-function validateEmailData({senderName, senderEmail, message}: ValidateEmaiLDataProps) {
+function validate_email_data({senderName, senderEmail, message}: ValidateEmaiLDataProps) {
     if(!validate_input(senderName, EMAIL_FORM_INFO.name.maxLength)) {
         return {
             error: 'Invalid sender name',
@@ -51,8 +48,8 @@ function validateEmailData({senderName, senderEmail, message}: ValidateEmaiLData
 }
 
 export const send_email = async (formData : FormData, url : string) => {
-    const emailData      = buildEmailDataFromFormData(formData);
-    const {valid, error} = validateEmailData(emailData);
+    const emailData      = build_emaildata_from_formdata(formData);
+    const {valid, error} = validate_email_data(emailData);
 
     if(!valid) {
         return {
@@ -60,7 +57,6 @@ export const send_email = async (formData : FormData, url : string) => {
         }
     }
     // return new Promise(sendMailHelper(emailData));
-
     // const ReactDOMServer = (await import('react-dom/server')).default; //dynamic import to get around needing use client for ReactDOMServer.renderToString
 
     return new Promise<{error?: string, data?: object}>((resolve, reject) => {
@@ -109,14 +105,11 @@ export const send_email = async (formData : FormData, url : string) => {
     });
 }
 
-
-
 // const resend = new Resend(process.env.RESEND_API_KEY);
 
 //this is a server action (new in Next.js)
-//Server Actions can only be invoked on the same host (e.g localhost) as the page that hosts it
 //dont need to create a separate api (Next.js takes care of it)
-// export const send_email = async (formData : FormData, url : string) => {
+// export const sendEmail = async (formData : FormData, url : string) => {
 //     const emailData = buildEmailDataFromFormData(formData);
 //     const {valid, error} = validateEmailData(emailData);
 
@@ -144,7 +137,7 @@ export const send_email = async (formData : FormData, url : string) => {
 //     }
 //     catch (error : unknown) {
 //         return {
-//             error: get_error_message(error),
+//             error: getErrorMessage(error),
 //         }
 //     }
 
