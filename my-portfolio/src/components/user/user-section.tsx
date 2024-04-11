@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import APIEndpointContextProvider from '@src/context/api/api-endpoint-context';
 import { UserFormResponse } from '@src/components/user/user-form';
 
@@ -15,7 +15,12 @@ export default function UserSection({ user_form, header_text }: UserSectionProps
                     <h3 className='text-2xl mb-[0.25rem]'>{header_text}</h3>
                     <hr className='mb-[0.75rem]'/>
 
-                    {user_form}
+                    {
+                        //Suspense lets you display a fallback component until the child component is fully loaded. Also needed to avoid useSearchParams error that occurs without suspense boundary.
+                    }
+                    <Suspense>
+                        {user_form}
+                    </Suspense>
               
                     <UserFormResponse/>
                 </div>
