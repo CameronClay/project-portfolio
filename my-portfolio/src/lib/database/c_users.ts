@@ -9,7 +9,7 @@ import { ObjectId, type WithId } from 'mongodb'
 // }
 
 export class User {
-    constructor(public username : string, public password : string, public is_admin : boolean, public id? : string) {
+    constructor(public username : string, public password : string, public is_admin : boolean, public _id? : string) {
         // this.username = username;
         // this.password = password;
         // this.is_admin = is_admin;

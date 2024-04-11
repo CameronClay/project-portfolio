@@ -25,13 +25,17 @@ export async function POST(request : NextRequest) {
 
     const jwt_token = await get_jwt_token(user._id as string, user.username, user.is_admin);
 
-    const res = NextResponse.json({ user: {
-        message  : "Log in successful",
-        id       : user._id as string,
-        username : username,
-        jwt_token: jwt_token
-    }}, { 
-        status: 200 }
+    const res = NextResponse.json(
+        { 
+            message  : "Log in successful",
+            jwt_token: jwt_token,
+            user: {
+                id       : user._id as string,
+                username : username,
+            }
+        }, { 
+            status: 200
+        }
     );
 
     set_user_cookie(res, jwt_token);

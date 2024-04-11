@@ -7,11 +7,15 @@ export async function POST(request : NextRequest) {
         return response;
     }
 
-    const res = NextResponse.json({ user: {
-        message  : "Log out successful",
-        id       : jwt_info.user_id as string
-    }}, { 
-        status: 200 }
+    const res = NextResponse.json(
+        {
+            message : "Log out successful",
+            user: {
+                id : jwt_info.user_id as string
+            }
+        }, { 
+            status: 200 
+        }
     );
 
     expire_user_cookie(res);
