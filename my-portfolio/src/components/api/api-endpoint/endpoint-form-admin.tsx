@@ -103,7 +103,7 @@ export function FormDeleteUser() {
             ]}
             get_response={
                 async (forminfo : any) => {
-                    return await api_tadmin.delete_user_by_username(forminfo.username, forminfo.password, forminfo.new_username, forminfo.new_password);
+                    return await api_tadmin.delete_user_by_username(forminfo.username, forminfo.password);
                 }
             }
         />
