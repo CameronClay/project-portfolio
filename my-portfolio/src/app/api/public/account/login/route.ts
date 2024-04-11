@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import * as users_db from '@src/lib/database/c_users';
 import { get_jwt_token, set_user_cookie } from '@src/lib/auth';
 import { verify, Options } from 'password-hash';
+import { ObjectId } from "mongodb";
 
 export async function POST(request : NextRequest) {
     const data = await request.json();
@@ -23,14 +24,14 @@ export async function POST(request : NextRequest) {
         return NextResponse.json({ message: "Invalid password" }, { status: 401 });
     }
 
-    const jwt_token = await get_jwt_token(user._id as string, user.username, user.is_admin);
+    const jwt_token = await get_jwt_token((user._id as ObjectId)?.toString(), user.username, user.is_admin);
 
     const res = NextResponse.json(
         { 
             message  : "Log in successful",
             jwt_token: jwt_token,
             user: {
-                id       : user._id as string,
+                id       : user._id?.toString(),
                 username : username,
             }
         }, { 

@@ -10,7 +10,7 @@ import { ObjectId } from 'mongodb';
 // }
 
 export class Stat {
-    constructor(public ip : string, public date : number, public _id? : number) {
+    constructor(public ip : string, public date : number, public _id? : ObjectId) {
         // this.ip = ip;
         // this.date = date;
         // this.id = id;
