@@ -2,7 +2,7 @@
 
 import React, { WheelEvent, useEffect, useRef, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
-import { useImageViewerContext } from '@src/context/image-viewer-context'
+import { useImageViewerContext } from '@src/context/home/image-viewer-context'
 import { useOutsideClick } from 'outsideclick-react';
 import { MdOutlineFilterCenterFocus, MdOutlineZoomOut, MdZoomIn } from 'react-icons/md';
 // import { MdOutlineZoomOut, MdZoomIn } from 'react-icons/md';

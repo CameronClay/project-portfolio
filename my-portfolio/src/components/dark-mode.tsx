@@ -1,6 +1,6 @@
 'use client';
 
-import { useTheme } from '@src/context/theme-context';
+import { useTheme } from '@src/context/home/theme-context';
 import React from 'react';
 import { CiLight, CiDark } from 'react-icons/ci';
 

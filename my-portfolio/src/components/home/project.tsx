@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
-import { useImageViewerContext } from '@src/context/image-viewer-context';
+import { useImageViewerContext } from '@src/context/home/image-viewer-context';
 import { PROJECTS_DATA, Skill } from '@src/constants/home/section-data';
 
 type ProjectProps = (typeof PROJECTS_DATA)[number];

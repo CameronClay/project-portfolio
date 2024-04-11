@@ -1,4 +1,4 @@
-export const validateInput = (input: unknown, maxLength: number): boolean => {
+export const validate_input = (input: unknown, maxLength: number): boolean => {
     //value is not null and is a string and the length is less than or equal to maxLength
     if(!input) {
         return false;
@@ -7,7 +7,7 @@ export const validateInput = (input: unknown, maxLength: number): boolean => {
     return (typeof input === 'string' && input.length <= maxLength);
 }
 
-export const getErrorMessage = (error: unknown): string => {
+export const get_error_message = (error: unknown): string => {
     let message: string = 'Unknown Error';
     if(error) {
         if ((typeof error === 'object' && 'message' in error) || (error instanceof Error)) {

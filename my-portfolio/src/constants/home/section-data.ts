@@ -1,5 +1,7 @@
+import { SectionType } from '@src/constants/section-type';
+
 export enum Section {
-    INFO          = 'Info',
+    INFO           = 'Info',
     PROJECTS       = 'Projects',
     SKILLS         = 'Skills',
     // EXPERIENCE     = 'Experience',
@@ -11,23 +13,23 @@ export const LINKS = [
     {
         name: Section.INFO,
         link: '#info',
-    },
+    } as SectionType,
     {
         name: Section.PROJECTS,
         link: '#projects',
-    },
+    } as SectionType,
     {
         name: Section.SKILLS,
         link: '#skills',
-    },
+    } as SectionType,
     // {
     //     name: Section.EXPERIENCE,
     //     link: '#experience',
-    // },
+    // } as SectionType,
     {
         name: Section.CONTACT,
         link: '#contact',
-    },
+    } as SectionType,
 ] as const;
 
 export const SKILLS_DATA = [

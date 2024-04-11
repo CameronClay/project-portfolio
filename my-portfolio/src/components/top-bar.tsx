@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default function TopBar({children} : {children: React.ReactNode}) {
     //sticky is like fixed but doesn't remove it from the flow of the document
