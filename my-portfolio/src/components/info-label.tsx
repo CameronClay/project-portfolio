@@ -15,7 +15,7 @@ type InfoLabelProps = {
 export default function InfoLabel({text, tooltip, iconSize, iconStyle} : InfoLabelProps) {
     return (
         <Tooltip content={tooltip}>
-            <Button placeholder={text} className='inline underline'>
+            <Button variant='filled' placeholder={text} className='inline underline'>
                 {text}
                 <BiSolidInfoCircle className={`inline ${iconStyle}`} size={iconSize}/>
             </Button>
