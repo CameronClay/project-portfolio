@@ -1,13 +1,13 @@
 import { on_request_error } from '@src/lib/api/helpers';
-import { LOCAL_URL } from "@src/constants/url-constants";
+import { PROD_URL } from "@src/constants/url-constants";
 
 //register user
 export async function register(username: string, password: string) {
-    console.log(LOCAL_URL);
+    console.log(PROD_URL);
     let response : Response | null = null;
     try {
         response = await fetch(
-          LOCAL_URL + "/api/public/account/register",
+          PROD_URL + "/api/public/account/register",
           {
             method: "POST",
             headers: {
@@ -31,7 +31,7 @@ export async function login(username: string, password: string) {
     let response : Response | null = null;
     try {
         response = await fetch(
-            LOCAL_URL + "/api/public/account/login",
+            PROD_URL + "/api/public/account/login",
             {
                 method: "POST",
                 headers: {
@@ -55,7 +55,7 @@ export async function logout() {
     let response : Response | null = null;
     try {
         response = await fetch(
-            LOCAL_URL + "/api/private/account/logout",
+            PROD_URL + "/api/private/account/logout",
             {
                 method: "POST",
                 headers: {
@@ -75,7 +75,7 @@ export async function delete_user(password: string) {
     let response : Response | null = null;
     try {
         response = await fetch(
-            LOCAL_URL + "/api/private/account/delete",
+            PROD_URL + "/api/private/account/delete",
             {
                 method: "DELETE",
                 headers: {
@@ -98,7 +98,7 @@ export async function update_user(password: string, new_username : string, new_p
     let response : Response | null = null;
     try {
         response = await fetch(
-            LOCAL_URL + "/api/private/account/update",
+            PROD_URL + "/api/private/account/update",
             {
                 method: "PATCH",
                 headers: {
@@ -123,7 +123,7 @@ export async function get_test_endpoint() {
     let response : Response | null = null;
     try {
         response = await fetch(
-            LOCAL_URL + "/api/public/test-endpoint",
+            PROD_URL + "/api/public/test-endpoint",
             {
                 method: "GET",
                 headers: {
@@ -144,7 +144,7 @@ export async function get_test_endpoint_priv() {
     let response : Response | null = null;
     try {
         response = await fetch(
-            LOCAL_URL + "/api/private/test-endpoint-priv",
+            PROD_URL + "/api/private/test-endpoint-priv",
             {
                 method: "GET",
                 headers: {

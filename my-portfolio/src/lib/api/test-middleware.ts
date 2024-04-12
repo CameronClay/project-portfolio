@@ -1,5 +1,5 @@
 import { on_request_error } from '@src/lib/api/helpers';
-import { LOCAL_URL } from "@src/constants/url-constants";
+import { PROD_URL } from "@src/constants/url-constants";
 
 //create stat (only accessible via server)
 //could have used a server action since it is the same way but wanted to do it the hard way for learning purposes
@@ -7,7 +7,7 @@ export async function create_stat(date: number, ip: string) {
     let response : Response | null = null;
     try {
         response = await fetch(
-            LOCAL_URL + "/api/middleware/stat",
+            PROD_URL + "/api/middleware/stat",
           {
             method: "POST",
             headers: {

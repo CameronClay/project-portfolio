@@ -60,7 +60,7 @@ async function verify_identity(request: NextRequest): Promise<NextResponse | nul
 
             //store user info in request so it can be accessed by api route (runs on server)
             response.headers.set('User_Info', JSON.stringify(user_info));
-            (response as any)['user_info'] = user_info;
+            // (response as any)['user_info'] = user_info;
             // request.cookies.set(get_jwt_info_key(), JSON.stringify(user_info));
         }
         catch(err : unknown) {
