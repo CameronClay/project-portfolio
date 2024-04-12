@@ -1,11 +1,13 @@
 import { on_request_error } from '@src/lib/api/helpers';
+import { LOCAL_URL } from "@src/constants/url-constants";
 
 //register user
 export async function register(username: string, password: string) {
+    console.log(LOCAL_URL);
     let response : Response | null = null;
     try {
         response = await fetch(
-          "http://localhost:3000/api/public/account/register",
+          LOCAL_URL + "/api/public/account/register",
           {
             method: "POST",
             headers: {
@@ -29,7 +31,7 @@ export async function login(username: string, password: string) {
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/public/account/login",
+            LOCAL_URL + "/api/public/account/login",
             {
                 method: "POST",
                 headers: {
@@ -53,7 +55,7 @@ export async function logout() {
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/private/account/logout",
+            LOCAL_URL + "/api/private/account/logout",
             {
                 method: "POST",
                 headers: {
@@ -73,7 +75,7 @@ export async function delete_user(password: string) {
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/private/account/delete",
+            LOCAL_URL + "/api/private/account/delete",
             {
                 method: "DELETE",
                 headers: {
@@ -96,7 +98,7 @@ export async function update_user(password: string, new_username : string, new_p
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/private/account/update",
+            LOCAL_URL + "/api/private/account/update",
             {
                 method: "PATCH",
                 headers: {
@@ -121,7 +123,7 @@ export async function get_test_endpoint() {
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/public/test-endpoint",
+            LOCAL_URL + "/api/public/test-endpoint",
             {
                 method: "GET",
                 headers: {
@@ -142,7 +144,7 @@ export async function get_test_endpoint_priv() {
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/private/test-endpoint-priv",
+            LOCAL_URL + "/api/private/test-endpoint-priv",
             {
                 method: "GET",
                 headers: {

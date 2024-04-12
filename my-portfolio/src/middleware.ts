@@ -1,14 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import * as api_main from '@src/lib/api/test-main';
-import * as api_admin from '@src/lib/api/test-admin';
 import * as api_middleware from '@src/lib/api/test-middleware';
 import { verify_user_cookie, set_user_cookie } from '@src/lib/auth';
-import { get_jwt_info_key } from '@src/constants/auth-constants';
 
 //https://nextjs.org/docs/messages/node-module-in-edge-runtime
 //Next.js Middleware runs on the server, using the edge runtime
 
-const LOCAL_URL_BASE = process.env.LOCAL_URL_BASE + ":" + process.env.PORT;
+import { LOCAL_URL_BASE } from '@src/constants/url-constants';
 
 //store ip of all users who visit the homepage in database
 //returns null if should continue with the next middleware and a valid response promise otherwise

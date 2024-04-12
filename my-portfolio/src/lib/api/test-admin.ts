@@ -1,5 +1,7 @@
 import { on_request_error } from '@src/lib/api/helpers';
 
+import { LOCAL_URL } from "@src/constants/url-constants";
+
 //all endpoints require authentication as admin
 
 //delete user by username
@@ -7,7 +9,7 @@ export async function delete_user_by_username(username: string, password: string
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/private/admin/user",
+            LOCAL_URL + "/api/private/admin/user",
             {
                 method: "DELETE",
                 headers: {
@@ -31,7 +33,7 @@ export async function update_user_by_username(username: string, password: string
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/private/admin/user",
+            LOCAL_URL + "/api/private/admin/user",
             {
                 method: "PATCH",
                 headers: {
@@ -57,7 +59,7 @@ export async function get_user_by_id(user_id : string) {
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/private/admin/user?" + new URLSearchParams({
+            LOCAL_URL + "/api/private/admin/user?" + new URLSearchParams({
                 user_id: user_id
             }),
             {
@@ -79,7 +81,7 @@ export async function get_users() {
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/private/admin/users",
+            LOCAL_URL + "/api/private/admin/users",
             {
                 method: "GET",
                 headers: {
@@ -100,7 +102,7 @@ export async function get_stat(entry_id : string) {
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/private/admin/stat?"+ new URLSearchParams({
+            LOCAL_URL + "/api/private/admin/stat?"+ new URLSearchParams({
                 entry_id: entry_id
             }),
             {
@@ -123,7 +125,7 @@ export async function get_stats() {
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/private/admin/stats",
+            LOCAL_URL + "/api/private/admin/stats",
             {
                 method: "GET",
                 headers: {
@@ -144,7 +146,7 @@ export async function clear_stats() {
     let response : Response | null = null;
     try {
         response = await fetch(
-            "http://localhost:3000/api/private/admin/stats",
+            LOCAL_URL + "/api/private/admin/stats",
             {
                 method: "DELETE",
                 headers: {
