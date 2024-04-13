@@ -19,9 +19,8 @@ export class AuthError extends Error {}
 //Cookies sent back to the client in a response are automatically sent back to the server in subsequent requests from the client while the cookie is valid
 
 //Verifies the user's JWT token and returns its UserJwtPayload if it is valid.
-export async function verify_user_cookie(req: NextRequest) {
-    const token = req.cookies.get(get_user_token_key())?.value;
 
+export async function verify_jwt(req: NextRequest, token : string | undefined) {
     if (!token) {
         throw new AuthError('Requires logged in user (JWT token required)');
     }
@@ -42,6 +41,15 @@ export async function verify_user_cookie(req: NextRequest) {
         throw new AuthError('Invalid session/JWT token');
     }
 }
+export async function verify_user_cookie(req: NextRequest) {
+    const token = req.cookies.get(get_user_token_key())?.value;
+    return verify_jwt(req, token);
+}
+
+export async function verify_auth_header(req: NextRequest) { //used for server to server api calls
+    const token = req.headers.get('Authorization')?.split(' ')[1];
+    return verify_jwt(req, token);
+}
 
 export async function get_jwt_token(user_id: string, username: string, is_admin: boolean = false) {
     const token = await new SignJWT({
@@ -57,6 +65,10 @@ export async function get_jwt_token(user_id: string, username: string, is_admin:
         .sign(new TextEncoder().encode(get_jwt_secret_key()));
 
     return token;
+}
+
+export async function set_auth_header(req: NextResponse, token: string) { //used for server to server api calls
+    return req.headers.set('Authorization', 'Bearer ' + token);
 }
 
 //Adds the user jwt token cookie to the response
