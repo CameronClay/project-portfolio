@@ -45,11 +45,10 @@ export const SKILLS_DATA = [
     'CSS',
     'Typescript',
     'JavaScript',
-    'Debugging',
+    'Docker',
     'Git',
     'Atlassian',
     'Jira',
-    'Docker',
     'Continous Integration/Continuous Deployment (CI/CD)',
     'Unit testing',
     'Integration testing',
@@ -60,6 +59,7 @@ export const SKILLS_DATA = [
     'Visual Studio',
     'Visual Studio Code',
     'Object Oriented Programming',
+    'Debugging',
 ] as const;
 
 export type Skill = typeof SKILLS_DATA[number];
