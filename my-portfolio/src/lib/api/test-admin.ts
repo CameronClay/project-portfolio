@@ -23,7 +23,7 @@ export async function delete_user_by_username(username: string, password: string
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
 
@@ -49,7 +49,7 @@ export async function update_user_by_username(username: string, password: string
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
 
@@ -71,7 +71,7 @@ export async function get_user_by_id(user_id : string) {
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
 
@@ -92,7 +92,7 @@ export async function get_users() {
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
 
@@ -115,7 +115,7 @@ export async function get_stat(entry_id : string) {
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
 
@@ -136,7 +136,7 @@ export async function get_stats() {
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
 
@@ -157,6 +157,6 @@ export async function clear_stats() {
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }

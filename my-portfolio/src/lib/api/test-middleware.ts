@@ -22,6 +22,6 @@ export async function create_stat(date: number, ip: string) {
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }

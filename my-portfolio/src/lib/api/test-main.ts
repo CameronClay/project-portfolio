@@ -7,22 +7,22 @@ export async function register(username: string, password: string) {
     let response : Response | null = null;
     try {
         response = await fetch(
-          PROD_URL + "/api/public/account/register",
-          {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ 
-                'username': username,
-                'password': password
-            }),
-          }
+            PROD_URL + "/api/public/account/register",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ 
+                    'username': username,
+                    'password': password
+                }),
+            }
         );
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
 
@@ -46,7 +46,7 @@ export async function login(username: string, password: string) {
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
 
@@ -66,7 +66,7 @@ export async function logout() {
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
 
@@ -89,7 +89,7 @@ export async function delete_user(password: string) {
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
 
@@ -114,7 +114,7 @@ export async function update_user(password: string, new_username : string, new_p
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
 
@@ -135,7 +135,7 @@ export async function get_test_endpoint() {
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
 
@@ -156,6 +156,6 @@ export async function get_test_endpoint_priv() {
         return response;
     } 
     catch (error) {
-        return on_request_error(response, error);
+        return await on_request_error(response, error);
     }
 }
