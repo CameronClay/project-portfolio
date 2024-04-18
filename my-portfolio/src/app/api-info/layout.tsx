@@ -1,5 +1,5 @@
 import React from 'react';
-import APITemplate from '@src/components/api/page-template';
+import APILayout from '@src/layouts/api-layout';
 
 export default function RootLayout({
     children,
@@ -7,8 +7,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <APITemplate>
+        <APILayout>
             {children}
-        </APITemplate>
+        </APILayout>
     );
 }

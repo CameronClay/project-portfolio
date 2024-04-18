@@ -1,5 +1,5 @@
-import clientPromise from '@src/lib/database/mongodb';
-import { ObjectId, type WithId } from 'mongodb'
+import { get_db, Collection } from '@src/lib/database/mongodb';
+import { ObjectId } from 'mongodb';
 
 // export type User = {
 //     _id      : number,
@@ -18,16 +18,16 @@ export class User {
 }
 
 export async function get_users() {
-    const client = await clientPromise;
-    const db = client.db("portfolio");
-    let users = (await db.collection<User>("users").find({}).project({ username: 1 }).toArray());
+    const db = await get_db();
+
+    let users = (await db.collection<User>(Collection.users).find({}).project({ username: 1 }).toArray());
     return users;
 }
 
 export async function get_user(user_id : string) {
-    const client = await clientPromise;
-    const db = client.db("portfolio");
-    const user = (await db.collection<User>("users").findOne({
+    const db = await get_db();
+
+    const user = (await db.collection<User>(Collection.users).findOne({
         _id: new ObjectId(user_id)
     }, {
          projection: { username: 1 } 
@@ -36,17 +36,17 @@ export async function get_user(user_id : string) {
 }
 
 export async function get_user_by_username(username : string) {
-    const client = await clientPromise;
-    const db = client.db("portfolio");
-    const user = (await db.collection<User>("users").findOne({username: username})) as User;
+    const db = await get_db();
+
+    const user = (await db.collection<User>(Collection.users).findOne({username: username})) as User;
     return user;
 }
 
 
 export async function create_user(username : string, password : string, is_admin : boolean = false) {
-    const client = await clientPromise
-    const db = client.db("portfolio")
-    const result = (await db.collection<User>("users").insertOne({
+    const db = await get_db();
+
+    const result = (await db.collection<User>(Collection.users).insertOne({
         username: username,
         password: password,
         is_admin: is_admin
@@ -55,8 +55,8 @@ export async function create_user(username : string, password : string, is_admin
 }
 
 export async function update_user(user_id : string, new_username : string | null, new_password : string | null) {
-    const client = await clientPromise;
-    const db = client.db("portfolio");
+    const db = await get_db();
+
     let update : any = {};
     if(new_username != null) {
         update["username"] = new_username;
@@ -64,15 +64,15 @@ export async function update_user(user_id : string, new_username : string | null
     if(new_password != null) {
         update["password"] = new_password;
     }
-    let result = await db.collection<User>("users").updateOne({_id: new ObjectId(user_id)}, {
+    let result = await db.collection<User>(Collection.users).updateOne({_id: new ObjectId(user_id)}, {
         $set: update
     });
     return result;
 }
 
 export async function update_user_by_username(username : string, new_username : string | null, new_password : string | null) {
-    const client = await clientPromise;
-    const db = client.db("portfolio");
+    const db = await get_db();
+
     let update : any = {};
     if(new_username != null) {
         update["username"] = new_username;
@@ -80,31 +80,31 @@ export async function update_user_by_username(username : string, new_username : 
     if(new_password != null) {
         update["password"] = new_password;
     }
-    let result = await db.collection<User>("users").updateOne({username: username}, {
+    let result = await db.collection<User>(Collection.users).updateOne({username: username}, {
         $set: update
     });
     return result;
 }
 
 export async function delete_user(user_id : string) {
-    const client = await clientPromise;
-    const db = client.db("portfolio");
-    const result = (await db.collection<User>("users").deleteOne({_id: new ObjectId(user_id)}));
+    const db = await get_db();
+
+    const result = (await db.collection<User>(Collection.users).deleteOne({_id: new ObjectId(user_id)}));
     return result;
 }
 
 
 export async function delete_user_by_username(username : string) {
-    const client = await clientPromise;
-    const db = client.db("portfolio");
-    const result = (await db.collection<User>("users").deleteOne({username: username}));
+    const db = await get_db();
+
+    const result = (await db.collection<User>(Collection.users).deleteOne({username: username}));
     return result;
 }
 
 
 export async function clear_users() {
-    const client = await clientPromise;
-    const db = client.db("portfolio");
-    const result = (await db.collection<User>("users").deleteMany({}));
+    const db = await get_db();
+
+    const result = (await db.collection<User>(Collection.users).deleteMany({}));
     return result;
 }

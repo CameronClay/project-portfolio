@@ -5,9 +5,7 @@ import { Inter } from 'next/font/google';
 import '@src/app/globals.css';
 
 import { CONTACT_INFO } from '@src/constants/home/contact-info'
-import PageContainer from '@src/components/home/page-container';
-import PageFooter from '@src/components/page-footer';
-import MyToaster from '@src/components/mytoaster';
+import MainLayout from '@src/layouts/main-layout';
 
 // choose font
 const inter = Inter({ subsets: ['latin'] });
@@ -47,12 +45,9 @@ export default function RootLayout({
                     {/* Other Meta Tags, Links, Etc... */}
                 </head>
                 <body className={`${inter.className}`}>
-                    <PageContainer>
+                    <MainLayout>
                         {children}
-
-                        <PageFooter/>
-                        <MyToaster/>
-                    </PageContainer>
+                    </MainLayout>
                 </body>
             </html>
         </React.StrictMode>
