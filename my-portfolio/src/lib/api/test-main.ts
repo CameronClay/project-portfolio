@@ -3,7 +3,6 @@ import { PROD_URL } from "@src/constants/url-constants";
 
 //register user
 export async function register(username: string, password: string) {
-    console.log(PROD_URL);
     let response : Response | null = null;
     try {
         response = await fetch(
@@ -14,8 +13,8 @@ export async function register(username: string, password: string) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ 
-                    'username': username,
-                    'password': password
+                    username: username,
+                    password: password
                 }),
             }
         );

@@ -23,7 +23,7 @@ async function restrict_middleware(request: NextRequest): Promise<NextResponse |
 
     //should also protect middleware api path with authentication as the referer/host can be spoofed, but for the purpose of this project this is not needed
     if(request.url.startsWith(middleware_path)) {
-        if(request.headers.get('referer')?.startsWith(process.env.HOST_PFX as string)) {
+        if(process.env.NEXT_PUBLIC_RUNNING_LOCAL || request.headers.get('referer')?.startsWith(process.env.HOST_PFX as string)) {
             //TODO: protect middleware api path with authentication
         }
         else {
@@ -32,17 +32,6 @@ async function restrict_middleware(request: NextRequest): Promise<NextResponse |
             }, { status: 403 });
         }
     }
-    
-    // if(request.url.startsWith(middleware_path)) { //restrict middleware api to localhost
-    //     await log_ext("AAAA");
-    //     await log_ext("referer: " + request.headers.get("referer"));
-    //     if (!request.headers.get("referer")?.startsWith(home_url)) {
-    //         await log_ext("BBBB");
-    //         return NextResponse.json({
-    //              message: 'Unauthorized' 
-    //         }, { status: 401 });
-    //     }
-    // }
 
     return response;
 }
@@ -54,7 +43,7 @@ async function store_ip(request: NextRequest): Promise<NextResponse | null> {
     const home_url = url.protocol + '//' + PROD_URL_BASE + '/';
 
     if(request.url == home_url) {
-        let ip = request.ip ?? request.headers.get('x-real-ip'); //?? is for nullish coalescing (request.ip if it is not null, else request.headers.get('x-real-ip'))
+        let ip = request.ip ?? request.headers.get('x-real-ip'); //?? is the nullish coalescing operator (request.ip if it is not null, else request.headers.get('x-real-ip'))
         const forwardedFor = request.headers.get('x-forwarded-for');
         if(!ip && forwardedFor) {
             ip = forwardedFor.split(',').at(0) ?? 'Unknown';
@@ -63,12 +52,19 @@ async function store_ip(request: NextRequest): Promise<NextResponse | null> {
             ip = 'Unknown';
         }
 
-        await api_middleware.create_stat(Date.now(), ip);
+        try {
+            // Cannot use Node.js modules in middleware so cannot use mongodb Node.js driver (bypass with api call)
+            // await stats_db.create_stat(ip, Date.now());
+            let response = await api_middleware.create_stat(Date.now(), ip);
+            if(response.status != 200) {
+                await log_ext('create_stat failed, status=' + response.status);
+            }
+        }
+        catch(error : any) {
+            await log_ext(error);
+        }
 
         return null;
-
-        // Cannot use Node.js modules in middleware so cannot use mongodb Node.js driver (bypass with api call)
-        // await stats_db.create_stat(ip, Date.now());
     }
 
     return null;
@@ -105,6 +101,7 @@ async function verify_identity(request: NextRequest): Promise<NextResponse | nul
 
 //middleware runs before every request
 export async function middleware(request: NextRequest) {
+    // console.log(request.headers.get('referer'));
     // log_ext('middleware: ' + request.url);
 
     let response = await restrict_middleware(request);

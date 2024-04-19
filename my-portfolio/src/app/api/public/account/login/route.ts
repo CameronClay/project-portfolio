@@ -3,15 +3,17 @@ import * as users_db from '@src/lib/database/c_users';
 import { get_jwt_token, set_user_cookie } from '@src/lib/auth';
 import { verify, Options } from 'password-hash';
 import { ObjectId } from "mongodb";
+import { parse_params_resp, Param } from '@src/lib/api/helpers';
+import * as params from '@src/constants/api/public-api-params';
 
 export async function POST(request : NextRequest) {
-    const data = await request.json();
+    let { data, response } = await parse_params_resp(request, params.login_user as Param[]);
+    if(response !== null) {
+        return response;
+    }
+
     const username = data["username"];
     const password = data["password"];
-
-    if(username == null || password == null) {
-        return NextResponse.json({ message: "Missing username or password" }, { status: 401 });
-    }
 
     const user = await users_db.get_user_by_username(username);
 
