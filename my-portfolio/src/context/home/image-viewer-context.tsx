@@ -47,7 +47,7 @@ export function useImageViewerContext() {
     const context = useContext(ImageViewerContext);
 
     if (context === null) {
-        let error = new Error();
+        const error = new Error();
         error.message =`${useImageViewerContext.name} must be used within an ${ImageViewerContextProvider.name}. Trace: ${error.stack}`;
         throw error;
     }

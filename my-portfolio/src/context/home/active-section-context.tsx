@@ -43,7 +43,7 @@ export function useActiveSectionContext() {
     const context = useContext(ActiveSectionContext);
 
     if (context === null) {
-        let error = new Error();
+        const error = new Error();
         error.message =`${useActiveSectionContext.name} must be used within an ${ActiveSectionContextProvider.name}. Trace: ${error.stack}`;
         throw error;
     }

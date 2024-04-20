@@ -5,6 +5,7 @@ import UserForm from '@src/components/user/user-form';
 import * as api_tmain from '@src/lib/api/test-main';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
+import * as api_params from '@src/constants/api/public-api-params';
 
 export default function RegisterForm() {
     const router = useRouter();
@@ -16,38 +17,16 @@ export default function RegisterForm() {
         <div>
             <UserForm
                 btn_text="Register"
-                form_inputs={[
-                    {
-                        name: "Username",
-                        type:"string",
-                        input_type: "text",
-                        required: true,
-                        input_id: "username"
-                    },
-                    {
-                        name: "Password",
-                        type:"string",
-                        input_type: "password",
-                        required: true,
-                        input_id: "password"
-                    },
-                    {
-                        name: "Repeat password",
-                        type:"string",
-                        input_type: "password",
-                        required: true,
-                        input_id: "password_repeat"
-                    }
-                ]}
-                get_response={async (forminfo : any) => {
-                    let resp : Response;
-                    
-                    if(forminfo.password !== forminfo.password_repeat) {
-                        resp = Response.json({status: 401, message: "Passwords do not match."});
+                form_inputs={api_params.register_user}
+                get_response={async (forminfo: Record<string, string>) => {
+                    let resp: Response;
+
+                    if (forminfo.password !== forminfo.password_repeat) {
+                        resp = Response.json({ status: 401, message: "Passwords do not match." });
                     }
                     resp = await api_tmain.register(forminfo.username, forminfo.password);
 
-                    if(redirect_to && resp.status == 200) {
+                    if (redirect_to && resp.status == 200) {
                         // router.push(redirect_to);
                         router.push(`/account/login${redirect_query}`);
                     }
@@ -56,7 +35,7 @@ export default function RegisterForm() {
                 }}
             />
 
-            <Link 
+            <Link
                 title="Login"
                 href={`/account/login${redirect_query}`}
                 target='_parent'

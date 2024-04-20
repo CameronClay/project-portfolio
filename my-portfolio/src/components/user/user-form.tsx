@@ -56,14 +56,14 @@ export function UserFormResponse() {
 export type UserFormProps = {
     btn_text: string,
     form_inputs: FormInputProps[],
-    get_response: (forminfo : any) => Promise<any>
+    get_response: (forminfo : Record<string, string>) => Promise<Response>
 }
 
 export default function UserForm({ btn_text, form_inputs, get_response }: UserFormProps) {
     const { set_response_text, set_response_text_error } = useResponseTextContext();
-    const on_submit = async (forminfo : any) => {
+    const on_submit = async (forminfo : Record<string, string>) => {
         const response = await get_response(forminfo);
-        const data = await response.json();
+        const data = await response.json() as { message: string };
         
         if(response.status == 200) {
             set_response_text(data.message);

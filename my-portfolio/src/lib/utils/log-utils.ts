@@ -4,13 +4,13 @@ export async function log_ext(message : string) {
     if(process.env.LOGFARE_API_KEY !== undefined) {
         //send to log server
         try {
-            let response = await fetch(
+            const response = await fetch(
                 process.env.LOGFARE_API_URL as string,
                 {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        "X-API-Key": process.env.LOGFARE_API_KEY as string
+                        "X-API-Key": process.env.LOGFARE_API_KEY
                     },
                     body: JSON.stringify({
                         'noobert': 'true',
@@ -25,7 +25,7 @@ export async function log_ext(message : string) {
         catch (error) {
             console.log(error);
         }
-    };
+    }
 
     return null;
 }

@@ -3,9 +3,9 @@
 import React, { useEffect, useState, createContext, useContext } from 'react';
 
 const THEME_KEY = 'theme';
-enum Theme {
+export enum Theme {
     LIGHT = 'light',
-    DARK    = 'dark',
+    DARK  = 'dark',
 }
 
 type ThemeContextInfo = {
@@ -77,7 +77,7 @@ export function useTheme() {
     const context = useContext(ThemeContext);
 
     if (context === null) {
-        let error = new Error();
+        const error = new Error();
         error.message =`${useTheme.name} must be used within an ${ThemeContextProvider.name}. Trace: ${error.stack}`;
         throw error;
     }

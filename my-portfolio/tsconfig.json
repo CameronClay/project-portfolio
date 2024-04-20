@@ -33,17 +33,58 @@
             ]
         }
     },
+    // "files": [
+    //     "**/*.ts",
+    //     "**/*.tsx",
+    //     "**/*.js",
+    //     "**/*.jsx",
+    //     "**/src/*.ts",
+    //     "**/src/*.tsx",
+    //     "**/src/*.js",
+    //     "**/src/*.jsx",
+    //     "./**/*.ts",
+    //     "./**/*.tsx",
+    //     "./**/*.js",
+    //     "./**/*.jsx",
+    //     "./**/src/*.ts",
+    //     "./**/src/*.tsx",
+    //     "./**/src/*.js",
+    //     "./**/src/*.jsx",
+    // ],
+    // "files": [
+    //     // "**/*.ts",
+    //     // "**/*.tsx",
+    //     // "**/*.js",
+    //     // "**/*.jsx",
+    //     // "./src/middleware.ts",
+    //     // "/home/fluffystuff/Desktop/repos/portfolio-website/my-portfolio/src/middleware.ts",
+    // ],
     "include": [
-        "next-env.d.ts",
+        // "./src/middleware.ts",
         "**/*.ts",
         "**/*.tsx",
+        "**/*.js",
+        "**/*.jsx",
+        // "**/src/*.ts",
+        // "**/src/*.tsx",
+        // "**/src/*.js",
+        // "**/src/*.jsx",
+        // "./**/*.ts",
+        // "./**/*.tsx",
+        // "./**/*.js",
+        // "./**/*.jsx",
+        // "./**/src/*.ts",
+        // "./**/src/*.tsx",
+        // "./**/src/*.js",
+        // "./**/src/*.jsx",
+        "next-env.d.ts",
         ".next/types/**/*.ts",
         "babel.config.js",
-        "jest.config.js", 
-        "custom-test-env.js"  
+        "jest.config.js",
+        "custom-test-env.js"
     ],
     "exclude": [
-        "node_modules"
+        "../node_modules"
     ],
     "sourceMap": true
 }

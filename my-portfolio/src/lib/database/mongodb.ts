@@ -1,3 +1,6 @@
+/* eslint @typescript-eslint/no-namespace: "off" */
+/* eslint no-var: "off" */
+
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
 if (!process.env.MONGODB_URI) {
@@ -14,10 +17,10 @@ const options = {
     }
 }
 
-let client : MongoClient
-let clientPromise : Promise<MongoClient>
+let client : MongoClient;
+let clientPromise : Promise<MongoClient>;
 
-export let my_db = 'portfolio';
+export const my_db = 'portfolio';
 export enum Collection {
     stats = 'stats',
     users = 'users'
@@ -25,7 +28,7 @@ export enum Collection {
 
 declare global {
     namespace globalThis {
-      var _mongoClientPromise: Promise<MongoClient>
+        var _mongoClientPromise: Promise<MongoClient> | null
     }
 }
 
@@ -110,7 +113,7 @@ async function schema_validation() {
     })
 }
 
-create_indexes();
-schema_validation();
+void create_indexes().catch(()=>{}).then(()=>{});
+void schema_validation().catch(()=>{}).then(()=>{});
 
 export default clientPromise;

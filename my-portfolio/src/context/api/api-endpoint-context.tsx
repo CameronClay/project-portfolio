@@ -42,7 +42,7 @@ export function useResponseTextContext() {
     const context = useContext(APIEndpointContext);
 
     if (context === null) {
-        let error = new Error();
+        const error = new Error();
         error.message =`${useResponseTextContext.name} must be used within an ${APIEndpointContextProvider.name}. Trace: ${error.stack}`;
         throw error;
     }

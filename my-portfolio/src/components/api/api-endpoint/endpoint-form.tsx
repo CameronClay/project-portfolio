@@ -10,7 +10,7 @@ import { usePathname, useRouter } from 'next/navigation';
 export type APIEndpointFormProps = {
     btn_text: string,
     parameters: FormInputProps[],
-    get_response: (forminfo : any) => Promise<Response>,
+    get_response: (forminfo : Record<string, string>) => Promise<Response>,
 }
 
 export default function APIEndpointForm({ btn_text, parameters, get_response }: APIEndpointFormProps) {
@@ -19,16 +19,16 @@ export default function APIEndpointForm({ btn_text, parameters, get_response }: 
     const redirect_str = `/account/login/?redirect=${url}`
     const { set_response_text } = useResponseTextContext();
 
-    const on_submit = async (forminfo : any) => {
+    const on_submit = async (forminfo : Record<string, string>) => {
         const response = await get_response(forminfo);
-        const data = response.headers.get('content-type') == 'application/json' ? await response.json() : await response.text();
+        const data = response.headers.get('content-type') == 'application/json' ? await response.json() as Record<string, unknown> : await response.text();
 
         set_response_text(JSON.stringify({
             status: response.status,
             data  : data
         }, null, 4));
 
-        if(response.status == 401 && data.auth_msg !== undefined) {
+        if(response.status == 401 && (data as Record<string, unknown>).auth_msg !== undefined) {
             router.push(redirect_str);
         }
     };

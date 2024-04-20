@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from 'react';
 import toast from 'react-hot-toast';
@@ -12,7 +12,16 @@ import SubmitBtn from '@src/components/submit-btn';
 
 export default function Contact() {
     const { ref } = useSectionInView(Section.CONTACT);
-    const url = 'localhost';
+    const url = process.env.NEXT_PUBLIC_URL_BASE as string;
+    const onAction = async (formData: FormData) => {
+        const { data, error } = await send_email(formData, url);
+        if (error) {
+            toast.error(error)
+            return;
+        }
+
+        toast.success('Email sent successfully!');
+    };
 
     return (
         //do a fade in animation first time this section comes into view
@@ -37,20 +46,11 @@ export default function Contact() {
 
             {
                 //action that takes function only exists in Next.js
+                //solve https://github.com/orgs/react-hook-form/discussions/8622
             }
             <form
                 className='mt-[2.0rem] flex flex-col dark:text-black transition'
-                action={
-                    async (formData) => {
-                        const { data, error } = await send_email(formData, url);
-                        if (error) {
-                            toast.error(error)
-                            return;
-                        }
-
-                        toast.success('Email sent successfully!')
-                    }
-                }       
+                action={(event) => void onAction(event)}
             >
                 <p className='text-left mb-[1rem] font-semibold italic text-gray-700 dark:text-white/80 transition'>
                     An asterisk (<span className='font-bold'>*</span>) indicates a required field
@@ -65,12 +65,12 @@ export default function Contact() {
                     <p>
                         Name: <span className='font-bold'>*</span>
                     </p>
-                    <input 
+                    <input
                         name='inputSenderName'
                         type='text'
                         required={true}
                         maxLength={EMAIL_FORM_INFO.name.maxLength}
-                        className='h-[3.5rem] mb-[0.625rem] p-[0.75rem] emailInput group' 
+                        className='h-[3.5rem] mb-[0.625rem] p-[0.75rem] emailInput group'
                     />
                 </label>
 
@@ -80,12 +80,12 @@ export default function Contact() {
                     <p>
                         Email: <span className='font-bold'>*</span>
                     </p>
-                    <input 
+                    <input
                         name='inputSenderEmail'
                         type='email'
                         required={true}
                         maxLength={EMAIL_FORM_INFO.email_address.maxLength}
-                        className='h-[3.5rem] mb-[0.625rem] p-[0.75rem] emailInput' 
+                        className='h-[3.5rem] mb-[0.625rem] p-[0.75rem] emailInput'
                     />
                 </label>
 
@@ -95,7 +95,7 @@ export default function Contact() {
                     <p>
                         Message: <span className='font-bold'>*</span>
                     </p>
-                    <textarea 
+                    <textarea
                         name='textAreaMessage'
                         required={true}
                         maxLength={EMAIL_FORM_INFO.message.maxLength}

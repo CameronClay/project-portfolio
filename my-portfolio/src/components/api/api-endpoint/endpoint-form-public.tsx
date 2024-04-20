@@ -13,7 +13,7 @@ export function FormTest() {
             btn_text='Test'
             parameters={params.test}
             get_response={
-                async (forminfo : any) => {
+                async (forminfo : Record<string, string>) => {
                     return await api_tmain.get_test_endpoint();
                 }
             }
@@ -27,7 +27,7 @@ export function FormTestPriv() {
             btn_text='Test'
             parameters={params.test_priv}
             get_response={
-                async (forminfo : any) => {
+                async (forminfo : Record<string, string>) => {
                     return await api_tmain.get_test_endpoint_priv();
                 }
             }
@@ -41,7 +41,7 @@ export function FormRegisterUser() {
             btn_text='Register'
             parameters={params.register_user}
             get_response={
-                async (forminfo : any) => {
+                async (forminfo : Record<string, string>) => {
                     return await api_tmain.register(forminfo.username, forminfo.password);
                 }
             }
@@ -55,7 +55,7 @@ export function FormLoginUser() {
             btn_text='Login'
             parameters={params.login_user}
             get_response={
-                async (forminfo : any) => {
+                async (forminfo : Record<string, string>) => {
                     return await api_tmain.login(forminfo.username, forminfo.password);
                 }
             }
@@ -69,7 +69,7 @@ export function FormLogoutUser() {
             btn_text='Logout'
             parameters={params.logout_user}
             get_response={
-                async (forminfo : any) => {
+                async (forminfo : Record<string, string>) => {
                     return await api_tmain.logout();
                 }
             }
@@ -83,7 +83,7 @@ export function FormUpdateUser() {
             btn_text='Update'
             parameters={params.update_user}
             get_response={
-                async (forminfo : any) => {
+                async (forminfo : Record<string, string>) => {
                     return await api_tmain.update_user(forminfo.password, forminfo.new_username, forminfo.new_password);
                 }
             }
@@ -97,7 +97,7 @@ export function FormDeleteUser() {
             btn_text='Delete'
             parameters={params.delete_user}
             get_response={
-                async (forminfo : any) => {
+                async (forminfo : Record<string, string>) => {
                     return await api_tmain.delete_user(forminfo.password);
                 }
             }

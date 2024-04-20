@@ -20,7 +20,7 @@ export class User {
 export async function get_users() {
     const db = await get_db();
 
-    let users = (await db.collection<User>(Collection.users).find({}).project({ username: 1 }).toArray());
+    const users = (await db.collection<User>(Collection.users).find({}).project({ username: 1 }).toArray());
     return users;
 }
 
@@ -57,14 +57,14 @@ export async function create_user(username : string, password : string, is_admin
 export async function update_user(user_id : string, new_username : string | null, new_password : string | null) {
     const db = await get_db();
 
-    let update : any = {};
+    const update : Record<string, string> = {};
     if(new_username != null) {
         update["username"] = new_username;
     }
     if(new_password != null) {
         update["password"] = new_password;
     }
-    let result = await db.collection<User>(Collection.users).updateOne({_id: new ObjectId(user_id)}, {
+    const result = await db.collection<User>(Collection.users).updateOne({_id: new ObjectId(user_id)}, {
         $set: update
     });
     return result;
@@ -73,14 +73,14 @@ export async function update_user(user_id : string, new_username : string | null
 export async function update_user_by_username(username : string, new_username : string | null, new_password : string | null) {
     const db = await get_db();
 
-    let update : any = {};
+    const update : Record<string, string> = {};
     if(new_username != null) {
         update["username"] = new_username;
     }
     if(new_password != null) {
         update["password"] = new_password;
     }
-    let result = await db.collection<User>(Collection.users).updateOne({username: username}, {
+    const result = await db.collection<User>(Collection.users).updateOne({username: username}, {
         $set: update
     });
     return result;

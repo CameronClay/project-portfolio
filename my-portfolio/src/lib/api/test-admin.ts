@@ -60,7 +60,7 @@ export async function get_user_by_id(user_id : string) {
         response = await fetch(
             PROD_URL + "/api/private/admin/user?" + new URLSearchParams({
                 user_id: user_id
-            }),
+            }).toString(),
             {
                 method: "GET",
                 headers: {
@@ -101,9 +101,9 @@ export async function get_stat(entry_id : string) {
     let response : Response | null = null;
     try {
         response = await fetch(
-            PROD_URL + "/api/private/admin/stat?"+ new URLSearchParams({
+            PROD_URL + "/api/private/admin/stat?" + new URLSearchParams({
                 entry_id: entry_id
-            }),
+            }).toString(),
             {
                 method: "GET",
                 headers: {

@@ -3,6 +3,7 @@
 import { useTheme } from '@src/context/home/theme-context';
 import React from 'react';
 import { CiLight, CiDark } from 'react-icons/ci';
+import { Theme } from '@src/context/home/theme-context';
 
 export default function DarkMode() {
     const { theme, toggleTheme } = useTheme();
@@ -14,7 +15,7 @@ export default function DarkMode() {
             onClick={toggleTheme}
         >
             <div className='flex items-center justify-center w-[75%] h-[75%]'>
-                {theme === 'light' ? <CiLight size={35}/> : <CiDark size={35}/>}
+                {theme === Theme.LIGHT ? <CiLight size={35}/> : <CiDark size={35}/>}
             </div>
         </button>  
     );

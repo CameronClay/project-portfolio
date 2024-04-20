@@ -4,5 +4,18 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"eslint.options": {
+			"configFile": "my-portfolio/.eslintrc.json"
+		},
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": "explicit"
+		},
+		"typescript.tsdk": "./my-portfolio/node_modules/typescript/lib",
+		// "eslint.workingDirectories": [
+		// 	"./my-portfolio"
+		// ],
+
+	}
 }

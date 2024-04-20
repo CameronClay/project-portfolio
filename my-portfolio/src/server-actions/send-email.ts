@@ -64,7 +64,7 @@ export const send_email = async (formData : FormData, url : string) => {
             from: `${emailData.senderName as string} <${process.env.SMTP_FROM}>`,
             to: `${EMAIL_INFO.to}`,
             replyTo: `${emailData.senderName as string} <${emailData.senderEmail as string}>`,
-            subject: `Contact form message`,
+            subject: `Contact form message ${url}`,
             text: 'message',
             html: render(ContactMeEmail({
                     senderName: emailData.senderName as string,

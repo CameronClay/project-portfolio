@@ -43,12 +43,12 @@ export async function verify_jwt(req: NextRequest, token : string | undefined) {
 }
 export async function verify_user_cookie(req: NextRequest) {
     const token = req.cookies.get(get_user_token_key())?.value;
-    return verify_jwt(req, token);
+    return await verify_jwt(req, token);
 }
 
 export async function verify_auth_header(req: NextRequest) { //used for server to server api calls
     const token = req.headers.get('Authorization')?.split(' ')[1];
-    return verify_jwt(req, token);
+    return await verify_jwt(req, token);
 }
 
 export async function get_jwt_token(user_id: string, username: string, is_admin: boolean = false) {
@@ -67,12 +67,12 @@ export async function get_jwt_token(user_id: string, username: string, is_admin:
     return token;
 }
 
-export async function set_auth_header(req: NextResponse, token: string) { //used for server to server api calls
+export function set_auth_header(req: NextResponse, token: string) { //used for server to server api calls
     return req.headers.set('Authorization', 'Bearer ' + token);
 }
 
 //Adds the user jwt token cookie to the response
-export async function set_user_cookie(res: NextResponse, jwt_token : string) {
+export function set_user_cookie(res: NextResponse, jwt_token : string) {
     res.cookies.set(get_user_token_key(), jwt_token, {
         httpOnly: true,
         maxAge: 60 * get_jwt_exp_minutes(), // in seconds
@@ -97,7 +97,7 @@ export function validate_user_info(req: NextRequest, admin_req: boolean = false)
             response: NextResponse.json({ message: "User info not found" }, { status: 401 })
         };
     }
-    const jwt_info = JSON.parse(user_info) as any as UserJwtPayload;
+    const jwt_info = JSON.parse(user_info) as UserJwtPayload;
 
     if(!jwt_info.is_admin && admin_req) {
         return {

@@ -5,6 +5,7 @@ import UserForm from '@src/components/user/user-form';
 import * as api_tmain from '@src/lib/api/test-main';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
+import * as api_params from '@src/constants/api/public-api-params';
 
 export default function LoginForm() {
     const router = useRouter();
@@ -16,25 +17,10 @@ export default function LoginForm() {
         <div>
             <UserForm
                 btn_text="Login"
-                form_inputs={[
-                    {
-                        name: "Username",
-                        type:"string",
-                        input_type: "text",
-                        required: true,
-                        input_id: "username"
-                    },
-                    {
-                        name: "Password",
-                        type:"string",
-                        input_type: "password",
-                        required: true,
-                        input_id: "password"
-                    }
-                ]}
-                get_response={async (forminfo : any) => {
+                form_inputs={api_params.login_user}
+                get_response={async (forminfo: Record<string, string>) => {
                     const resp = await api_tmain.login(forminfo.username, forminfo.password);
-                    if(redirect_to && resp.status == 200) {
+                    if (redirect_to && resp.status == 200) {
                         router.push(redirect_to);
                     }
                     return resp;
