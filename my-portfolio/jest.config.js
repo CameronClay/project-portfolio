@@ -14,8 +14,13 @@ const createJestConfig = nextJest({
     dir: "./",
 });
 const customJestConfig = {
-    moduleDirectories: ["node_modules", "<rootDir>/"],
+    roots: ["<rootDir>"],
+    modulePaths: ["<rootDir>", "<rootDir>/src"],
+    moduleDirectories: ["node_modules"],
     testEnvironment: "./custom-test-env",
+    moduleNameMapper: {
+        "^@src/(.*)$": "<rootDir>/src/$1", //needed for module path aliases e.g. @src/.*
+    }
     // testEnvironment: "jest-environment-jsdom",
 };
 module.exports = createJestConfig(customJestConfig);

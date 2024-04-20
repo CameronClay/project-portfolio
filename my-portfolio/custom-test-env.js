@@ -21,6 +21,9 @@ class CustomTestEnvironment extends Environment {
             const { TextEncoder } = require('util');
             this.global.TextEncoder = TextEncoder;
         }
+        this.global.TextDecoder = TextDecoder;
+        this.global.Response = Response;
+        this.global.Request = Request;
     }
 }
 
