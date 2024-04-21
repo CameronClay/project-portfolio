@@ -10,7 +10,7 @@ import { usePathname, useRouter } from 'next/navigation';
 export type APIEndpointFormProps = {
     btn_text: string,
     parameters: FormInputProps[],
-    get_response: (forminfo : Record<string, string>) => Promise<Response>,
+    get_response: (forminfo: Record<string, string>) => Promise<Response>,
 }
 
 export default function APIEndpointForm({ btn_text, parameters, get_response }: APIEndpointFormProps) {
@@ -19,25 +19,25 @@ export default function APIEndpointForm({ btn_text, parameters, get_response }: 
     const redirect_str = `/account/login/?redirect=${url}`
     const { set_response_text } = useResponseTextContext();
 
-    const on_submit = async (forminfo : Record<string, string>) => {
+    const on_submit = async (forminfo: Record<string, string>) => {
         const response = await get_response(forminfo);
         const data = response.headers.get('content-type') == 'application/json' ? await response.json() as Record<string, unknown> : await response.text();
 
         set_response_text(JSON.stringify({
             status: response.status,
-            data  : data
+            data: data
         }, null, 4));
 
-        if(response.status == 401 && (data as Record<string, unknown>).auth_msg !== undefined) {
+        if (response.status == 401 && (data as Record<string, unknown>).auth_msg !== undefined) {
             router.push(redirect_str);
         }
     };
-    
+
     return (
-        <div 
+        <div
             className=''
         >
-            <p 
+            <p
                 className={clsx('mb-[1rem]',
                     {
                         'hidden': parameters.length == 0
@@ -50,8 +50,8 @@ export default function APIEndpointForm({ btn_text, parameters, get_response }: 
             <Form
                 submit_btn={
                     //ml-auto positions the button the end of flexbox
-                    <div className='ml-auto pr-[0.25rem]'>
-                        <SubmitBtn text={btn_text}/>
+                    <div className='ml-[0rem] basis-full md:basis-0 md:ml-auto pr-[0.25rem]'>
+                        <SubmitBtn text={btn_text} />
                     </div>
 
                     // <div className='relative left-[100%] -translate-x-[100%] pr-[0.25rem]'>

@@ -14,21 +14,17 @@ type PageHeaderProps = {
     children: React.ReactNode
 }
 
-export default function PageHeaderTemplate({ links, children } : PageHeaderProps) {
+export default function PageHeaderTemplate({ links, children }: PageHeaderProps) {
     const { activeSection, setActiveSection, setTimeOfLastClick } =
         useActiveSectionContext(); //use react context api because using useState makes it so cannot set the section in the individual sections because the hook only would exist in the header
 
     //The <header> element represents a container for introductory content or a set of navigational links.
-    //A <header> element typically contains:
-    //one or more heading elements (<h1> - <h6>)
-    //logo or icon
-    //authorship information
-    
+    //<header> typically contains: one or more heading elements (<h1> - <h6>), logo or icon, authorship information
     //need relative positioning to make z index work
     return (
         // {
         //     // motion.div is a div element with special props (using package framer-motion)
-        //     // fixed means element is positioned relative to the browser window (scrolls with you)
+        //     // fixed means element is positioned relative to the browser window/viewport (scrolls with you)
         //     // shadow-lg is a utility for box shadowing an element
         //     // shadow-black sets color of box shadow /[0.03] sets the opacity 0.03/1 or /3 is 3%
         //     // left-1/2 sets left side of element to be in the middle of the page
@@ -49,10 +45,10 @@ export default function PageHeaderTemplate({ links, children } : PageHeaderProps
         <motion.header
             className='flex flex-row z-[999] relative items-center justify-start rounded-none'
             initial={{ y: -75, opacity: 0 }}
-            animate={{ y: 0  , opacity: 1 }}
+            animate={{ y: 0, opacity: 1 }}
         >
-            <div className='whitespace-wrap text-wrap lg:text-nowrap lg:whitespace-nowrap mx-[0.25rem] my-[0rem] lg:mx-[0.5rem]'>
-                <p className='text-2xl font-bold text-white text-opacity-85 dark:text-opacity-70'>
+            <div className='hidden sm:block whitespace-wrap text-wrap lg:text-nowrap lg:whitespace-nowrap sm:mx-[0.25rem] my-[0rem] lg:mx-[0.5rem]'>
+                <p className='headerItemText font-bold text-white text-opacity-85 dark:text-opacity-70'>
                     Cameron Clay
                 </p>
             </div>
@@ -60,13 +56,12 @@ export default function PageHeaderTemplate({ links, children } : PageHeaderProps
             {
                 //The <nav> HTML element represents a section of a page whose purpose is to provide navigation links, either within the current document or to other documents. Common examples of navigation sections are menus, tables of contents, and indexes.
                 //navbar width is width of all the links (flex items) combined
-                //why does motion.li need relative positioning to work??
-                //possibly because top property is inherited from navbar on the motion.li? nope it seems...
-                //actually it seems to have to do with absolute positioning of the motion.span
+                //why does motion.li need relative positioning to work?
+                //it seems to have to do with absolute positioning of the motion.span
                 //Absolute positioning refers to positioning an element relative to its nearest positioned ancestor (i.e. the nearest parent element with a position value of relative, absolute, or fixed). 
             }
-            <nav className='flex flex-row flex-wrap justify-end w-full pr-[0.5rem] mx-[0.25rem] gap-[0.5rem]'>
-                <ul className='flex flex-row flex-wrap headerContainerSpacing text-[0.75rem] font-medium transition'>
+            <nav className='flex flex-row flex-wrap justify-center sm:justify-end w-full gap-[0.5rem] mr-[0.25rem] sm:mr-[0rem]'>
+                <ul className='flex flex-row flex-wrap headerContainerSpacing font-medium transition'>
                     {links.map((link) => (
                         <li
                             className='relative flex justify-center headerSectionBase'
@@ -76,12 +71,12 @@ export default function PageHeaderTemplate({ links, children } : PageHeaderProps
                                 //background for link
                                 //clsx used for conditional properties on the link (not background blob)
                             }
-                            
-                            <div className='absolute h-full w-full bg-white bg-opacity-80 dark:bg-zinc-600 -z-[16]'/>
+
+                            <div className='absolute h-full w-full bg-white bg-opacity-80 dark:bg-zinc-600 -z-[16]' />
 
                             <Link
                                 className={clsx(
-                                    'select-none flex items-center justify-center text-2xl w-full h-full dark:text-zinc-300 hover:bg-slate-400 hover:dark:bg-slate-600 transition',
+                                    'select-none flex items-center justify-center w-full h-full dark:text-zinc-300 hover:bg-slate-400 hover:dark:bg-slate-600 transition',
                                     {
                                         '!text-red-700 dark:!text-amber-100':
                                             activeSection === link.name,
@@ -125,10 +120,10 @@ export default function PageHeaderTemplate({ links, children } : PageHeaderProps
                     <div
                         className='flex flex-row flex-wrap headerContainerSpacing'
                     >
-                        {children}   
+                        {children}
 
                         <div className='flex flex-shrink-0 h-[3.25rem] w-[3.25rem]'>
-                            <DarkMode/> 
+                            <DarkMode />
                         </div>
                     </div>
                 </ul>

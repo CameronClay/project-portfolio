@@ -22,20 +22,26 @@ html.dark {
     @apply text-left font-semibold text-gray-700 dark:text-white/80 focus-within:text-red-400 dark:focus-within:text-red-400;
 }
 
+.headerItemText {
+    @apply text-base sm:text-2xl;
+}
+
 .dropdownItem {
-    @apply text-2xl h-full dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-800;
+    @apply headerItemText h-full dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-800;
 }
 
+/* used for header sections */
 .headerSectionBase {
-    @apply px-[0.25rem] md:px-[0rem] md:min-w-[7rem] lg:min-w-[8rem] h-[3.25rem];
+    @apply headerItemText px-[0.25rem] md:px-[0.5rem] lg:px-[0rem] lg:min-w-[7rem] xl:min-w-[8rem] h-[3.25rem];
 }
 
+/* used for header items other than sections */
 .headerItemBase {
-    @apply h-[3.25rem] px-[0.25rem] md:px-[1rem];
+    @apply headerItemText h-[3.25rem] px-[0.25rem] md:px-[1rem];
 }
 
 .headerContainerSpacing {
-    @apply gap-x-[0.25rem] gap-y-[0.25rem] sm:gap-x-[0.5rem] sm:gap-y-[0.5rem];
+    @apply gap-x-[0.25rem] gap-y-[0.25rem] md:gap-x-[0.5rem] md:gap-y-[0.5rem];
 }
 
 .link {

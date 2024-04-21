@@ -22,7 +22,7 @@ export default function APIEndpointBase({ method, endpoint, description, auth_re
                 <p className='text-2xl text-red-500 font-bold'>
                     {method}
                 </p>
-                <p className='flex ml-auto text-2xl'>
+                <p className='flex ml-[0rem] basis-full sm:basis-0 sm:ml-auto text-2xl sm:whitespace-nowrap'>
                     {endpoint}
                 </p>
             </div>
@@ -31,18 +31,18 @@ export default function APIEndpointBase({ method, endpoint, description, auth_re
                 {description} {(auth_required !== null && auth_required === true) ? <span className='font-bold'> (Authentication Required)</span> : ''}
             </p>
 
-            <hr className='mt-[0.5rem] mb-[1rem] h-[0.125rem] bg-black dark:bg-white'/>
+            <hr className='mt-[0.5rem] mb-[1rem] h-[0.125rem] bg-black dark:bg-white' />
 
-            {form}      
+            {form}
 
             {
                 (auth_required !== null && auth_required === true) ? (
                     <div>
-                        <hr/>
-                        <EndpointLinks/>
+                        <hr />
+                        <EndpointLinks />
                     </div>
                 ) : null
-            }  
+            }
 
             {/* <APIEndpointFormEtc
                 endpoint={endpoint}
@@ -51,7 +51,7 @@ export default function APIEndpointBase({ method, endpoint, description, auth_re
                 get_response={get_response}            
             /> */}
 
-            <APIEndpointResponse/>
+            <APIEndpointResponse />
         </div>
     )
 }
