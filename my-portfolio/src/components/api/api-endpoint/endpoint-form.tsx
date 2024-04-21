@@ -50,6 +50,7 @@ export default function APIEndpointForm({ btn_text, parameters, get_response }: 
             <Form
                 submit_btn={
                     //ml-auto positions the button the end of flexbox
+                    //basis-full forces the button onto a new line
                     <div className='ml-[0rem] basis-full md:basis-0 md:ml-auto pr-[0.25rem]'>
                         <SubmitBtn text={btn_text} />
                     </div>

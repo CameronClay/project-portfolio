@@ -22,6 +22,9 @@ export default function APIEndpointBase({ method, endpoint, description, auth_re
                 <p className='text-2xl text-red-500 font-bold'>
                     {method}
                 </p>
+                {
+                    //basis-full forces the button onto a new line
+                }
                 <p className='flex ml-[0rem] basis-full sm:basis-0 sm:ml-auto text-2xl sm:whitespace-nowrap'>
                     {endpoint}
                 </p>

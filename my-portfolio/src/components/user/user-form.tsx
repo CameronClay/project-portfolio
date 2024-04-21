@@ -6,7 +6,7 @@ import SubmitBtn from '@src/components/submit-btn';
 import { useResponseTextContext } from '@/src/context/api/api-endpoint-context';
 import { FormInputProps } from '@src/components/form';
 
-export function UserFormSubmitBtnContainer({children}: {children: React.ReactNode}) {
+export function UserFormSubmitBtnContainer({ children }: { children: React.ReactNode }) {
     return (
         //w-0 basis-[100%] to force wrapping
         <div className='flex w-0 basis-[100%] justify-start pr-[0.25rem] mt-[0.5rem] mb-[0.25rem]'>
@@ -15,9 +15,9 @@ export function UserFormSubmitBtnContainer({children}: {children: React.ReactNod
     )
 }
 
-export function UserResponseElement({children, classNameEtc}: {children: React.ReactNode, classNameEtc?: string}) {
+export function UserResponseElement({ children, classNameEtc }: { children: React.ReactNode, classNameEtc?: string }) {
     let className = 'max-w-[20rem] text-wrap whitespace-pre-wrap break-words mt-[0.25rem] italic'
-    if(classNameEtc) {
+    if (classNameEtc) {
         className += ` ${classNameEtc}`
     }
 
@@ -48,7 +48,7 @@ export function UserFormResponse() {
                     </UserResponseElement>
                 ) : null
             }
-         
+
         </div>
     );
 }
@@ -56,16 +56,16 @@ export function UserFormResponse() {
 export type UserFormProps = {
     btn_text: string,
     form_inputs: FormInputProps[],
-    get_response: (forminfo : Record<string, string>) => Promise<Response>
+    get_response: (forminfo: Record<string, string>) => Promise<Response>
 }
 
 export default function UserForm({ btn_text, form_inputs, get_response }: UserFormProps) {
     const { set_response_text, set_response_text_error } = useResponseTextContext();
-    const on_submit = async (forminfo : Record<string, string>) => {
+    const on_submit = async (forminfo: Record<string, string>) => {
         const response = await get_response(forminfo);
         const data = await response.json() as { message: string };
-        
-        if(response.status == 200) {
+
+        if (response.status == 200) {
             set_response_text(data.message);
         }
         else {
@@ -77,7 +77,7 @@ export default function UserForm({ btn_text, form_inputs, get_response }: UserFo
         <Form
             submit_btn={
                 <UserFormSubmitBtnContainer>
-                    <SubmitBtn text={btn_text}/>
+                    <SubmitBtn text={btn_text} />
                 </UserFormSubmitBtnContainer>
             }
             form_inputs={form_inputs}
