@@ -1,7 +1,8 @@
-export async function log_ext(message : string) {
+//logging utility function that logs to console and logfare.
+export async function log_ext(message: string) {
     console.log(message);
     // console.log(process.env.LOGFARE_API_URL);
-    if(process.env.LOGFARE_API_KEY !== undefined) {
+    if (process.env.LOGFARE_API_KEY !== undefined) {
         //send to log server
         try {
             const response = await fetch(

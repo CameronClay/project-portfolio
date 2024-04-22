@@ -1,4 +1,4 @@
-//.caller forbidden in strict mode (does not work :/)
+//.caller forbidden (does not work) in strict mode
 export function getFuncName() {
     return getFuncName.caller.name
- }
+}

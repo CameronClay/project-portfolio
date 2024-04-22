@@ -9,6 +9,7 @@ import { log_ext } from '@src/lib/utils/log-utils';
 import { PROD_URL_BASE } from '@src/constants/url-constants';
 import { get_error_message } from "./lib/utils/validation";
 
+//restrict middleware api paths to the server itself
 function restrict_middleware(request: NextRequest): NextResponse | null {
     const url = new URL(request.url);
     const middleware_path = url.protocol + '//' + PROD_URL_BASE + '/api/middleware';

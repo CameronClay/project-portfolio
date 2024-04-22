@@ -6,10 +6,11 @@ import { validate_input, get_error_message } from '@src/lib/utils/validation';
 import ContactMeEmail from '@src/components/contact-me-email';
 import { EMAIL_FORM_INFO, EMAIL_INFO } from '@src/constants/home/email-constants';
 
-function build_emaildata_from_formdata(formData : FormData) {
-    const senderName  = formData.get('inputSenderName') as string | null;
+//builds email data from form data
+function build_emaildata_from_formdata(formData: FormData) {
+    const senderName = formData.get('inputSenderName') as string | null;
     const senderEmail = formData.get('inputSenderEmail') as string | null;
-    const message     = formData.get('textAreaMessage') as string | null;
+    const message = formData.get('textAreaMessage') as string | null;
 
     return {
         senderName,
@@ -18,25 +19,25 @@ function build_emaildata_from_formdata(formData : FormData) {
     };
 }
 
-type ValidateEmaiLDataProps = {
-    senderName : string | null;
+type ValidateEmailDataProps = {
+    senderName: string | null;
     senderEmail: string | null;
-    message    : string | null;
+    message: string | null;
 };
 
-//server side validation
-function validate_email_data({senderName, senderEmail, message}: ValidateEmaiLDataProps) {
-    if(!validate_input(senderName, EMAIL_FORM_INFO.name.maxLength)) {
+//server side validation of email info
+function validate_email_data({ senderName, senderEmail, message }: ValidateEmailDataProps) {
+    if (!validate_input(senderName, EMAIL_FORM_INFO.name.maxLength)) {
         return {
             error: 'Invalid sender name',
         };
     }
-    if(!validate_input(senderEmail, EMAIL_FORM_INFO.email_address.maxLength)) {
+    if (!validate_input(senderEmail, EMAIL_FORM_INFO.email_address.maxLength)) {
         return {
             error: 'Invalid sender email',
         };
     }
-    if(!validate_input(message, EMAIL_FORM_INFO.message.maxLength)) {
+    if (!validate_input(message, EMAIL_FORM_INFO.message.maxLength)) {
         return {
             error: 'Invalid message',
         };
@@ -47,11 +48,11 @@ function validate_email_data({senderName, senderEmail, message}: ValidateEmaiLDa
     }
 }
 
-export const send_email = async (formData : FormData, url : string) => {
-    const emailData      = build_emaildata_from_formdata(formData);
-    const {valid, error} = validate_email_data(emailData);
+export const send_email = async (formData: FormData, url: string) => {
+    const emailData = build_emaildata_from_formdata(formData);
+    const { valid, error } = validate_email_data(emailData);
 
-    if(!valid) {
+    if (!valid) {
         return {
             error: error
         }
@@ -59,7 +60,7 @@ export const send_email = async (formData : FormData, url : string) => {
     // return new Promise(sendMailHelper(emailData));
     // const ReactDOMServer = (await import('react-dom/server')).default; //dynamic import to get around needing use client for ReactDOMServer.renderToString
 
-    return new Promise<{error?: string, data?: object}>((resolve, reject) => {
+    return new Promise<{ error?: string, data?: object }>((resolve, reject) => {
         const mailData = {
             from: `${emailData.senderName as string} <${process.env.SMTP_FROM}>`,
             to: `${EMAIL_INFO.to}`,
@@ -67,10 +68,10 @@ export const send_email = async (formData : FormData, url : string) => {
             subject: `Contact form message ${url}`,
             text: 'message',
             html: render(ContactMeEmail({
-                    senderName: emailData.senderName as string,
-                    senderEmail: emailData.senderEmail as string, //senderEmail cannot be null because of server side validation
-                    message: emailData.message as string, //message cannot be null because of server side validation
-                }))
+                senderName: emailData.senderName as string,
+                senderEmail: emailData.senderEmail as string, //senderEmail cannot be null because of server side validation
+                message: emailData.message as string, //message cannot be null because of server side validation
+            }))
             // html: ReactDOMServer.renderToString(React.createElement(ContactFormEmail, { //cannot access DOM on a server component
             //     senderName: emailData.senderName as string,
             //     senderEmail: emailData.senderEmail as string, //senderEmail cannot be null because of server side validation
@@ -89,7 +90,7 @@ export const send_email = async (formData : FormData, url : string) => {
 
         const transporter = nodemailer.createTransport(smtpSettings);
         transporter.sendMail(mailData, (error, data) => {
-            if(error) {
+            if (error) {
                 resolve({
                     error: get_error_message(error),
                 });

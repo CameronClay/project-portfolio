@@ -3,6 +3,7 @@ import { after, afterEach } from 'node:test';
 import { set_db_name, validate_schema } from '@src/lib/database/mongodb';
 import * as users_db from '@src/lib/database/c_users';
 
+//test users collection functions using separate testing database
 describe('Users collection', () => {
     const set_and_clear_users = async () => {
         set_db_name('test-db');

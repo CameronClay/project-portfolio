@@ -3,6 +3,7 @@ import { afterEach, after } from 'node:test';
 import { set_db_name, validate_schema } from '@src/lib/database/mongodb';
 import * as stats_db from '@src/lib/database/c_stats';
 
+//test stats collection functions using separate testing database
 describe('Stats collection', () => {
     const set_and_clear_stats = async () => {
         set_db_name('test-db');

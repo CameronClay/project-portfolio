@@ -1,8 +1,7 @@
 const JWT_SECRET_KEY: string | undefined = process.env.JWT_SECRET_KEY;
 const JWT_ALGORITHM: string | undefined = process.env.JWT_ALGORITHM;
 const JWT_EXP_MINUTES: string | undefined = process.env.JWT_EXP_MINUTES;
-const COOKIE_USER_TOKEN: string | undefined = process.env.COOKIE_USER_TOKEN;
-const COOKIE_JWT_INFO: string | undefined = process.env.COOKIE_JWT_INFO;
+const COOKIE_USER_TOKEN: string | undefined = process.env.COOKIE_USER_TOKEN; //cookie key for user token
 
 export function get_jwt_secret_key(): string {
     if (!JWT_SECRET_KEY || JWT_SECRET_KEY.length === 0) {
@@ -34,12 +33,4 @@ export function get_user_token_key(): string {
     }
 
     return COOKIE_USER_TOKEN;
-}
-
-export function get_jwt_info_key(): string {
-    if (!COOKIE_JWT_INFO || COOKIE_JWT_INFO.length === 0) {
-        throw new Error('Environment variable COOKIE_JWT_INFO not set.');
-    }
-
-    return COOKIE_JWT_INFO;
 }
