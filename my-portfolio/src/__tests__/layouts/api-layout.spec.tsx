@@ -2,10 +2,11 @@ import '@testing-library/jest-dom';
 import { render, renderHook, screen } from '@testing-library/react';
 import React from 'react';
 import APILayout from '@src/layouts/api-layout';
+import assert from 'node:assert';
 
 describe('API Layout', () => {
     //JSDOM doesnt implement matchMedia need to mock it manually
-    
+
     Object.defineProperty(window, 'matchMedia', {
         writable: true,
         value: jest.fn().mockImplementation(query => ({
@@ -22,7 +23,7 @@ describe('API Layout', () => {
 
     it('render without errors', () => { //can be it or test
         render(
-            <APILayout/>
+            <APILayout />
         )
     });
 })

@@ -9,7 +9,7 @@ import { ObjectId } from 'mongodb';
 // }
 
 export class User {
-    constructor(public username : string, public password : string, public is_admin : boolean, public _id? : ObjectId) {
+    constructor(public username: string, public password: string, public is_admin: boolean, public _id?: ObjectId) {
         // this.username = username;
         // this.password = password;
         // this.is_admin = is_admin;
@@ -24,26 +24,27 @@ export async function get_users() {
     return users;
 }
 
-export async function get_user(user_id : string) {
+//only projects username
+export async function get_user(user_id: string) {
     const db = await get_db();
 
     const user = (await db.collection<User>(Collection.users).findOne({
         _id: new ObjectId(user_id)
     }, {
-         projection: { username: 1 } 
+        projection: { username: 1 }
     })) as User | null;
     return user;
 }
 
-export async function get_user_by_username(username : string) {
+export async function get_user_by_username(username: string) {
     const db = await get_db();
 
-    const user = (await db.collection<User>(Collection.users).findOne({username: username})) as User;
+    const user = (await db.collection<User>(Collection.users).findOne({ username: username })) as User;
     return user;
 }
 
 
-export async function create_user(username : string, password : string, is_admin : boolean = false) {
+export async function create_user(username: string, password: string, is_admin: boolean = false) {
     const db = await get_db();
 
     const result = (await db.collection<User>(Collection.users).insertOne({
@@ -54,50 +55,50 @@ export async function create_user(username : string, password : string, is_admin
     return result;
 }
 
-export async function update_user(user_id : string, new_username : string | null, new_password : string | null) {
+export async function update_user(user_id: string, new_username: string | null, new_password: string | null) {
     const db = await get_db();
 
-    const update : Record<string, string> = {};
-    if(new_username != null) {
+    const update: Record<string, string> = {};
+    if (new_username != null) {
         update["username"] = new_username;
     }
-    if(new_password != null) {
+    if (new_password != null) {
         update["password"] = new_password;
     }
-    const result = await db.collection<User>(Collection.users).updateOne({_id: new ObjectId(user_id)}, {
+    const result = await db.collection<User>(Collection.users).updateOne({ _id: new ObjectId(user_id) }, {
         $set: update
     });
     return result;
 }
 
-export async function update_user_by_username(username : string, new_username : string | null, new_password : string | null) {
+export async function update_user_by_username(username: string, new_username: string | null, new_password: string | null) {
     const db = await get_db();
 
-    const update : Record<string, string> = {};
-    if(new_username != null) {
+    const update: Record<string, string> = {};
+    if (new_username != null) {
         update["username"] = new_username;
     }
-    if(new_password != null) {
+    if (new_password != null) {
         update["password"] = new_password;
     }
-    const result = await db.collection<User>(Collection.users).updateOne({username: username}, {
+    const result = await db.collection<User>(Collection.users).updateOne({ username: username }, {
         $set: update
     });
     return result;
 }
 
-export async function delete_user(user_id : string) {
+export async function delete_user(user_id: string) {
     const db = await get_db();
 
-    const result = (await db.collection<User>(Collection.users).deleteOne({_id: new ObjectId(user_id)}));
+    const result = (await db.collection<User>(Collection.users).deleteOne({ _id: new ObjectId(user_id) }));
     return result;
 }
 
 
-export async function delete_user_by_username(username : string) {
+export async function delete_user_by_username(username: string) {
     const db = await get_db();
 
-    const result = (await db.collection<User>(Collection.users).deleteOne({username: username}));
+    const result = (await db.collection<User>(Collection.users).deleteOne({ username: username }));
     return result;
 }
 

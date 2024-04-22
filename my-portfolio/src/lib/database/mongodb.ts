@@ -4,10 +4,10 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
 if (!process.env.MONGODB_URI) {
-    throw new Error('Missing MONGODB_URI in .env.local')
+    throw new Error('Missing MONGODB_URI in .env.local');
 }
 
-const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_URI = process.env.MONGODB_URI;
 const options = {
     connectTimeoutMS: 1000,
     serverApi: {
@@ -15,15 +15,22 @@ const options = {
         strict: true,
         deprecationErrors: true,
     }
-}
+};
 
-let client : MongoClient;
-let clientPromise : Promise<MongoClient>;
+let client: MongoClient;
+let clientPromise: Promise<MongoClient>;
 
-export const my_db = 'portfolio';
+let my_db = 'portfolio';
 export enum Collection {
     stats = 'stats',
     users = 'users'
+}
+
+export function set_db_name(db: string) {
+    my_db = db;
+}
+export function get_db_name(db: string) {
+    return my_db;
 }
 
 declare global {
@@ -40,7 +47,7 @@ if (process.env.NODE_ENV === 'development') {
         global._mongoClientPromise = client.connect();
     }
     clientPromise = global._mongoClientPromise;
-} 
+}
 else {
     // In production mode, it's best to not use a global variable.
     client = new MongoClient(MONGODB_URI, options);
@@ -56,14 +63,14 @@ async function create_indexes() {
     const db = await get_db();
 
     await db.collection(Collection.users).createIndex({
-            username: 1
-        }, {
-            unique: true
-        }
+        username: 1
+    }, {
+        unique: true
+    }
     )
 }
 
-async function schema_validation() {
+export async function validate_schema() {
     const db = await get_db();
 
     await db.command({
@@ -113,7 +120,8 @@ async function schema_validation() {
     })
 }
 
-void create_indexes().catch(()=>{}).then(()=>{});
-void schema_validation().catch(()=>{}).then(()=>{});
+//using void in front of function call makes it return undefined
+void create_indexes().catch(() => { }).then(() => { });
+void validate_schema().catch(() => { }).then(() => { });
 
 export default clientPromise;

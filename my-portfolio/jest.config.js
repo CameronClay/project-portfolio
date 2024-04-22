@@ -18,6 +18,8 @@ const customJestConfig = {
     modulePaths: ["<rootDir>", "<rootDir>/src"],
     moduleDirectories: ["node_modules"],
     testEnvironment: "./custom-test-env",
+    // setupFiles: ['<rootDir>/.env.local'],
+    setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
     moduleNameMapper: {
         "^@src/(.*)$": "<rootDir>/src/$1", //needed for module path aliases e.g. @src/.*
     }

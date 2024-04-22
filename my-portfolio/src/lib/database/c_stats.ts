@@ -10,7 +10,7 @@ import { ObjectId } from 'mongodb';
 // }
 
 export class Stat {
-    constructor(public ip : string, public date : number, public _id? : ObjectId) {
+    constructor(public ip: string, public date: number, public _id?: ObjectId) {
         // this.ip = ip;
         // this.date = date;
         // this.id = id;
@@ -23,26 +23,33 @@ export async function get_stats() {
     return (await db.collection<Stat>(Collection.stats).find().toArray()) as Stat[];
 }
 
-export async function get_stat(entry_id : string) {
+export async function get_stat(entry_id: string) {
     const db = await get_db();
-    
-    const stat = await db.collection<Stat>(Collection.stats).findOne({_id: new ObjectId(entry_id)}) as Stat | null;
+
+    const stat = await db.collection<Stat>(Collection.stats).findOne({ _id: new ObjectId(entry_id) }) as Stat | null;
     return stat
 }
 
-export async function create_stat(date : number, ip : string) {
+export async function create_stat(date: number, ip: string) {
     const db = await get_db();
-    
+
     const result = (await db.collection<Stat>(Collection.stats).insertOne({
-        ip     : ip,
-        date   : date
+        ip: ip,
+        date: date
     }));
+    return result;
+}
+
+export async function delete_stat(entry_id: string) {
+    const db = await get_db();
+
+    const result = (await db.collection<Stat>(Collection.stats).deleteOne({ _id: new ObjectId(entry_id) }));
     return result;
 }
 
 export async function clear_stats() {
     const db = await get_db();
-    
+
     const result = (await db.collection<Stat>(Collection.stats).deleteMany({}));
     return result;
 }
