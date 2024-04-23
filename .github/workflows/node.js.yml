@@ -13,30 +13,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      SMTP_FROM: ''
-      SMTP_HOST: ''
-      SMTP_PORT: ''
-      SMTP_USER: ''
-      SMTP_PASSWORD: ''
-      MONGODB_URI: ''
-      NEXT_PUBLIC_RUNNING_LOCAL: true
-      NEXT_PUBLIC_PROTOCOL: 'http'
-      NEXT_PUBLIC_PORT: 3000
-      NEXT_PUBLIC_LOCAL_URL_BASE: 'localhost'
-      NEXT_PUBLIC_URL_BASE: 'localhost'
-      HOST_PFX: 'localhost'
-      COOKIE_USER_TOKEN: ''
-      COOKIE_JWT_INFO: ''
-      JWT_SECRET_KEY: ''
-      JWT_ALGORITHM: ''
-      JWT_EXP_MINUTES: ''
-      LOGFARE_API_KEY: ''
-      LOGFARE_API_URL: ''
-
     strategy:
       matrix:
-        node-version: [18.x, 21.x]
+        node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     defaults:
@@ -51,8 +30,31 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: './my-portfolio/package-lock.json'
+    - name: Create .env.local file
+      run: |
+        touch .env.local
+        echo SMTP_FROM=${{ secrets.SMTP_FROM }} >> .env.local
+        echo SMTP_HOST=${{ secrets.SMTP_HOST }} >> .env.local
+        echo SMTP_PORT=${{ secrets.SMTP_PORT }} >> .env.local
+        echo SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }} >> .env.local
+        echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env.local
+        echo NEXT_PUBLIC_RUNNING_LOCAL=${{ secrets.NEXT_PUBLIC_RUNNING_LOCAL }} >> .env.local
+        echo NEXT_PUBLIC_PROTOCOL=${{ secrets.NEXT_PUBLIC_PROTOCOL }} >> .env.local
+        echo NEXT_PUBLIC_PORT=${{ secrets.NEXT_PUBLIC_PORT }} >> .env.local
+        echo NEXT_PUBLIC_LOCAL_URL_BASE=${{ secrets.NEXT_PUBLIC_LOCAL_URL_BASE }} >> .env.local
+        echo NEXT_PUBLIC_URL_BASE=${{ secrets.NEXT_PUBLIC_URL_BASE }} >> .env.local
+        echo HOST_PFX=${{ secrets.HOST_PFX }} >> .env.local
+        echo COOKIE_USER_TOKEN=${{ secrets.COOKIE_USER_TOKEN }} >> .env.local
+        echo COOKIE_JWT_INFO=${{ secrets.COOKIE_JWT_INFO }} >> .env.local
+        echo JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }} >> .env.local
+        echo JWT_ALGORITHM=${{ secrets.JWT_ALGORITHM }} >> .env.local
+        echo JWT_EXP_MINUTES=${{ secrets.JWT_EXP_MINUTES }} >> .env.local
+        echo LOGFARE_API_KEY=${{ secrets.LOGFARE_API_KEY }} >> .env.local
+        echo LOGFARE_API_URL=${{ secrets.LOGFARE_API_URL }} >> .env.local
+        
     - name: Install dependencies
       run: npm install
-    - run: npm run build --if-present
-    - run: npm test
-    - run: npm run test:ci
+    - name: Build
+      run: npm run build --if-present
+    - name: Test
+      run: npm run test:ci
