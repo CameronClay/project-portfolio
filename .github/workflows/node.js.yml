@@ -30,7 +30,11 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: './my-portfolio/package-lock.json'
-    - name: Create .env.local file
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Create .env.local file and run scripts
       run: |
         touch .env.local
         echo SMTP_FROM=${{ secrets.SMTP_FROM }} >> .env.local
@@ -50,11 +54,10 @@ jobs:
         echo JWT_ALGORITHM=${{ secrets.JWT_ALGORITHM }} >> .env.local
         echo JWT_EXP_MINUTES=${{ secrets.JWT_EXP_MINUTES }} >> .env.local
         echo LOGFARE_API_KEY=${{ secrets.LOGFARE_API_KEY }} >> .env.local
-        echo LOGFARE_API_URL=${{ secrets.LOGFARE_API_URL }} >> .env.local
+        echo LOGFARE_API_URL=${{ secrets.LOGFARE_API_URL }} >> .env.local  
         
-    - name: Install dependencies
-      run: npm install
-    - name: Build
-      run: npm run build --if-present
-    - name: Test
-      run: npm run test:ci
+        echo "Build Step"
+        npm run build --if-present
+
+        echo "Test step"
+        npm run test:ci
