@@ -13,9 +13,9 @@
 			"source.fixAll.eslint": "explicit"
 		},
 		"typescript.tsdk": "./my-portfolio/node_modules/typescript/lib",
+		"terminal.integrated.cwd": "./my-portfolio",
 		// "eslint.workingDirectories": [
 		// 	"./my-portfolio"
 		// ],
-
 	}
 }
