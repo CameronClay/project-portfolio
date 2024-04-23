@@ -10,7 +10,7 @@
         "lint-staged": "lint-staged",
         "preview-email": "email dev",
         "test": "jest --verbose --watch",
-        "prepare": "cd .. && husky install",
+        "prepare": "cd .. && husky my-portfolio/.husky/_",
         "prettier": "prettier --write --ignore-unknown src/**/*.{js,jsx,ts,tsx}"
     },
     "dependencies": {
