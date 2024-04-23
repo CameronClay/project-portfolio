@@ -22,9 +22,15 @@ export default function RegisterForm() {
                     let resp: Response;
 
                     if (forminfo.password !== forminfo.password_repeat) {
-                        resp = Response.json({ status: 401, message: "Passwords do not match." });
+                        resp = Response.json({
+                            status: 401,
+                            message: 'Passwords do not match.',
+                        });
                     }
-                    resp = await api_tmain.register(forminfo.username, forminfo.password);
+                    resp = await api_tmain.register(
+                        forminfo.username,
+                        forminfo.password
+                    );
 
                     if (redirect_to && resp.status == 200) {
                         // router.push(redirect_to);
@@ -38,11 +44,11 @@ export default function RegisterForm() {
             <Link
                 title="Login"
                 href={`/account/login${redirect_query}`}
-                target='_parent'
-                className='block link'
+                target="_parent"
+                className="block link"
             >
                 Already have an account?
             </Link>
         </div>
-    )
+    );
 }

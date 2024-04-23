@@ -5,7 +5,7 @@ import React, { useEffect, useState, createContext, useContext } from 'react';
 const THEME_KEY = 'theme';
 export enum Theme {
     LIGHT = 'light',
-    DARK  = 'dark',
+    DARK = 'dark',
 }
 
 type ThemeContextInfo = {
@@ -26,15 +26,14 @@ export default function ThemeContextProvider({
 }: ThemeContextProviderProps) {
     const [theme, setTheme] = useState<Theme>(Theme.LIGHT);
 
-    const setThemeState = (theme : Theme) => {
+    const setThemeState = (theme: Theme) => {
         setTheme(theme);
         window.localStorage.setItem(THEME_KEY, theme);
 
         if (theme === Theme.DARK) {
             document.documentElement.classList.add(Theme.DARK);
-        }
-        else {
-            if(document.documentElement.classList.contains(Theme.DARK)) {
+        } else {
+            if (document.documentElement.classList.contains(Theme.DARK)) {
                 document.documentElement.classList.remove(Theme.DARK);
             }
         }
@@ -49,14 +48,14 @@ export default function ThemeContextProvider({
         let localTheme = window.localStorage.getItem(THEME_KEY) as Theme | null;
 
         if (!localTheme) {
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) { //query dark theme status of user's OS
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                //query dark theme status of user's OS
                 localTheme = Theme.DARK;
-            }
-            else {
+            } else {
                 localTheme = Theme.LIGHT;
             }
         }
-        
+
         setThemeState(localTheme);
     }, []);
 
@@ -78,7 +77,7 @@ export function useTheme() {
 
     if (context === null) {
         const error = new Error();
-        error.message =`${useTheme.name} must be used within an ${ThemeContextProvider.name}. Trace: ${error.stack}`;
+        error.message = `${useTheme.name} must be used within an ${ThemeContextProvider.name}. Trace: ${error.stack}`;
         throw error;
     }
 

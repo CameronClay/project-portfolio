@@ -26,7 +26,9 @@ describe('Stats collection', () => {
         const result = await stats_db.create_stat(1, 'test-ip');
         expect(result.acknowledged).toBe(true);
         const stat = await stats_db.get_stat(result.insertedId.toString());
-        expect(stat !== null && stat.ip == 'test-ip' && stat.date == 1).toBe(true);
+        expect(stat !== null && stat.ip == 'test-ip' && stat.date == 1).toBe(
+            true
+        );
     });
 
     it('store and delete stat', async () => {
@@ -46,4 +48,4 @@ describe('Stats collection', () => {
         const stats = await stats_db.get_stats();
         expect(stats.length == 0).toBe(true);
     });
-})
+});

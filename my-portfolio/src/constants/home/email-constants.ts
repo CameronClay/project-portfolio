@@ -1,8 +1,8 @@
 export const EMAIL_INFO = {
     // from: 'onboarding@resend.dev',
     // to: 'bobertbilliam@proton.me',
-    to:   'cameronpclay@gmail.com',
-} as const;  
+    to: 'cameronpclay@gmail.com',
+} as const;
 
 export const EMAIL_FORM_INFO = {
     name: {
@@ -13,5 +13,5 @@ export const EMAIL_FORM_INFO = {
     },
     message: {
         maxLength: 5000,
-    }
-} as const
+    },
+} as const;

@@ -12,10 +12,9 @@ import ContextProviderElement from '@src/context/home/context-provider-element';
 import ImageViewer from '@src/components/image-viewer';
 
 export default function Home() {
-	return (
-		<ContextProviderElement>
-			{
-			/* 
+    return (
+        <ContextProviderElement>
+            {/* 
 				// two divs are for two different colors at the top of the page
 				// rounded-full makes it a circle
 
@@ -30,22 +29,21 @@ export default function Home() {
 
 				//Header element is for the header of the page, which is same for all pages
 				//Toaster element is for react-hot-toaster (alert display) 
-			*/
-			}
+			*/}
 
-			<TopBar>
-				<PageHeader/>
-			</TopBar>
+            <TopBar>
+                <PageHeader />
+            </TopBar>
 
-			<ImageViewer/>
+            <ImageViewer />
 
-			<SectionContainer>
-				<Info />
-				<SectionDivider />
-				<Projects />
-				<Skills />
-				<Contact />
-			</SectionContainer>
-		</ContextProviderElement>	
-	);
+            <SectionContainer>
+                <Info />
+                <SectionDivider />
+                <Projects />
+                <Skills />
+                <Contact />
+            </SectionContainer>
+        </ContextProviderElement>
+    );
 }

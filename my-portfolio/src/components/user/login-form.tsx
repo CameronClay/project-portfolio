@@ -19,7 +19,10 @@ export default function LoginForm() {
                 btn_text="Login"
                 form_inputs={api_params.login_user}
                 get_response={async (forminfo: Record<string, string>) => {
-                    const resp = await api_tmain.login(forminfo.username, forminfo.password);
+                    const resp = await api_tmain.login(
+                        forminfo.username,
+                        forminfo.password
+                    );
                     if (redirect_to && resp.status == 200) {
                         router.push(redirect_to);
                     }
@@ -30,11 +33,11 @@ export default function LoginForm() {
             <Link
                 title="Register"
                 href={`/account/register${redirect_query}`}
-                target='_parent'
-                className='block link'
+                target="_parent"
+                className="block link"
             >
                 Don't have an account?
             </Link>
         </div>
-    )
+    );
 }

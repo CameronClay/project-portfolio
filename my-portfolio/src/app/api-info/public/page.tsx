@@ -8,9 +8,11 @@ import APIInfo from '@src/components/api/api-info';
 export default function PublicAPI() {
     return (
         <SectionContainer>
-            <APIInfo heading="Public API" description="REST API with JWT token Authentication."/>
-            <APIPublic/>
+            <APIInfo
+                heading="Public API"
+                description="REST API with JWT token Authentication."
+            />
+            <APIPublic />
         </SectionContainer>
-    )
+    );
 }
-

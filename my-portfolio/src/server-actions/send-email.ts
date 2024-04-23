@@ -1,10 +1,13 @@
 'use server'; //makes code run on the server only (applies to everything in this module)
 
 import nodemailer from 'nodemailer';
-import { render } from "@react-email/render";
+import { render } from '@react-email/render';
 import { validate_input, get_error_message } from '@src/lib/utils/validation';
 import ContactMeEmail from '@src/components/contact-me-email';
-import { EMAIL_FORM_INFO, EMAIL_INFO } from '@src/constants/home/email-constants';
+import {
+    EMAIL_FORM_INFO,
+    EMAIL_INFO,
+} from '@src/constants/home/email-constants';
 
 //builds email data from form data
 function build_emaildata_from_formdata(formData: FormData) {
@@ -26,7 +29,11 @@ type ValidateEmailDataProps = {
 };
 
 //server side validation of email info
-function validate_email_data({ senderName, senderEmail, message }: ValidateEmailDataProps) {
+function validate_email_data({
+    senderName,
+    senderEmail,
+    message,
+}: ValidateEmailDataProps) {
     if (!validate_input(senderName, EMAIL_FORM_INFO.name.maxLength)) {
         return {
             error: 'Invalid sender name',
@@ -45,7 +52,7 @@ function validate_email_data({ senderName, senderEmail, message }: ValidateEmail
 
     return {
         valid: true,
-    }
+    };
 }
 
 export const send_email = async (formData: FormData, url: string) => {
@@ -54,30 +61,32 @@ export const send_email = async (formData: FormData, url: string) => {
 
     if (!valid) {
         return {
-            error: error
-        }
+            error: error,
+        };
     }
     // return new Promise(sendMailHelper(emailData));
     // const ReactDOMServer = (await import('react-dom/server')).default; //dynamic import to get around needing use client for ReactDOMServer.renderToString
 
-    return new Promise<{ error?: string, data?: object }>((resolve, reject) => {
+    return new Promise<{ error?: string; data?: object }>((resolve, reject) => {
         const mailData = {
             from: `${emailData.senderName as string} <${process.env.SMTP_FROM}>`,
             to: `${EMAIL_INFO.to}`,
             replyTo: `${emailData.senderName as string} <${emailData.senderEmail as string}>`,
             subject: `Contact form message ${url}`,
             text: 'message',
-            html: render(ContactMeEmail({
-                senderName: emailData.senderName as string,
-                senderEmail: emailData.senderEmail as string, //senderEmail cannot be null because of server side validation
-                message: emailData.message as string, //message cannot be null because of server side validation
-            }))
+            html: render(
+                ContactMeEmail({
+                    senderName: emailData.senderName as string,
+                    senderEmail: emailData.senderEmail as string, //senderEmail cannot be null because of server side validation
+                    message: emailData.message as string, //message cannot be null because of server side validation
+                })
+            ),
             // html: ReactDOMServer.renderToString(React.createElement(ContactFormEmail, { //cannot access DOM on a server component
             //     senderName: emailData.senderName as string,
             //     senderEmail: emailData.senderEmail as string, //senderEmail cannot be null because of server side validation
             //     message: emailData.message as string, //message cannot be null because of server side validation
             // }))
-        }
+        };
 
         const smtpSettings = {
             host: process.env.SMTP_HOST as string,
@@ -85,7 +94,7 @@ export const send_email = async (formData: FormData, url: string) => {
             auth: {
                 user: process.env.SMTP_USER as string,
                 pass: process.env.SMTP_PASSWORD as string,
-            }
+            },
         };
 
         const transporter = nodemailer.createTransport(smtpSettings);
@@ -94,17 +103,16 @@ export const send_email = async (formData: FormData, url: string) => {
                 resolve({
                     error: get_error_message(error),
                 });
-            }
-            else {
+            } else {
                 resolve({
                     data: {
                         response: data.response,
                     },
                 });
             }
-        })
+        });
     });
-}
+};
 
 // const resend = new Resend(process.env.RESEND_API_KEY);
 

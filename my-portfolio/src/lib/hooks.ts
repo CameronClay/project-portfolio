@@ -6,9 +6,9 @@ import { useEffect } from 'react';
 // import { SectionName } from './types';
 
 //sets active section in header when user scrolls to it manually
-export function useSectionInView(sectionName : string, threshold = 0.75) {
+export function useSectionInView(sectionName: string, threshold = 0.75) {
     const { ref, inView } = useInView({
-        threshold //when threshold*100% of the element (corresponding to ref) is in view
+        threshold, //when threshold*100% of the element (corresponding to ref) is in view
     });
     const { setActiveSection, timeOfLastClick } = useActiveSectionContext();
 
@@ -18,9 +18,9 @@ export function useSectionInView(sectionName : string, threshold = 0.75) {
         if (inView && Date.now() - timeOfLastClick > 1000) {
             setActiveSection(sectionName);
         }
-    }, [inView, timeOfLastClick, sectionName, setActiveSection])
+    }, [inView, timeOfLastClick, sectionName, setActiveSection]);
 
     return {
         ref,
-    }
+    };
 }

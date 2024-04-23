@@ -5,13 +5,11 @@ import APIDropdown from '@src/components/api/api-dropdown';
 
 export default function PageHeader() {
     return (
-        <PageHeaderTemplate
-            links={[]}
-        >
+        <PageHeaderTemplate links={[]}>
             <Link
-                href='/'
-                target='_parent'
-                className='flex items-center justify-center headerItemBase dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-800 bg-slate-400 dark:bg-slate-800 transition'
+                href="/"
+                target="_parent"
+                className="flex items-center justify-center headerItemBase dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-800 bg-slate-400 dark:bg-slate-800 transition"
             >
                 Home
             </Link>

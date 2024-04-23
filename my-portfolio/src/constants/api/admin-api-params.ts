@@ -1,4 +1,4 @@
-import { FormInputProps, ParamLocation } from "@src/components/form";
+import { FormInputProps, ParamLocation } from '@src/components/form';
 
 export const get_users = [] as FormInputProps[];
 
@@ -8,8 +8,8 @@ export const get_user = [
         type: 'string',
         required: true,
         input_id: 'user_id',
-        location: ParamLocation.QUERY
-    }
+        location: ParamLocation.QUERY,
+    },
 ] as FormInputProps[];
 
 export const update_user = [
@@ -18,7 +18,7 @@ export const update_user = [
         type: 'string',
         required: true,
         input_id: 'username',
-        location: ParamLocation.BODY
+        location: ParamLocation.BODY,
     },
     {
         name: 'password',
@@ -26,14 +26,14 @@ export const update_user = [
         required: true,
         input_id: 'password',
         input_type: 'password',
-        location: ParamLocation.BODY
+        location: ParamLocation.BODY,
     },
     {
         name: 'new_username',
         type: 'string',
         required: false,
         input_id: 'new_username',
-        location: ParamLocation.BODY
+        location: ParamLocation.BODY,
     },
     {
         name: 'new_password',
@@ -41,8 +41,8 @@ export const update_user = [
         required: false,
         input_id: 'new_password',
         input_type: 'password',
-        location: ParamLocation.BODY
-    }
+        location: ParamLocation.BODY,
+    },
 ] as FormInputProps[];
 
 export const delete_user = [
@@ -51,7 +51,7 @@ export const delete_user = [
         type: 'string',
         required: true,
         input_id: 'username',
-        location: ParamLocation.BODY
+        location: ParamLocation.BODY,
     },
     {
         name: 'password',
@@ -59,8 +59,8 @@ export const delete_user = [
         required: true,
         input_id: 'password',
         input_type: 'password',
-        location: ParamLocation.BODY
-    }
+        location: ParamLocation.BODY,
+    },
 ] as FormInputProps[];
 
 export const get_stat = [
@@ -69,8 +69,8 @@ export const get_stat = [
         type: 'string',
         required: true,
         input_id: 'entry_id',
-        location: ParamLocation.QUERY
-    }
+        location: ParamLocation.QUERY,
+    },
 ];
 
 export const get_stats = [] as FormInputProps[];

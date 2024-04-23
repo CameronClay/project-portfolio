@@ -5,22 +5,25 @@ import { Toaster, ToastBar } from 'react-hot-toast';
 //toaster for custom alerts
 export default function MyToaster() {
     return (
-        <Toaster position='bottom-right' toastOptions={{
+        <Toaster
+            position="bottom-right"
+            toastOptions={{
                 success: {
                     duration: 5000,
                     style: {
                         background: 'white',
-                        border: '2px solid #000000'
+                        border: '2px solid #000000',
                     },
                 },
                 error: {
                     duration: 5000,
                     style: {
                         background: 'white',
-                        border: '2px solid #000000'
+                        border: '2px solid #000000',
                     },
                 },
-            }}>
+            }}
+        >
             {/* {(t) => {
                 return (<ToastBar
                     toast={t}
@@ -31,5 +34,5 @@ export default function MyToaster() {
                 />)
          }} */}
         </Toaster>
-    )
+    );
 }

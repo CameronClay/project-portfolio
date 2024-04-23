@@ -7,28 +7,28 @@ type ImageViewerContextProviderProps = {
 };
 
 type ImageViewerContextType = {
-    isVisible  : boolean;
-    setVisible : (isVisible:boolean) => void;
-    imageSrc   : string;
-    setImageSrc: (imageSrc:string) => void;
-    imageAlt   : string;
-    setImageAlt: (isVisible:string) => void;
+    isVisible: boolean;
+    setVisible: (isVisible: boolean) => void;
+    imageSrc: string;
+    setImageSrc: (imageSrc: string) => void;
+    imageAlt: string;
+    setImageAlt: (isVisible: string) => void;
 };
 
-const ImageViewerContext =
-    createContext<ImageViewerContextType | null>(null);
+const ImageViewerContext = createContext<ImageViewerContextType | null>(null);
 
 //global react element that holds the state info
 export default function ImageViewerContextProvider({
     children,
 }: ImageViewerContextProviderProps) {
-  const [isVisible, setVisible] = useState(false);
-  const [imageSrc, setImageSrc] = useState('');
-  const [imageAlt, setImageAlt] = useState('');
+    const [isVisible, setVisible] = useState(false);
+    const [imageSrc, setImageSrc] = useState('');
+    const [imageAlt, setImageAlt] = useState('');
 
     return (
         <ImageViewerContext.Provider
-            value={{ //first set of curly braces is so you can use javascript, second set is to denote an object
+            value={{
+                //first set of curly braces is so you can use javascript, second set is to denote an object
                 isVisible,
                 setVisible,
                 imageSrc,
@@ -48,7 +48,7 @@ export function useImageViewerContext() {
 
     if (context === null) {
         const error = new Error();
-        error.message =`${useImageViewerContext.name} must be used within an ${ImageViewerContextProvider.name}. Trace: ${error.stack}`;
+        error.message = `${useImageViewerContext.name} must be used within an ${ImageViewerContextProvider.name}. Trace: ${error.stack}`;
         throw error;
     }
 

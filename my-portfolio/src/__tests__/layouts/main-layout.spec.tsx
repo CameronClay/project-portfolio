@@ -4,9 +4,8 @@ import React from 'react';
 import MainLayout from '@src/layouts/main-layout';
 
 describe('Main Layout', () => {
-    it('render without errors', () => { //can be it or test
-        render(
-            <MainLayout/>
-        )
+    it('render without errors', () => {
+        //can be it or test
+        render(<MainLayout />);
     });
-})
+});

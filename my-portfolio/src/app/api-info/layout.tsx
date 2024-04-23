@@ -6,9 +6,5 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    return (
-        <APILayout>
-            {children}
-        </APILayout>
-    );
+    return <APILayout>{children}</APILayout>;
 }

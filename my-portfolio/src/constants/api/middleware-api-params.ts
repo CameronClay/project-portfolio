@@ -1,4 +1,4 @@
-import { FormInputProps, ParamLocation } from "@src/components/form";
+import { FormInputProps, ParamLocation } from '@src/components/form';
 
 export const create_stat = [
     {
@@ -6,13 +6,13 @@ export const create_stat = [
         type: 'number',
         required: true,
         input_id: 'date',
-        location: ParamLocation.BODY
+        location: ParamLocation.BODY,
     },
     {
         name: 'ip',
         type: 'string',
         required: true,
         input_id: 'ip',
-        location: ParamLocation.BODY
-    }
+        location: ParamLocation.BODY,
+    },
 ] as FormInputProps[];

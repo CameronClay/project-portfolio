@@ -14,19 +14,22 @@ type ActiveSectionContextType = {
     setTimeOfLastClick: React.Dispatch<React.SetStateAction<number>>; //used to disable the inView check for each section temporarily when a user clicks on a button in the header
 };
 
-const ActiveSectionContext =
-    createContext<ActiveSectionContextType | null>(null);
+const ActiveSectionContext = createContext<ActiveSectionContextType | null>(
+    null
+);
 
 //global react element that holds the state info
 export default function ActiveSectionContextProvider({
-    defaultSection, children,
+    defaultSection,
+    children,
 }: ActiveSectionContextProviderProps) {
     const [activeSection, setActiveSection] = useState<string>(defaultSection);
     const [timeOfLastClick, setTimeOfLastClick] = useState(0); // keep track of this to disable the page-header background animation temporarily when user clicks on a link
 
     return (
         <ActiveSectionContext.Provider
-            value={{ //first set of curly braces is so you can use javascript, second set is to denote an object
+            value={{
+                //first set of curly braces is so you can use javascript, second set is to denote an object
                 activeSection,
                 setActiveSection,
                 timeOfLastClick,
@@ -44,7 +47,7 @@ export function useActiveSectionContext() {
 
     if (context === null) {
         const error = new Error();
-        error.message =`${useActiveSectionContext.name} must be used within an ${ActiveSectionContextProvider.name}. Trace: ${error.stack}`;
+        error.message = `${useActiveSectionContext.name} must be used within an ${ActiveSectionContextProvider.name}. Trace: ${error.stack}`;
         throw error;
     }
 

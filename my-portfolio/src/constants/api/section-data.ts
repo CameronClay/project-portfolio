@@ -1,8 +1,8 @@
 import { SectionType } from '@src/constants/section-type';
 
 export enum Section {
-    INFO   = 'INFO',
-    API    = 'API',
+    INFO = 'INFO',
+    API = 'API',
 }
 
 //determines name of each section and what is appended to the url

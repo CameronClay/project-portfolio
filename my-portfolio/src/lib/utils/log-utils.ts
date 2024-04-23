@@ -8,22 +8,21 @@ export async function log_ext(message: string) {
             const response = await fetch(
                 process.env.LOGFARE_API_URL as string,
                 {
-                    method: "POST",
+                    method: 'POST',
                     headers: {
-                        "Content-Type": "application/json",
-                        "X-API-Key": process.env.LOGFARE_API_KEY
+                        'Content-Type': 'application/json',
+                        'X-API-Key': process.env.LOGFARE_API_KEY,
                     },
                     body: JSON.stringify({
-                        'noobert': 'true',
-                        'message': message
+                        noobert: 'true',
+                        message: message,
                     }),
                 }
-            )
+            );
 
             // console.log(response);
             return response;
-        }
-        catch (error) {
+        } catch (error) {
             console.log(error);
         }
     }

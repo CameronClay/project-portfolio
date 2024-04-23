@@ -8,24 +8,24 @@ export default function EndpointLinks() {
     const pathname = usePathname();
 
     return (
-        <div className=''>
-            <Link 
+        <div className="">
+            <Link
                 title="Login"
-                href={`/account/login?redirect=${pathname}`} 
-                target='_parent'
-                className='block link text-xl font-bold'
+                href={`/account/login?redirect=${pathname}`}
+                target="_parent"
+                className="block link text-xl font-bold"
             >
                 Login
             </Link>
 
-            <Link 
+            <Link
                 title="Register"
-                href={`/account/register?redirect=${pathname}`} 
-                target='_parent'
-                className='block link text-xl font-bold'
+                href={`/account/register?redirect=${pathname}`}
+                target="_parent"
+                className="block link text-xl font-bold"
             >
                 Register
             </Link>
         </div>
-    )
+    );
 }

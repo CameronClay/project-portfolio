@@ -66,6 +66,10 @@ describe('Users collection', () => {
     it('get user by username', async () => {
         await users_db.create_user('user1', 'password');
         const user = await users_db.get_user_by_username('user1');
-        expect(user !== null && user.username == 'user1' && user.password == 'password').toBe(true);
+        expect(
+            user !== null &&
+                user.username == 'user1' &&
+                user.password == 'password'
+        ).toBe(true);
     });
-})
+});

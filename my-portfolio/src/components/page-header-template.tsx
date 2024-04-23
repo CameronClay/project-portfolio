@@ -10,11 +10,14 @@ import DarkMode from '@src/components/dark-mode';
 import { SectionType } from '@src/constants/section-type';
 
 type PageHeaderProps = {
-    links: readonly SectionType[],
-    children: React.ReactNode
-}
+    links: readonly SectionType[];
+    children: React.ReactNode;
+};
 
-export default function PageHeaderTemplate({ links, children }: PageHeaderProps) {
+export default function PageHeaderTemplate({
+    links,
+    children,
+}: PageHeaderProps) {
     const { activeSection, setActiveSection, setTimeOfLastClick } =
         useActiveSectionContext(); //use react context api because using useState makes it so cannot set the section in the individual sections because the hook only would exist in the header
 
@@ -43,12 +46,12 @@ export default function PageHeaderTemplate({ links, children }: PageHeaderProps)
         // }
 
         <motion.header
-            className='flex flex-row z-[999] relative items-center justify-start rounded-none'
+            className="flex flex-row z-[999] relative items-center justify-start rounded-none"
             initial={{ y: -75, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
         >
-            <div className='hidden sm:block whitespace-wrap text-wrap lg:text-nowrap lg:whitespace-nowrap sm:mx-[0.25rem] my-[0rem] lg:mx-[0.5rem]'>
-                <p className='headerItemText font-bold text-white text-opacity-85 dark:text-opacity-70'>
+            <div className="hidden sm:block whitespace-wrap text-wrap lg:text-nowrap lg:whitespace-nowrap sm:mx-[0.25rem] my-[0rem] lg:mx-[0.5rem]">
+                <p className="headerItemText font-bold text-white text-opacity-85 dark:text-opacity-70">
                     Cameron Clay
                 </p>
             </div>
@@ -58,13 +61,13 @@ export default function PageHeaderTemplate({ links, children }: PageHeaderProps)
                 //navbar width is width of all the links (flex items) combined
                 //why does motion.li need relative positioning to work?
                 //it seems to have to do with absolute positioning of the motion.span
-                //Absolute positioning refers to positioning an element relative to its nearest positioned ancestor (i.e. the nearest parent element with a position value of relative, absolute, or fixed). 
+                //Absolute positioning refers to positioning an element relative to its nearest positioned ancestor (i.e. the nearest parent element with a position value of relative, absolute, or fixed).
             }
-            <nav className='flex flex-row flex-wrap justify-center sm:justify-end w-full gap-[0.5rem] mr-[0.25rem] sm:mr-[0rem]'>
-                <ul className='flex flex-row flex-wrap headerContainerSpacing font-medium transition'>
+            <nav className="flex flex-row flex-wrap justify-center sm:justify-end w-full gap-[0.5rem] mr-[0.25rem] sm:mr-[0rem]">
+                <ul className="flex flex-row flex-wrap headerContainerSpacing font-medium transition">
                     {links.map((link) => (
                         <li
-                            className='relative flex justify-center headerSectionBase'
+                            className="relative flex justify-center headerSectionBase"
                             key={link.link}
                         >
                             {
@@ -72,7 +75,7 @@ export default function PageHeaderTemplate({ links, children }: PageHeaderProps)
                                 //clsx used for conditional properties on the link (not background blob)
                             }
 
-                            <div className='absolute h-full w-full bg-white bg-opacity-80 dark:bg-zinc-600 -z-[16]' />
+                            <div className="absolute h-full w-full bg-white bg-opacity-80 dark:bg-zinc-600 -z-[16]" />
 
                             <Link
                                 className={clsx(
@@ -95,18 +98,17 @@ export default function PageHeaderTemplate({ links, children }: PageHeaderProps)
                                     //how this works is when the section is changed the span will be removed and a new one will come into view
                                     //scrolling changing the section is done with the intersection observer api (react-intersection-observer package in react)
                                     //The inset CSS property is a shorthand that corresponds to the top, right, bottom, and/or left properties. It has the same multi-value syntax of the margin shorthand.
-                                    //why does absolute positioning make this work and it doesnt work with any other (fixed/relative/etc...?) 
+                                    //why does absolute positioning make this work and it doesnt work with any other (fixed/relative/etc...?)
                                     //Absolute-positioned elements are completely taken out of the regular flow of the web page.
                                     //Absolute positioning refers to positioning an element relative to its nearest positioned ancestor (i.e. the nearest parent element with a position value of relative, absolute, or fixed
                                     //They are not positioned based on their usual place in the document flow, but based on the position of their ancestor.
-
                                     //-z-[15] needed to put the active section blob behind the link text ({link.name})
                                 }
                                 {link.name === activeSection && (
                                     <motion.span
-                                        className='absolute h-[0.125rem] z-[15] bottom-0 left-0 right-0 dark:bg-amber-100 bg-red-700'
+                                        className="absolute h-[0.125rem] z-[15] bottom-0 left-0 right-0 dark:bg-amber-100 bg-red-700"
                                         // className='absolute rounded-full bg-slate-200 inset-0 -z-[15] dark:bg-zinc-500 top-[12.5%] bottom-[12.5%]'
-                                        layoutId='activeSection'
+                                        layoutId="activeSection"
                                         transition={{
                                             type: 'spring',
                                             stiffness: 500,
@@ -117,18 +119,15 @@ export default function PageHeaderTemplate({ links, children }: PageHeaderProps)
                             </Link>
                         </li>
                     ))}
-                    <div
-                        className='flex flex-row flex-wrap headerContainerSpacing'
-                    >
+                    <div className="flex flex-row flex-wrap headerContainerSpacing">
                         {children}
 
-                        <div className='flex flex-shrink-0 h-[3.25rem] w-[3.25rem]'>
+                        <div className="flex flex-shrink-0 h-[3.25rem] w-[3.25rem]">
                             <DarkMode />
                         </div>
                     </div>
                 </ul>
             </nav>
-
         </motion.header>
     );
 }

@@ -6,9 +6,9 @@ import APIDropdown from '@src/components/api/api-dropdown';
 import PageHeaderTemplate from '@src/components/page-header-template';
 
 export default function PageHeader() {
-    return (   
+    return (
         <PageHeaderTemplate links={LINKS}>
-            <APIDropdown/>
+            <APIDropdown />
         </PageHeaderTemplate>
     );
 }

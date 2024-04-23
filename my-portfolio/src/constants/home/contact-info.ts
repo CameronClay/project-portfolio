@@ -1,4 +1,4 @@
-import { EMAIL_INFO } from "@src/constants/home/email-constants";
+import { EMAIL_INFO } from '@src/constants/home/email-constants';
 
 export const CONTACT_INFO = {
     name: 'Cameron Clay',

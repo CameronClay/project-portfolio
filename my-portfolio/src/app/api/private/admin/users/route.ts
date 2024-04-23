@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 import * as users_db from '@src/lib/database/c_users';
 import { validate_user_info } from '@src/lib/auth';
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
@@ -11,7 +11,10 @@ export async function GET(request: NextRequest) {
     }
     const jwt_info = vui_res.jwt_info;
 
-    const { data, response } = await parse_params_resp(request, params.get_users as Param[]);
+    const { data, response } = await parse_params_resp(
+        request,
+        params.get_users as Param[]
+    );
     if (response !== null) {
         return response;
     }

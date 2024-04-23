@@ -1,10 +1,16 @@
 'use client';
 
 import React from 'react';
-import APIEndpointForm, { APIEndpointFormProps } from '@src/components/api/api-endpoint/endpoint-form';
+import APIEndpointForm, {
+    APIEndpointFormProps,
+} from '@src/components/api/api-endpoint/endpoint-form';
 import { FormInputProps } from '@src/components/form';
 
-export default function APIEndpointFormEtc({ btn_text, parameters, get_response }: APIEndpointFormProps) {
+export default function APIEndpointFormEtc({
+    btn_text,
+    parameters,
+    get_response,
+}: APIEndpointFormProps) {
     return (
         <APIEndpointForm
             btn_text={btn_text}
@@ -16,5 +22,5 @@ export default function APIEndpointFormEtc({ btn_text, parameters, get_response 
             }))}
             get_response={get_response}
         />
-    )
+    );
 }

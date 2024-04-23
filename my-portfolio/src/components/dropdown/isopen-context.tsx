@@ -7,15 +7,14 @@ type IsOpenContextProviderProps = {
 };
 
 type IsOpenContextType = {
-    isOpen   : boolean;
-    toggle   : () => void;
-    close    : () => void;
+    isOpen: boolean;
+    toggle: () => void;
+    close: () => void;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 //global section context needed for IsOpenContextProvider function
-const IsOpenContext =
-    createContext<IsOpenContextType | null>(null);
+const IsOpenContext = createContext<IsOpenContextType | null>(null);
 
 //global react element that holds the state info
 export default function IsOpenContextProvider({
@@ -33,11 +32,12 @@ export default function IsOpenContextProvider({
 
     return (
         <IsOpenContext.Provider
-            value={{ //first set of curly braces is so you can use javascript, second set is to denote an object
+            value={{
+                //first set of curly braces is so you can use javascript, second set is to denote an object
                 toggle,
                 close,
                 isOpen,
-                setIsOpen
+                setIsOpen,
             }}
         >
             {children}

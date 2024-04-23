@@ -1,4 +1,4 @@
-import { FormInputProps, ParamLocation } from "@src/components/form";
+import { FormInputProps, ParamLocation } from '@src/components/form';
 
 export const test = [] as FormInputProps[];
 
@@ -10,7 +10,7 @@ export const register_user = [
         type: 'string',
         required: true,
         input_id: 'username',
-        location: ParamLocation.BODY
+        location: ParamLocation.BODY,
     },
     {
         name: 'password',
@@ -18,8 +18,8 @@ export const register_user = [
         required: true,
         input_id: 'password',
         input_type: 'password',
-        location: ParamLocation.BODY
-    }
+        location: ParamLocation.BODY,
+    },
 ] as FormInputProps[];
 
 export const login_user = [
@@ -28,7 +28,7 @@ export const login_user = [
         type: 'string',
         required: true,
         input_id: 'username',
-        location: ParamLocation.BODY
+        location: ParamLocation.BODY,
     },
     {
         name: 'password',
@@ -36,8 +36,8 @@ export const login_user = [
         required: true,
         input_id: 'password',
         input_type: 'password',
-        location: ParamLocation.BODY
-    }
+        location: ParamLocation.BODY,
+    },
 ] as FormInputProps[];
 
 export const logout_user = [] as FormInputProps[];
@@ -49,14 +49,14 @@ export const update_user = [
         required: true,
         input_id: 'password',
         input_type: 'password',
-        location: ParamLocation.BODY
+        location: ParamLocation.BODY,
     },
     {
         name: 'new_username',
         type: 'string',
         required: false,
         input_id: 'new_username',
-        location: ParamLocation.BODY
+        location: ParamLocation.BODY,
     },
     {
         name: 'new_password',
@@ -64,8 +64,8 @@ export const update_user = [
         required: false,
         input_id: 'new_password',
         input_type: 'password',
-        location: ParamLocation.BODY
-    }
+        location: ParamLocation.BODY,
+    },
 ] as FormInputProps[];
 
 export const delete_user = [
@@ -75,6 +75,6 @@ export const delete_user = [
         required: true,
         input_id: 'password',
         input_type: 'password',
-        location: ParamLocation.BODY
-    }
+        location: ParamLocation.BODY,
+    },
 ] as FormInputProps[];

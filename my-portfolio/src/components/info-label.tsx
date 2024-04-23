@@ -1,24 +1,36 @@
-"use client";
+'use client';
 
 import React from 'react';
-import { BiSolidInfoCircle } from "react-icons/bi";
+import { BiSolidInfoCircle } from 'react-icons/bi';
 // import { Tooltip } from 'react-tooltip';
-import { Tooltip, Button } from "@material-tailwind/react";
+import { Tooltip, Button } from '@material-tailwind/react';
 
 type InfoLabelProps = {
     text: string;
     tooltip: string;
     iconSize: number;
     iconStyle: string;
-}
+};
 
-export default function InfoLabel({text, tooltip, iconSize, iconStyle} : InfoLabelProps) {
+export default function InfoLabel({
+    text,
+    tooltip,
+    iconSize,
+    iconStyle,
+}: InfoLabelProps) {
     return (
         <Tooltip content={tooltip}>
-            <Button variant='filled' placeholder={text} className='inline underline'>
+            <Button
+                variant="filled"
+                placeholder={text}
+                className="inline underline"
+            >
                 {text}
-                <BiSolidInfoCircle className={`inline ${iconStyle}`} size={iconSize}/>
+                <BiSolidInfoCircle
+                    className={`inline ${iconStyle}`}
+                    size={iconSize}
+                />
             </Button>
         </Tooltip>
-    )
+    );
 }

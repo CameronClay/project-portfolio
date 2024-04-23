@@ -13,8 +13,7 @@ type APIEndpointContextType = {
     set_response_text_error: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const APIEndpointContext =
-    createContext<APIEndpointContextType | null>(null);
+const APIEndpointContext = createContext<APIEndpointContextType | null>(null);
 
 //global react element that holds the state info
 export default function APIEndpointContextProvider({
@@ -25,7 +24,8 @@ export default function APIEndpointContextProvider({
 
     return (
         <APIEndpointContext.Provider
-            value={{ //first set of curly braces is so you can use javascript, second set is to denote an object
+            value={{
+                //first set of curly braces is so you can use javascript, second set is to denote an object
                 response_text,
                 set_response_text,
                 response_text_error,
@@ -43,7 +43,7 @@ export function useResponseTextContext() {
 
     if (context === null) {
         const error = new Error();
-        error.message =`${useResponseTextContext.name} must be used within an ${APIEndpointContextProvider.name}. Trace: ${error.stack}`;
+        error.message = `${useResponseTextContext.name} must be used within an ${APIEndpointContextProvider.name}. Trace: ${error.stack}`;
         throw error;
     }
 
