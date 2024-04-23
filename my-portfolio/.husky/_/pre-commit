@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+# . "${0%/*}/h"
+
+cd my-portfolio
+npm run lint-staged #run lint for staged files (lint staged)
+npm run prettier #run prettier to format code
+#npm run test #run tests
+
+# exit 1 # dont actually commit
