@@ -10,6 +10,7 @@
         "lint-staged": "lint-staged",
         "preview-email": "email dev",
         "test": "jest --verbose --watch",
+        "test:ci": "jest --verbose --ci",
         "prepare": "cd .. && husky my-portfolio/.husky",
         "prettier": "prettier --write --ignore-unknown src/**/*.{js,jsx,ts,tsx}"
     },
