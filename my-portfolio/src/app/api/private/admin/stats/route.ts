@@ -1,10 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
 import * as stats_db from '@src/lib/database/c_stats';
 import { validate_user_info } from '@src/lib/auth';
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
 import * as params from '@src/constants/api/admin-api-params';
 
-export async function GET(request: NextRequest) {
+export async function GET(request: Request) {
     const vui_res = validate_user_info(request, false);
     if (vui_res.response != null) {
         return vui_res.response;
@@ -21,10 +20,10 @@ export async function GET(request: NextRequest) {
 
     const stats = await stats_db.get_stats();
 
-    return NextResponse.json({ stats: stats }, { status: 200 });
+    return Response.json({ stats: stats }, { status: 200 });
 }
 
-export async function DELETE(request: NextRequest) {
+export async function DELETE(request: Request) {
     const vui_res = validate_user_info(request, false);
     if (vui_res.response != null) {
         return vui_res.response;
@@ -41,9 +40,9 @@ export async function DELETE(request: NextRequest) {
 
     const result = await stats_db.clear_stats();
     if (result.acknowledged) {
-        return NextResponse.json({ message: 'Stats cleared' }, { status: 200 });
+        return Response.json({ message: 'Stats cleared' }, { status: 200 });
     } else {
-        return NextResponse.json(
+        return Response.json(
             { message: 'Failed to clear stats' },
             { status: 500 }
         );

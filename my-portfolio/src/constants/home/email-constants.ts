@@ -1,6 +1,4 @@
 export const EMAIL_INFO = {
-    // from: 'onboarding@resend.dev',
-    // to: 'bobertbilliam@proton.me',
     to: 'cameronpclay@gmail.com',
 } as const;
 

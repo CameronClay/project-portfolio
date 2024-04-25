@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { expire_user_cookie, validate_user_info } from '@src/lib/auth';
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
 import * as params from '@src/constants/api/public-api-params';
+import { PROTECTED_PATH } from '@src/constants/auth-constants';
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
     const vui_res = validate_user_info(request, false);
     if (vui_res.response != null) {
         return vui_res.response;
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
         return response;
     }
 
-    const res = NextResponse.json(
+    const res = Response.json(
         {
             message: 'Log out successful',
             user: {
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
         }
     );
 
-    expire_user_cookie(res);
+    expire_user_cookie(res, PROTECTED_PATH);
 
     return res;
 }

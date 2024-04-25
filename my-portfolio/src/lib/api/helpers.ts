@@ -1,9 +1,9 @@
 import { get_error_message } from '@src/lib/utils/validation';
 import { log_ext } from '@src/lib/utils/log-utils';
-import { NextRequest, NextResponse } from 'next/server';
 import { ParamLocation } from '@src/components/form';
 
 //return error response if request fails for any reason
+//utilizes response.status if response is not null
 export async function on_request_error(
     response: Response | null,
     error: unknown
@@ -12,6 +12,7 @@ export async function on_request_error(
 
     const status_code =
         response !== null && response.status !== null ? response.status : 500;
+
     response = Response.json(
         { error: get_error_message(error) },
         { status: status_code }
@@ -29,7 +30,7 @@ export type Param = {
 //verifies all parameters are present in the request and of the correct type and in the correct location (query/body)
 //returns Error exception if any parameter fails to meet criteria
 export async function parse_params(
-    request: NextRequest,
+    request: Request,
     param_info: Param[]
 ): Promise<Record<string, unknown>> {
     let data: Record<string, unknown> | null = null;
@@ -49,7 +50,8 @@ export async function parse_params(
                 data = {};
             }
 
-            param_value = request.nextUrl.searchParams.get(param.name);
+            const url = new URL(request.url);
+            param_value = url.searchParams.get(param.name);
 
             // const url = new URL(request.url);
             // if (url.searchParams.get("user_id") == null) {
@@ -84,15 +86,15 @@ export async function parse_params(
 
 //wraps parse_params and returns response from error if parse fails
 export async function parse_params_resp(
-    request: NextRequest,
+    request: Request,
     param_info: Param[]
-): Promise<{ data: Record<string, unknown>; response: NextResponse | null }> {
+): Promise<{ data: Record<string, unknown>; response: Response | null }> {
     let data: Record<string, unknown> = {};
-    let response: NextResponse | null = null;
+    let response: Response | null = null;
     try {
         data = await parse_params(request, param_info);
     } catch (error) {
-        response = NextResponse.json({ message: error }, { status: 422 });
+        response = Response.json({ message: error }, { status: 422 });
     }
 
     return { data, response };

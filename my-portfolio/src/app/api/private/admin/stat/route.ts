@@ -1,10 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
 import * as stats_db from '@src/lib/database/c_stats';
 import { validate_user_info } from '@src/lib/auth';
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
 import * as params from '@src/constants/api/admin-api-params';
 
-export async function GET(request: NextRequest) {
+export async function GET(request: Request) {
     const vui_res = validate_user_info(request, false);
     if (vui_res.response != null) {
         return vui_res.response;
@@ -22,5 +21,5 @@ export async function GET(request: NextRequest) {
     const entry_id = data['entry_id'] as string;
     const stat = await stats_db.get_stat(entry_id);
 
-    return NextResponse.json({ stat: stat }, { status: 200 });
+    return Response.json({ stat: stat }, { status: 200 });
 }

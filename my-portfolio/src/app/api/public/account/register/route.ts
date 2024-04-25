@@ -1,10 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
 import * as users_db from '@src/lib/database/c_users';
 import { generate, Options } from 'password-hash';
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
 import * as params from '@src/constants/api/public-api-params';
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
     const { data, response } = await parse_params_resp(
         request,
         params.register_user as Param[]
@@ -19,7 +18,7 @@ export async function POST(request: NextRequest) {
     const user = await users_db.get_user_by_username(username);
 
     if (user != null) {
-        return NextResponse.json(
+        return Response.json(
             { message: 'Username already exists' },
             { status: 401 }
         );
@@ -27,7 +26,7 @@ export async function POST(request: NextRequest) {
 
     const result = await users_db.create_user(username, generate(password));
 
-    return NextResponse.json(
+    return Response.json(
         {
             user: {
                 id: result.insertedId.toString(),

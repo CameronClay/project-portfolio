@@ -34,3 +34,5 @@ export function get_user_token_key(): string {
 
     return COOKIE_USER_TOKEN;
 }
+
+export const PROTECTED_PATH = '/api/private';
