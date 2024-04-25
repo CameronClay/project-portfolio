@@ -10,12 +10,33 @@ on:
     branches: [ "*" ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
+
+    env:
+      SMTP_FROM: ${{ secrets.SMTP_FROM }}
+      SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      NEXT_PUBLIC_RUNNING_LOCAL: ${{ secrets.NEXT_PUBLIC_RUNNING_LOCAL }}
+      NEXT_PUBLIC_PROTOCOL: ${{ secrets.NEXT_PUBLIC_PROTOCOL }}
+      NEXT_PUBLIC_PORT: ${{ secrets.NEXT_PUBLIC_PORT }}
+      NEXT_PUBLIC_LOCAL_URL_BASE: ${{ secrets.NEXT_PUBLIC_LOCAL_URL_BASE }}
+      NEXT_PUBLIC_URL_BASE: ${{ secrets.NEXT_PUBLIC_URL_BASE }}
+      HOST_PFX: ${{ secrets.HOST_PFX }}
+      COOKIE_USER_TOKEN: ${{ secrets.COOKIE_USER_TOKEN }}
+      COOKIE_JWT_INFO: ${{ secrets.COOKIE_JWT_INFO }}
+      JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+      JWT_ALGORITHM: ${{ secrets.JWT_ALGORITHM }}
+      JWT_EXP_MINUTES: ${{ secrets.JWT_EXP_MINUTES }}
+      LOGFARE_API_KEY: ${{ secrets.LOGFARE_API_KEY }}
+      LOGFARE_API_URL: ${{ secrets.LOGFARE_API_URL }}
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     defaults:
@@ -29,6 +50,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm run build --if-present
-    - run: npm test
-    - run: npm run test:ci
+        cache-dependency-path: './my-portfolio/package-lock.json'
+        
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build --if-present
+
+    - name: Test
+      run: npm run test:ci
