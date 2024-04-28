@@ -1,6 +1,6 @@
 // import { NextRequest, NextResponse } from 'next/server';
 import { nanoid } from 'nanoid';
-import { SignJWT, jwtVerify, JWTVerifyOptions } from 'jose'; //used for jwt
+import { SignJWT, jwtVerify, JWTVerifyOptions, JWTPayload } from 'jose'; //used for jwt
 import {
     get_jwt_secret_key,
     get_jwt_algorithm,
@@ -18,15 +18,16 @@ interface UserJwtPayload {
 }
 
 import { get_cookies } from '@src/lib/utils/cookie-utils';
+import { get_error_message } from '@src/lib/utils/validation';
 
-export class AuthError extends Error {}
+export class AuthError extends Error { }
 
 //https://blog.logrocket.com/jwt-authentication-best-practices/
 //JWT can either be sent in authorization header or as a cookie
 //Cookies sent back to the client in a response are automatically sent back to the server in subsequent requests from the client while the cookie is valid
 
 //Verifies the user's JWT token and returns its UserJwtPayload if it is valid.
-export async function verify_jwt(req: Request, token: string | undefined) {
+export async function verify_jwt(token: string | undefined) {
     if (!token) {
         throw new AuthError('Requires logged in user (JWT token required)');
     }
@@ -44,7 +45,7 @@ export async function verify_jwt(req: Request, token: string | undefined) {
         );
         return result.payload as unknown as UserJwtPayload;
     } catch (err) {
-        throw new AuthError('Invalid session/JWT token');
+        throw new AuthError('Invalid session/JWT token. ' + get_error_message(err));
     }
 }
 
@@ -54,7 +55,7 @@ export async function verify_user_cookie(req: Request) {
 
     if (cookies) {
         if (get_user_token_key() in cookies) {
-            return await verify_jwt(req, cookies[get_user_token_key()]);
+            return await verify_jwt(cookies[get_user_token_key()]);
         }
         throw new Error('JWT cookie not present in request');
     } else {
@@ -66,7 +67,7 @@ export async function verify_user_cookie(req: Request) {
 //Used for server to server api calls
 export async function verify_auth_header(req: Request) {
     const token = req.headers.get('Authorization')?.split(' ')[1];
-    return await verify_jwt(req, token);
+    return await verify_jwt(token);
 }
 
 //Generates a JWT token given user information and permissions
@@ -75,6 +76,16 @@ export async function get_jwt_token(
     username: string,
     is_admin: boolean = false
 ) {
+
+    // // let a: Uint8Array;
+    // // let b : Uint8ArrayConstructor;
+    // console.log(Uint8Array);
+    // // const sig = (new TextEncoder().encode(get_jwt_secret_key())) as Uint8Array;
+    // const sig = new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+    // // const sig = 'blahasfdsa';
+    // console.log(sig);
+    // console.log(typeof sig);
+
     const token = await new SignJWT({
         user_id: user_id,
         username: username,
@@ -86,6 +97,16 @@ export async function get_jwt_token(
         .setIssuedAt()
         .setExpirationTime(get_jwt_exp_minutes() + ' m')
         .sign(new TextEncoder().encode(get_jwt_secret_key()));
+
+    // const token = await new SignJWT()
+    //     .setProtectedHeader({ alg: get_jwt_algorithm() })
+    //     .setJti(nanoid())
+    //     .setIssuer('my-portfolio')
+    //     .setIssuedAt()
+    //     .setExpirationTime(get_jwt_exp_minutes() + ' m')
+    //     .sign(sig); //causes TypeError: payload must be an instance of Uint8Array in jest
+
+    // const token = 'balh';
 
     return token;
 }
