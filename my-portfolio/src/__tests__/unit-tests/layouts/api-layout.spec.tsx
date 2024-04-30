@@ -1,8 +1,6 @@
-import '@testing-library/jest-dom';
 import { render, renderHook, screen } from '@testing-library/react';
 import React from 'react';
 import APILayout from '@src/layouts/api-layout';
-import assert from 'node:assert';
 
 describe('API Layout', () => {
     //JSDOM doesnt implement matchMedia need to mock it manually
@@ -21,8 +19,8 @@ describe('API Layout', () => {
         })),
     });
 
+    //can be it or test
     it('render without errors', () => {
-        //can be it or test
         render(<APILayout />);
     });
 });

@@ -6,7 +6,7 @@ import MyToaster from '@src/components/mytoaster';
 export default function MainLayout({
     children,
 }: {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }) {
     return (
         <PageContainer>

@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es2015",
         "lib": [
             "dom",
             "dom.iterable",
@@ -84,7 +84,7 @@
         "custom-test-env.js"
     ],
     "exclude": [
-        "../node_modules"
+        "../node_modules",
     ],
     "sourceMap": true
 }

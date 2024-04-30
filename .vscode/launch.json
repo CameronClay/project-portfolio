@@ -16,7 +16,9 @@
             "type": "node",
             "request": "attach",
             "name": "Debug Server",
-            "skipFiles": ["<node_internals>/**"],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
             "cwd": "${workspaceFolder}/my-portfolio",
             "port": 3000
         },
@@ -26,13 +28,32 @@
             "request": "launch",
             "cwd": "${workspaceFolder}/my-portfolio",
             "command": "npm run dev"
-          },
-          {
+        },
+        {
             "name": "Next.js: debug client-side",
             "type": "chrome",
             "request": "launch",
             "cwd": "${workspaceFolder}/my-portfolio",
             "url": "http://localhost:3000"
-          },
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Jest: current file",
+            "cwd": "${workspaceFolder}/my-portfolio",
+            "program": "${workspaceFolder}/my-portfolio/node_modules/.bin/jest",
+            "args": [
+                "${fileBasenameNoExtension}",
+                "--config",
+                "${workspaceFolder}/my-portfolio/jest.config.js",
+                "--detectOpenHandles",
+                "-runInBand",
+                "--passWithNoTests"
+            ],
+            "console": "integratedTerminal",
+            "windows": {
+                "program": "${workspaceFolder}/my-portfolio/node_modules/jest/bin/jest"
+            }
+        }
     ]
 }

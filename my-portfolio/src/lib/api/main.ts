@@ -12,7 +12,7 @@ export async function register(username: string, password: string) {
             },
             body: JSON.stringify({
                 username: username,
-                password: password,
+                password: password
             }),
         });
         return response;
@@ -32,7 +32,7 @@ export async function login(username: string, password: string) {
             },
             body: JSON.stringify({
                 username: username,
-                password: password,
+                password: password
             }),
         });
         return response;
@@ -48,7 +48,7 @@ export async function logout() {
         response = await fetch(PROD_URL + '/api/private/account/logout', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
         });
         return response;
@@ -67,7 +67,7 @@ export async function delete_user(password: string) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                password: password,
+                password: password
             }),
         });
         return response;
@@ -92,7 +92,7 @@ export async function update_user(
             body: JSON.stringify({
                 password: password,
                 new_username: new_username,
-                new_password: new_password,
+                new_password: new_password
             }),
         });
         return response;

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import UserForm from '@src/components/user/user-form';
-import * as api_tmain from '@src/lib/api/test-main';
+import * as api_tmain from '@src/lib/api/main';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import * as api_params from '@src/constants/api/public-api-params';

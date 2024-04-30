@@ -2,6 +2,8 @@
 /* eslint no-var: "off" */
 
 import { MongoClient, ServerApiVersion } from 'mongodb';
+import { $jsonSchema as stats_schema } from '@/database/schemas/stats.json';
+import { $jsonSchema as users_schema } from '@/database/schemas/users.json';
 
 if (!process.env.MONGODB_URI) {
     throw new Error('Missing MONGODB_URI in .env.local');
@@ -20,19 +22,106 @@ const options = {
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
-let my_db = 'portfolio';
+export enum Database {
+    portfolio = 'portfolio',
+    test_db = 'test_db',
+}
+
+let my_db = Database.portfolio;
 export enum Collection {
     stats = 'stats',
     users = 'users',
 }
 
-export function set_db_name(db: string) {
+//set the current database name
+export function set_db_name(db: Database) {
     my_db = db;
 }
-export function get_db_name(db: string) {
+
+//get the current database name
+export function get_db_name() {
     return my_db;
 }
 
+//drops the database and waits for it to be dropped
+export async function drop_db(force: boolean = false) {
+    if (get_db_name() == Database.portfolio && !force) {
+        throw new Error(`Cannot drop db ${get_db_name()} without force being true`);
+    }
+
+    const db = await get_db();
+    const res = await db.dropDatabase();
+
+    if (!res) {
+        throw new Error(`Could not drop database ${get_db_name()}`);
+    }
+}
+
+//returns current database instance corresponding to the current database name (creates the database if it does not exist)
+export async function get_db() {
+    const client = await clientPromise;
+    return client.db(my_db);
+}
+
+//creates database indexes
+async function create_indexes() {
+    const db = await get_db();
+
+    await db.collection(Collection.users).createIndex(
+        {
+            username: 1,
+        },
+        {
+            unique: true,
+        }
+    );
+}
+
+//returns true if the database exists
+export async function database_exists(database: Database) {
+    const db = await get_db();
+    return (await db.admin().listDatabases({ dbName: database })).databases.length > 0;
+}
+
+//returns true if the collection exists
+export async function collection_exists(collection: Collection) {
+    const client = await clientPromise;
+    const db = await get_db();
+
+    // return (await db.listCollections().toArray()).filter((c) => {
+    //     return c.name == collection;
+    // }).length > 0;
+    const result = await db.listCollections({ name: collection }).next();
+    return !!result; //!! converts value to boolean
+}
+
+export async function validate_schema(collection: Collection, schema: object) {
+    if (await database_exists(get_db_name())) {
+        if (await collection_exists(collection)) {
+            const db = await get_db();
+            await db.command({
+                collMod: collection,
+                validator: {
+                    $jsonSchema: schema,
+                },
+            });
+        }
+    }
+}
+
+//validates the schema
+export async function validate_schemas() {
+    await validate_schema(Collection.users, users_schema);
+    await validate_schema(Collection.stats, stats_schema);
+}
+
+//close database connection and prevent any further operations
+export async function close_db() {
+    const client = await clientPromise;
+    await client.close();
+}
+
+//--------------------mongo db setup-----------------------
 declare global {
     namespace globalThis {
         var _mongoClientPromise: Promise<MongoClient> | null;
@@ -54,80 +143,12 @@ if (process.env.NODE_ENV === 'development') {
     clientPromise = client.connect();
 }
 
-export async function get_db() {
-    const client = await clientPromise;
-    return client.db(my_db);
-}
-
-async function create_indexes() {
-    const db = await get_db();
-
-    await db.collection(Collection.users).createIndex(
-        {
-            username: 1,
-        },
-        {
-            unique: true,
-        }
-    );
-}
-
-export async function validate_schema() {
-    const db = await get_db();
-
-    await db.command({
-        collMod: 'users',
-        validator: {
-            $jsonSchema: {
-                bsonType: 'object',
-                description: 'Document describing a user',
-                required: ['username', 'password', 'is_admin'],
-                properties: {
-                    username: {
-                        bsonType: 'string',
-                        description: 'username is a required string',
-                    },
-                    password: {
-                        bsonType: 'string',
-                        description: 'password is a required string',
-                    },
-                    is_admin: {
-                        bsonType: 'bool',
-                        description: 'is_admin is a required bool',
-                    },
-                },
-            },
-        },
-    });
-
-    await db.command({
-        collMod: 'stats',
-        validator: {
-            $jsonSchema: {
-                bsonType: 'object',
-                description: 'Document describing a stat',
-                required: ['ip', 'date'],
-                properties: {
-                    ip: {
-                        bsonType: 'string',
-                        description: 'ip is a required string',
-                    },
-                    date: {
-                        bsonType: 'number',
-                        description: 'date is a required number',
-                    },
-                },
-            },
-        },
-    });
-}
-
-//using void in front of function call makes it return undefined
+//using void in front of function call makes it return undefined (without causes eslint error by not awaiting function call)
 void create_indexes()
-    .catch(() => {})
-    .then(() => {});
-void validate_schema()
-    .catch(() => {})
-    .then(() => {});
+    .catch(() => { })
+    .then(() => { });
+void validate_schemas()
+    .catch(() => { })
+    .then(() => { });
 
 export default clientPromise;

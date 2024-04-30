@@ -13,7 +13,7 @@ export async function create_stat(date: number, ip: string) {
             },
             body: JSON.stringify({
                 date: date,
-                ip: ip,
+                ip: ip
             }),
         });
         return response;

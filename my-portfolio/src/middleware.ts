@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import * as api_middleware from '@src/lib/api/test-middleware';
+import * as api_middleware from '@src/lib/api/middleware';
 import { verify_user_cookie } from '@src/lib/auth';
 import { log_ext } from '@src/lib/utils/log-utils';
 
@@ -15,7 +15,6 @@ export type MiddlewareResponse = {
 }
 
 //restrict middleware api paths to the server itself
-//returns true if the request should be blocked, and false if it should be allowed and continue on with the next middleware
 function restrict_middleware(request: Request, response: Response): MiddlewareResponse {
     const url = new URL(request.url);
     const middleware_path =
@@ -55,7 +54,6 @@ function restrict_middleware(request: Request, response: Response): MiddlewareRe
 }
 
 //store ip of all users who visit the homepage in database
-//returns true if the request should be blocked, and false if it should be allowed and continue on with the next middleware
 async function store_ip(request: Request, response: Response): Promise<MiddlewareResponse> {
     const url = new URL(request.url);
     const home_url = url.protocol + '//' + PROD_URL_BASE + '/';
@@ -87,7 +85,6 @@ async function store_ip(request: Request, response: Response): Promise<Middlewar
 }
 
 //restricted protected apis to logged in users (those with valid JWT token)
-//returns true if the request should be blocked, and false if it should be allowed and continue on with the next middleware
 async function verify_identity(request: Request, response: Response): Promise<MiddlewareResponse> {
     const url = new URL(request.url);
     const protected_path = url.protocol + '//' + PROD_URL_BASE + '/api/private';
@@ -97,7 +94,9 @@ async function verify_identity(request: Request, response: Response): Promise<Mi
             const user_info = await verify_user_cookie(request);
 
             //store user info in request so it can be accessed by api route (runs on server)
-            response.headers.set('User_Info', JSON.stringify(user_info));
+            const user_info_str = JSON.stringify(user_info);
+            // request.headers.set('User_Info', user_info_str); //needed for jest testing
+            response.headers.set('User_Info', user_info_str); //needed for nextjs middleware
         } catch (err: unknown) {
             response = Response.json(
                 {
@@ -114,7 +113,7 @@ async function verify_identity(request: Request, response: Response): Promise<Mi
     return { response: response, should_proc_req: true };
 }
 
-export async function middleware_def(request: Request, response: Response): Promise<MiddlewareResponse> {
+async function middleware_def(request: Request, response: Response): Promise<MiddlewareResponse> {
     let middleware_resp = { response: response, should_proc_req: true } as MiddlewareResponse;
 
     middleware_resp = restrict_middleware(request, middleware_resp.response);
@@ -133,6 +132,27 @@ export async function middleware_def(request: Request, response: Response): Prom
     }
 
     return middleware_resp;
+}
+
+//returns true if the request should be processed, and false if it should be blocked
+export async function middleware_def_test(request: Request): Promise<MiddlewareResponse> {
+    let middleware_resp = { response: Response.json({}), should_proc_req: true } as MiddlewareResponse;
+    // console.log('Running middleware!!!! ' + request.url);
+
+    middleware_resp = await middleware_def(request, middleware_resp.response);
+    copy_response_headers(request, middleware_resp.response);
+    return middleware_resp;
+}
+
+//copies response headers to the request headers
+function copy_response_headers(request: Request, response: Response) {
+    // console.log('[copy_response_headers] ' + JSON.stringify(response.headers));
+    for (const [key, value] of response.headers) {
+        // console.log(`[copy_response_headers] ${key}: ${value}`);
+        request.headers.set(key, value);
+    }
+
+    // console.log(`[copy_response_headers] cookie: ${response.headers.get('cookie')}`);
 }
 
 //middleware runs before every request

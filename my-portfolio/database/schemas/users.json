@@ -1,0 +1,25 @@
+{
+    "$jsonSchema": {
+        "bsonType": "object",
+        "description": "Document describing a user",
+        "required": [
+            "username",
+            "password",
+            "is_admin"
+        ],
+        "properties": {
+            "username": {
+                "bsonType": "string",
+                "description": "username is a required string"
+            },
+            "password": {
+                "bsonType": "string",
+                "description": "password is a required string"
+            },
+            "is_admin": {
+                "bsonType": "bool",
+                "description": "is_admin is a required bool"
+            }
+        }
+    }
+}

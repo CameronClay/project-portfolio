@@ -1,4 +1,4 @@
-import { get_db, Collection } from '@src/lib/database/mongodb';
+import { get_db, Collection, get_db_name, Database } from '@src/lib/database/mongodb';
 import { ObjectId } from 'mongodb';
 
 // export type User = {
@@ -30,6 +30,7 @@ export async function get_users() {
         .find({})
         .project({ username: 1 })
         .toArray();
+
     return users;
 }
 
@@ -45,6 +46,7 @@ export async function get_user(user_id: string) {
             projection: { username: 1 },
         }
     )) as User | null;
+
     return user;
 }
 
@@ -53,7 +55,8 @@ export async function get_user_by_username(username: string) {
 
     const user = (await db
         .collection<User>(Collection.users)
-        .findOne({ username: username })) as User;
+        .findOne({ username: username })) as User | null;
+
     return user;
 }
 
@@ -69,6 +72,7 @@ export async function create_user(
         password: password,
         is_admin: is_admin,
     });
+
     return result;
 }
 
@@ -136,7 +140,11 @@ export async function delete_user_by_username(username: string) {
     return result;
 }
 
-export async function clear_users() {
+export async function clear_users(force: boolean = false) {
+    if (get_db_name() == Database.portfolio && !force) {
+        throw new Error(`Cannot clear users in ${Database.portfolio} without force being true`);
+    }
+
     const db = await get_db();
 
     const result = await db.collection<User>(Collection.users).deleteMany({});

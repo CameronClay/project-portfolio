@@ -12,6 +12,7 @@ interface UserJwtPayload {
     jti: string; //jwt id
     iat: number; //issued at
     issuer: string; //who issued the token
+    audience: string; //who is allowed to use the token
     user_id: string;
     username: string;
     is_admin: boolean;
@@ -32,12 +33,15 @@ export async function verify_jwt(token: string | undefined) {
         throw new AuthError('Requires logged in user (JWT token required)');
     }
 
+    console.log('[verify_jwt] jwt: ' + token);
+
     try {
         const result = await jwtVerify(
             token,
             new TextEncoder().encode(get_jwt_secret_key()),
             {
                 issuer: 'my-portfolio',
+                audience: 'my-portfolio',
                 algorithms: [get_jwt_algorithm()],
                 maxTokenAge: get_jwt_exp_minutes() + ' m',
                 ignoreExpiration: false,
@@ -45,7 +49,7 @@ export async function verify_jwt(token: string | undefined) {
         );
         return result.payload as unknown as UserJwtPayload;
     } catch (err) {
-        throw new AuthError('Invalid session/JWT token. ' + get_error_message(err));
+        throw new AuthError('Invalid session/JWT token. ' + get_error_message(err) + ', jwt: ' + token);
     }
 }
 
@@ -55,8 +59,13 @@ export async function verify_user_cookie(req: Request) {
 
     if (cookies) {
         if (get_user_token_key() in cookies) {
-            return await verify_jwt(cookies[get_user_token_key()]);
+            const jwt_cookie = cookies[get_user_token_key()]
+
+            console.log('[verify_user_cookie] cookie: ' + jwt_cookie);
+
+            return await verify_jwt(jwt_cookie);
         }
+
         throw new Error('JWT cookie not present in request');
     } else {
         // console.log('No cookies found in the request');
@@ -77,15 +86,6 @@ export async function get_jwt_token(
     is_admin: boolean = false
 ) {
 
-    // // let a: Uint8Array;
-    // // let b : Uint8ArrayConstructor;
-    // console.log(Uint8Array);
-    // // const sig = (new TextEncoder().encode(get_jwt_secret_key())) as Uint8Array;
-    // const sig = new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
-    // // const sig = 'blahasfdsa';
-    // console.log(sig);
-    // console.log(typeof sig);
-
     const token = await new SignJWT({
         user_id: user_id,
         username: username,
@@ -94,19 +94,12 @@ export async function get_jwt_token(
         .setProtectedHeader({ alg: get_jwt_algorithm() })
         .setJti(nanoid())
         .setIssuer('my-portfolio')
+        .setAudience('my-portfolio')
         .setIssuedAt()
         .setExpirationTime(get_jwt_exp_minutes() + ' m')
         .sign(new TextEncoder().encode(get_jwt_secret_key()));
 
-    // const token = await new SignJWT()
-    //     .setProtectedHeader({ alg: get_jwt_algorithm() })
-    //     .setJti(nanoid())
-    //     .setIssuer('my-portfolio')
-    //     .setIssuedAt()
-    //     .setExpirationTime(get_jwt_exp_minutes() + ' m')
-    //     .sign(sig); //causes TypeError: payload must be an instance of Uint8Array in jest
-
-    // const token = 'balh';
+    console.log('[get_jwt_token] jwt token: ' + token);
 
     return token;
 }
@@ -123,11 +116,14 @@ export function set_user_cookie(
     jwt_token: string,
     path: string = '/'
 ) {
-    let cookie = `${get_user_token_key()}=${jwt_token}; Path=${path}; SameSite=strict; HttpOnly; Max-Age=${Math.floor(60 * get_jwt_exp_minutes())}`;
+    let jwt_cookie = `${get_user_token_key()}=${jwt_token}; Path=${path}; SameSite=strict; HttpOnly; Max-Age=${Math.floor(60 * get_jwt_exp_minutes())}`;
     if (process.env.NEXT_PUBLIC_RUNNING_LOCAL == 'true') {
-        cookie += '; Secure';
+        jwt_cookie += '; Secure';
     }
-    res.headers.set('Set-Cookie', cookie);
+
+    console.log('[set_user_cookie] cookie: ' + jwt_cookie);
+
+    res.headers.set('Set-Cookie', jwt_cookie);
 
     return res;
 }

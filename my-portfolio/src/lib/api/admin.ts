@@ -17,7 +17,7 @@ export async function delete_user_by_username(
             },
             body: JSON.stringify({
                 username: username,
-                password: password,
+                password: password
             }),
         });
         return response;
@@ -44,7 +44,7 @@ export async function update_user_by_username(
                 username: username,
                 password: password,
                 new_username: new_username,
-                new_password: new_password,
+                new_password: new_password
             }),
         });
         return response;
@@ -59,10 +59,10 @@ export async function get_user_by_id(user_id: string) {
     try {
         response = await fetch(
             PROD_URL +
-                '/api/private/admin/user?' +
-                new URLSearchParams({
-                    user_id: user_id,
-                }).toString(),
+            '/api/private/admin/user?' +
+            new URLSearchParams({
+                user_id: user_id
+            }).toString(),
             {
                 method: 'GET',
                 headers: {
@@ -99,10 +99,10 @@ export async function get_stat(entry_id: string) {
     try {
         response = await fetch(
             PROD_URL +
-                '/api/private/admin/stat?' +
-                new URLSearchParams({
-                    entry_id: entry_id,
-                }).toString(),
+            '/api/private/admin/stat?' +
+            new URLSearchParams({
+                entry_id: entry_id
+            }).toString(),
             {
                 method: 'GET',
                 headers: {

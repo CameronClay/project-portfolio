@@ -1,37 +1,38 @@
-import '@testing-library/jest-dom';
-import { afterEach, after } from 'node:test';
-import { set_db_name, validate_schema } from '@src/lib/database/mongodb';
+import '@src/test-setup/jest-db-setup';
+
 import * as stats_db from '@src/lib/database/c_stats';
 
 //test stats collection functions using separate testing database
 describe('Stats collection', () => {
-    const set_and_clear_stats = async () => {
-        set_db_name('test-db');
-        await stats_db.clear_stats();
-    };
+    // const set_and_clear_stats = async () => {
+    //     const cres = await stats_db.clear_stats();
+    //     expect(cres.acknowledged).toBe(true);
+    // };
 
-    beforeEach(async () => {
-        await set_and_clear_stats();
-    });
+    // beforeEach(async () => {
+    //     console.log('[api/private/admin/stats beforeEach]');
 
-    afterEach(async () => {
-        await validate_schema();
-    });
+    //     await set_and_clear_stats();
+    // }, 10000);
 
-    after(async () => {
-        await set_and_clear_stats();
-    });
+    // afterAll(async () => {
+    //     console.log('[api/private/admin/stats afterAll]');
+
+    //     await set_and_clear_stats();
+    // }, 10000);
 
     it('store and retreive stat', async () => {
+        console.log('[api/private/admin/stats store and retreive stat]');
+
         const result = await stats_db.create_stat(1, 'test-ip');
         expect(result.acknowledged).toBe(true);
         const stat = await stats_db.get_stat(result.insertedId.toString());
-        expect(stat !== null && stat.ip == 'test-ip' && stat.date == 1).toBe(
-            true
-        );
+        expect(stat !== null && stat.ip == 'test-ip' && stat.date == 1).toBe(true);
     });
 
     it('store and delete stat', async () => {
+        console.log('[api/private/admin/stats store and delete stat]');
+
         const result = await stats_db.create_stat(1, 'test-ip');
         expect(result.acknowledged).toBe(true);
         const dres = await stats_db.delete_stat(result.insertedId.toString());
@@ -41,6 +42,8 @@ describe('Stats collection', () => {
     });
 
     it('store and clear stats', async () => {
+        console.log('[api/private/admin/stats store and clear stats]');
+
         await stats_db.create_stat(1, 'test-ip');
         await stats_db.create_stat(2, 'test-ip-2');
         const clrres = await stats_db.clear_stats();

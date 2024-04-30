@@ -2,7 +2,7 @@
 
 import React from 'react';
 import APIEndpointFormEtc from '@src/components/api/api-endpoint/endpoint-form-etc';
-import * as api_tmain from '@src/lib/api/test-main';
+import * as api_tmain from '@src/lib/api/main';
 import * as params from '@src/constants/api/public-api-params';
 
 //cannot pass function from server to client component so have to have the function part of the component
