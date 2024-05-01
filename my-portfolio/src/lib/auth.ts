@@ -117,8 +117,8 @@ export function set_user_cookie(
     path: string = '/'
 ) {
     let jwt_cookie = `${get_user_token_key()}=${jwt_token}; Path=${path}; SameSite=strict; HttpOnly; Max-Age=${Math.floor(60 * get_jwt_exp_minutes())}`;
-    if (process.env.NEXT_PUBLIC_RUNNING_LOCAL == 'true') {
-        jwt_cookie += '; Secure';
+    if (process.env.NEXT_PUBLIC_RUNNING_LOCAL !== 'true') {
+        jwt_cookie += '; Secure'; //secure cookies are only sent over https
     }
 
     console.log('[set_user_cookie] cookie: ' + jwt_cookie);
