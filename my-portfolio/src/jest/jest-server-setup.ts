@@ -18,7 +18,7 @@ import * as api_admin_stat from '@src/app/api/private/admin/stat/route';
 import * as api_admin_user from '@src/app/api/private/admin/user/route';
 import * as api_admin_users from '@src/app/api/private/admin/users/route';
 
-import { set_db_name, drop_db } from '@src/lib/database/mongodb';
+import { setup_db, drop_db } from '@src/lib/database/mongodb';
 import * as middleware from '@src/middleware';
 
 

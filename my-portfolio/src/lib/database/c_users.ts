@@ -141,8 +141,8 @@ export async function delete_user_by_username(username: string) {
 }
 
 export async function clear_users(force: boolean = false) {
-    if (get_db_name() == Database.portfolio && !force) {
-        throw new Error(`Cannot clear users in ${Database.portfolio} without force being true`);
+    if (get_db_name() == Database.PORTFOLIO && !force) {
+        throw new Error(`Cannot clear users in ${Database.PORTFOLIO} without force being true`);
     }
 
     const db = await get_db();

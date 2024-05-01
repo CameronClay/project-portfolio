@@ -1,5 +1,6 @@
 import { get_db, Collection, get_db_name, Database } from '@src/lib/database/mongodb';
 import { ObjectId } from 'mongodb';
+import 'mongodb';
 
 //https://orangematter.solarwinds.com/2019/12/22/what-is-mongodbs-id-field-and-how-to-use-it/
 
@@ -59,8 +60,8 @@ export async function delete_stat(entry_id: string) {
 }
 
 export async function clear_stats(force: boolean = false) {
-    if (get_db_name() == Database.portfolio && !force) {
-        throw new Error(`Cannot clear stats in ${Database.portfolio} without force being true`);
+    if (get_db_name() == Database.PORTFOLIO && !force) {
+        throw new Error(`Cannot clear stats in ${Database.PORTFOLIO} without force being true`);
     }
 
     const db = await get_db();

@@ -8,8 +8,6 @@
 //         "^.+\\.(t|j)sx?$": "ts-jest"
 //     }
 // }
-
-const { TestEnvironment } = require("jest-environment-jsdom");
 const nextJest = require("next/jest");
 const createJestConfig = nextJest({
     dir: "./",

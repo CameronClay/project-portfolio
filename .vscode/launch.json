@@ -48,7 +48,8 @@
                 "${workspaceFolder}/my-portfolio/jest.config.js",
                 "--detectOpenHandles",
                 "-runInBand",
-                "--passWithNoTests"
+                "--passWithNoTests",
+                "--debug"
             ],
             "console": "integratedTerminal",
             "windows": {
