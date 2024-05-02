@@ -14,6 +14,7 @@ export type FormInputProps = {
     location: ParamLocation;
     input_id: string;
     input_type?: string;
+    hidden?: boolean;
 };
 
 export type FormProps = {
@@ -53,7 +54,7 @@ export default function Form({
 
             <div className="flex flex-row flex-wrap">
                 <ul className="flex flex-col justify-start">
-                    {form_inputs.map((input: FormInputProps) => (
+                    {form_inputs.filter((input) => !input.hidden).map((input: FormInputProps) => (
                         <li
                             className="flex flexrow flex-wrap"
                             key={input.input_id}
