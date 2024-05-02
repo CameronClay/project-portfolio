@@ -3,6 +3,12 @@ import { parse_params_resp, Param } from '@src/lib/api/helpers';
 import * as params from '@src/constants/api/public-api-params';
 
 export async function GET(request: Request) {
+    const vui_res = validate_user_info(request, false);
+    if (vui_res.response != null) {
+        return vui_res.response;
+    }
+    const jwt_info = vui_res.jwt_info;
+
     const { data, response } = await parse_params_resp(
         request,
         params.test_priv as Param[]
@@ -10,12 +16,6 @@ export async function GET(request: Request) {
     if (response !== null) {
         return response;
     }
-
-    const vui_res = validate_user_info(request, false);
-    if (vui_res.response != null) {
-        return vui_res.response;
-    }
-    const jwt_info = vui_res.jwt_info;
 
     return Response.json(
         { message: 'Request from private test endpoint successful' },

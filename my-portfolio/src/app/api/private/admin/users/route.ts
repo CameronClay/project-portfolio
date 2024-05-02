@@ -4,7 +4,7 @@ import { parse_params_resp, Param } from '@src/lib/api/helpers';
 import * as params from '@src/constants/api/admin-api-params';
 
 export async function GET(request: Request) {
-    const vui_res = validate_user_info(request, false);
+    const vui_res = validate_user_info(request, true);
     if (vui_res.response != null) {
         return vui_res.response;
     }

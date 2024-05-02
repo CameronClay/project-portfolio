@@ -7,7 +7,7 @@ import { PROTECTED_PATH } from '@src/constants/auth-constants';
 
 //get user
 export async function GET(request: Request) {
-    const vui_res = validate_user_info(request, false);
+    const vui_res = validate_user_info(request, true);
     if (vui_res.response != null) {
         return vui_res.response;
     }
@@ -34,7 +34,7 @@ export async function GET(request: Request) {
 
 //delete user
 export async function DELETE(request: Request) {
-    const vui_res = validate_user_info(request, false);
+    const vui_res = validate_user_info(request, true);
     if (vui_res.response != null) {
         return vui_res.response;
     }
@@ -96,7 +96,7 @@ export async function DELETE(request: Request) {
 
 //update user
 export async function PATCH(request: Request) {
-    const vui_res = validate_user_info(request, false);
+    const vui_res = validate_user_info(request, true);
     if (vui_res.response != null) {
         return vui_res.response;
     }
