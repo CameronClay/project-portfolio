@@ -11,7 +11,7 @@ type APIInfoProps = {
 };
 
 export default function APIInfo({ heading, description }: APIInfoProps) {
-    const { ref } = useSectionInView(Section.INFO, 0.75);
+    const { ref } = useSectionInView(Section.INFO, 0.80);
 
     return (
         <section id="info" ref={ref} className="scroll-mt-[5rem] mb-[2rem]">

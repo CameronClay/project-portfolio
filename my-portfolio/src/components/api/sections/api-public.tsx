@@ -8,7 +8,9 @@ import * as api_forms from '@src/components/api/api-endpoint/endpoint-form-publi
 //https://stackoverflow.com/questions/41431322/how-to-convert-formdata-html5-object-to-json
 export default function APIPublic() {
     return (
-        <Api>
+        <Api
+            in_view_threshold={0.60}
+        >
             <APIEndpoint
                 method={RESTMethodType.GET}
                 endpoint="/api/public/test-endpoint"

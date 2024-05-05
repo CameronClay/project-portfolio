@@ -8,14 +8,16 @@ import * as api_forms from '@src/components/api/api-endpoint/endpoint-form-admin
 //https://stackoverflow.com/questions/41431322/how-to-convert-formdata-html5-object-to-json
 export default function APIAdmin() {
     return (
-        <Api>
+        <Api
+            in_view_threshold={0.40}
+        >
             <APIEndpoint
                 method={RESTMethodType.GET}
                 endpoint="/api/private/admin/users"
                 description="Retreive a list of all users. Requires logged in user with admin permissions."
                 auth_required={true}
                 form={<api_forms.FormGetUsers />}
-            ></APIEndpoint>
+            />
 
             <APIEndpoint
                 method={RESTMethodType.GET}
@@ -23,7 +25,7 @@ export default function APIAdmin() {
                 description="Retreive user information from user_id. Requires logged in user with admin permissions."
                 auth_required={true}
                 form={<api_forms.FormGetUser />}
-            ></APIEndpoint>
+            />
 
             <APIEndpoint
                 method={RESTMethodType.PATCH}
@@ -31,7 +33,7 @@ export default function APIAdmin() {
                 description="Modify username/password. Requires logged in user with admin permissions."
                 auth_required={true}
                 form={<api_forms.FormUpdateUser />}
-            ></APIEndpoint>
+            />
 
             <APIEndpoint
                 method={RESTMethodType.DELETE}
@@ -39,15 +41,7 @@ export default function APIAdmin() {
                 description="Delete user. Requires logged in user with admin permissions."
                 auth_required={true}
                 form={<api_forms.FormDeleteUser />}
-            ></APIEndpoint>
-
-            <APIEndpoint
-                method={RESTMethodType.GET}
-                endpoint="/api/private/admin/stat?entry_id=entry_id"
-                description="Retreive basic website statistics. Requires logged in user with admin permissions."
-                auth_required={true}
-                form={<api_forms.FormGetStat />}
-            ></APIEndpoint>
+            />
 
             <APIEndpoint
                 method={RESTMethodType.GET}
@@ -55,7 +49,15 @@ export default function APIAdmin() {
                 description="Retreive basic website statistics. Requires logged in user with admin permissions."
                 auth_required={true}
                 form={<api_forms.FormGetStats />}
-            ></APIEndpoint>
+            />
+
+            <APIEndpoint
+                method={RESTMethodType.GET}
+                endpoint="/api/private/admin/stat?entry_id=entry_id"
+                description="Retreive basic website statistics. Requires logged in user with admin permissions."
+                auth_required={true}
+                form={<api_forms.FormGetStat />}
+            />
 
             <APIEndpoint
                 method={RESTMethodType.DELETE}
@@ -63,7 +65,7 @@ export default function APIAdmin() {
                 description="Clear all website statistics. Requires logged in user with admin permissions."
                 auth_required={true}
                 form={<api_forms.FormClearStats />}
-            ></APIEndpoint>
+            />
         </Api>
     );
 }

@@ -1,7 +1,7 @@
 import { SectionType } from '@src/constants/section-type';
 
 export enum Section {
-    INFO = 'INFO',
+    INFO = 'Info',
     API = 'API',
 }
 

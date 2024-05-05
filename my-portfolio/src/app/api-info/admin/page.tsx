@@ -1,6 +1,5 @@
 import React from 'react';
 
-import APITemplate from '@src/components/api/page-template';
 import SectionContainer from '@src/components/api/section-container';
 import APIAdmin from '@src/components/api/sections/api-admin';
 import APIInfo from '@src/components/api/api-info';

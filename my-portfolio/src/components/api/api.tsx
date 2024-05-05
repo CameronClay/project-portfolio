@@ -6,10 +6,11 @@ import { useSectionInView } from '@src/lib/hooks';
 
 type ApiProps = {
     children: React.ReactNode;
+    in_view_threshold: number;
 };
 
-export default function Api({ children }: ApiProps) {
-    const { ref } = useSectionInView(Section.API, 0.65);
+export default function Api({ children, in_view_threshold }: ApiProps) {
+    const { ref } = useSectionInView(Section.API, in_view_threshold);
 
     return (
         <section id="api" ref={ref} className="scroll-mt-[5rem] mb-[2rem]">
