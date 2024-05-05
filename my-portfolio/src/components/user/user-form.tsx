@@ -5,6 +5,7 @@ import Form from '@src/components/form';
 import SubmitBtn from '@src/components/submit-btn';
 import { useResponseTextContext } from '@/src/context/api/api-endpoint-context';
 import { FormInputProps } from '@src/components/form';
+import { GenericResponse } from '@src/constants/api/generic';
 
 export function UserFormSubmitBtnContainer({
     children,
@@ -47,7 +48,7 @@ export function UserFormResponse() {
             ) : null}
 
             {response_text_error !== undefined &&
-            response_text_error.length > 0 ? (
+                response_text_error.length > 0 ? (
                 <UserResponseElement classNameEtc="text-red-600 dark:text-red-700">
                     {response_text_error}
                 </UserResponseElement>
@@ -71,7 +72,7 @@ export default function UserForm({
         useResponseTextContext();
     const on_submit = async (forminfo: Record<string, string>) => {
         const response = await get_response(forminfo);
-        const data = (await response.json()) as { message: string };
+        const data = (await response.json()) as GenericResponse;
 
         if (response.status == 200) {
             set_response_text(data.message);

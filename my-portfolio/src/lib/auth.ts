@@ -18,8 +18,9 @@ interface UserJwtPayload {
     is_admin: boolean;
 }
 
-import { get_cookies } from '@src/lib/utils/cookie-utils';
+import { expire_cookie_str, get_cookies } from '@src/lib/utils/cookie-utils';
 import { get_error_message } from '@src/lib/utils/validation';
+import { ValidateUserInfoResponse } from '@src/constants/api/generic';
 
 export class AuthError extends Error { }
 
@@ -33,7 +34,7 @@ export async function verify_jwt(token: string | undefined) {
         throw new AuthError('Requires logged in user (JWT token required)');
     }
 
-    console.log('[verify_jwt] jwt: ' + token);
+    // console.log('[verify_jwt] jwt: ' + token);
 
     try {
         const result = await jwtVerify(
@@ -55,13 +56,14 @@ export async function verify_jwt(token: string | undefined) {
 
 //Used for client to server api calls
 export async function verify_user_cookie(req: Request) {
+    // console.log('[verify_user_cookie] cookies: ' + req.headers.get('cookie'));
     const cookies = get_cookies(req);
 
     if (cookies) {
         if (get_user_token_key() in cookies) {
-            const jwt_cookie = cookies[get_user_token_key()]
+            const jwt_cookie = cookies[get_user_token_key()];
 
-            console.log('[verify_user_cookie] cookie: ' + jwt_cookie);
+            // console.log('[verify_user_cookie] cookie: ' + jwt_cookie);
 
             return await verify_jwt(jwt_cookie);
         }
@@ -99,7 +101,7 @@ export async function get_jwt_token(
         .setExpirationTime(get_jwt_exp_minutes() + ' m')
         .sign(new TextEncoder().encode(get_jwt_secret_key()));
 
-    console.log('[get_jwt_token] jwt token: ' + token);
+    // console.log('[get_jwt_token] jwt token: ' + token);
 
     return token;
 }
@@ -116,13 +118,16 @@ export function set_user_cookie(
     jwt_token: string,
     path: string = '/'
 ) {
-    let jwt_cookie = `${get_user_token_key()}=${jwt_token}; Path=${path}; SameSite=strict; HttpOnly; Max-Age=${Math.floor(60 * get_jwt_exp_minutes())}`;
+    let jwt_cookie = `${get_user_token_key()}=${jwt_token}; Path=${path}; SameSite=strict; Max-Age=${Math.floor(60 * get_jwt_exp_minutes())}`;
+
+    //if running in a production environment set flags to make cookie secure
     if (process.env.NEXT_PUBLIC_RUNNING_LOCAL !== 'true') {
+        jwt_cookie += '; HttpOnly'; //httpOnly cookies are not accessible from javascript
         jwt_cookie += '; Secure'; //secure cookies are only sent over https
     }
+    // console.log('[set_user_cookie] cookie: ' + jwt_cookie);
 
-    console.log('[set_user_cookie] cookie: ' + jwt_cookie);
-
+    //this appears to set cookie multiple times in jest tests
     res.headers.set('Set-Cookie', jwt_cookie);
 
     return res;
@@ -131,7 +136,7 @@ export function set_user_cookie(
 //Expires the user jwt token cookie (note the JWT token is still valid, this only expires the cookie)
 //path is the path the cookie will be sent on follow up requests from the client e.g. /api/private
 export function expire_user_cookie(res: Response, path: string = '/') {
-    const cookie = `${get_user_token_key()}=; Path=${path}; Max-Age=0`;
+    const cookie = expire_cookie_str(get_user_token_key(), path);
     res.headers.set('Set-Cookie', cookie);
 }
 
@@ -142,7 +147,7 @@ export function validate_user_info(req: Request, admin_req: boolean = false) {
         return {
             jwt_info: null,
             response: Response.json(
-                { message: 'User info not found' },
+                { message: 'User info not found' } as ValidateUserInfoResponse,
                 { status: 401 }
             ),
         };
@@ -153,7 +158,7 @@ export function validate_user_info(req: Request, admin_req: boolean = false) {
         return {
             jwt_info: jwt_info,
             response: Response.json(
-                { message: 'Admin permissions required' },
+                { message: 'Insufficent permissions' } as ValidateUserInfoResponse,
                 { status: 401 }
             ),
         };
@@ -164,28 +169,3 @@ export function validate_user_info(req: Request, admin_req: boolean = false) {
         response: null,
     };
 }
-
-//Expires the user jwt token cookie (note the JWT token is still valid, this only expires the cookie)
-// export function expire_user_cookie(res: NextResponse) {
-//     res.cookies.set(get_user_token_key(), '', { httpOnly: true, maxAge: 0, path: '/api/private' });
-//     return res;
-// }
-
-//Adds the user jwt token cookie to the response
-// export function set_user_cookie(res: NextResponse, jwt_token: string) {
-//     res.cookies.set(get_user_token_key(), jwt_token, {
-//         path: '/api/private',
-//         httpOnly: true, //prevent javascript access to the cookie
-//         secure: process.env.NEXT_PUBLIC_RUNNING_LOCAL == 'true' ? false : true, //only send cookie over https except when running locally
-//         sameSite: 'strict', //only send cookie on same site as request came from
-//         maxAge: 60 * get_jwt_exp_minutes(), //expiration time in seconds
-//     });
-//
-//     return res;
-// }
-
-//Used for client to server api calls
-// export async function verify_user_cookie(req: NextRequest) {
-//     const token = req.cookies.get(get_user_token_key())?.value;
-//     return await verify_jwt(req, token);
-// }

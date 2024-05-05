@@ -2,8 +2,10 @@ import * as users_db from '@src/lib/database/c_users';
 import { generate, verify, Options } from 'password-hash';
 import { validate_user_info, expire_user_cookie } from '@src/lib/auth';
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
-import * as params from '@src/constants/api/admin-api-params';
+import * as api_info from '@src/constants/api/admin-api';
+import { GenericResponse } from '@src/constants/api/generic';
 import { PROTECTED_PATH } from '@src/constants/auth-constants';
+import { ObjectId } from 'mongodb';
 
 //get user
 export async function GET(request: Request) {
@@ -15,19 +17,14 @@ export async function GET(request: Request) {
 
     const { data, response } = await parse_params_resp(
         request,
-        params.get_user as Param[]
+        api_info.GET_USER_PARAMS as Param[]
     );
     if (response !== null) {
         return response;
     }
 
-    // const data = await request.json()
-    // if (data["user_id"] == null) {
-    //     return Response.json({ message: "Expected user_id" }, { status: 422 });
-    // }
-    // const user_id = +(data["user_id"] as string)//+ operator converts string to number (can also use parseInt)
     const user_id = data['user_id'] as string;
-    const user = await users_db.get_user(user_id);
+    const user = await users_db.get_user(new ObjectId(user_id));
 
     return Response.json({ user: user }, { status: 200 });
 }
@@ -42,7 +39,7 @@ export async function DELETE(request: Request) {
 
     const { data, response } = await parse_params_resp(
         request,
-        params.delete_user as Param[]
+        api_info.DELETE_USER_PARAMS as Param[]
     );
     if (response !== null) {
         return response;
@@ -55,14 +52,14 @@ export async function DELETE(request: Request) {
 
     if (user == null) {
         return Response.json(
-            { message: `User: ${username} not found` },
+            { message: `User: ${username} not found` } as GenericResponse,
             { status: 404 }
         );
     }
 
     //check password against hashed password
-    if (!verify(password, user.password)) {
-        return Response.json({ message: 'Invalid password' }, { status: 401 });
+    if (!verify(password, user.password as string)) {
+        return Response.json({ message: 'Invalid password' } as GenericResponse, { status: 401 });
     }
 
     const result = await users_db.delete_user_by_username(username);
@@ -70,8 +67,8 @@ export async function DELETE(request: Request) {
     if (result.acknowledged && result.deletedCount > 0) {
         const res = Response.json(
             {
-                message: `User: ${username} sucessfully deleted`,
-            },
+                message: `User: ${username} successfully deleted`,
+            } as api_info.DeleteUserResponse,
             {
                 status: 200,
             }
@@ -86,7 +83,7 @@ export async function DELETE(request: Request) {
         return Response.json(
             {
                 message: `Failed to delete: ${username}`,
-            },
+            } as api_info.DeleteUserResponse,
             {
                 status: 500,
             }
@@ -104,7 +101,7 @@ export async function PATCH(request: Request) {
 
     const { data, response } = await parse_params_resp(
         request,
-        params.delete_user as Param[]
+        api_info.DELETE_USER_PARAMS as Param[]
     );
     if (response !== null) {
         return response;
@@ -123,8 +120,8 @@ export async function PATCH(request: Request) {
 
     if (new_username == null && new_password == null) {
         return Response.json(
-            { message: 'Either new password or new username is required' },
-            { status: 401 }
+            { message: 'Either new password or new username is required' } as GenericResponse,
+            { status: 422 }
         );
     }
 
@@ -132,7 +129,7 @@ export async function PATCH(request: Request) {
 
     if (user == null) {
         return Response.json(
-            { message: `User: ${username} not found` },
+            { message: `User: ${username} not found` } as GenericResponse,
             { status: 404 }
         );
     }
@@ -141,15 +138,15 @@ export async function PATCH(request: Request) {
         const new_user = await users_db.get_user_by_username(new_username);
         if (new_user != null) {
             return Response.json(
-                { message: `User: ${new_username} already exists` },
+                { message: `User: ${new_username} already exists` } as GenericResponse,
                 { status: 401 }
             );
         }
     }
 
     //check password against hashed password
-    if (!verify(password, user.password)) {
-        return Response.json({ message: 'Invalid password' }, { status: 401 });
+    if (!verify(password, user.password as string)) {
+        return Response.json({ message: 'Invalid password' } as GenericResponse, { status: 401 });
     }
 
     const result = await users_db.update_user_by_username(
@@ -161,8 +158,8 @@ export async function PATCH(request: Request) {
     if (result.acknowledged && result.modifiedCount > 0) {
         return Response.json(
             {
-                message: `User: ${username} sucessfully updated`,
-            },
+                message: `User: ${username} successfully updated`,
+            } as api_info.UpdateUserResponse,
             {
                 status: 200,
             }
@@ -171,7 +168,7 @@ export async function PATCH(request: Request) {
         return Response.json(
             {
                 message: `Failed to update: ${username}`,
-            },
+            } as api_info.UpdateUserResponse,
             {
                 status: 500,
             }

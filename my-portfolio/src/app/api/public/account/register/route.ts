@@ -1,12 +1,13 @@
 import * as users_db from '@src/lib/database/c_users';
-import { generate, Options } from 'password-hash';
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
-import * as params from '@src/constants/api/public-api-params';
+import * as api_info from '@src/constants/api/main-api';
+import { GenericResponse } from '@src/constants/api/generic';
+import { AUser } from '@src/lib/database/c_users';
 
 export async function POST(request: Request) {
     const { data, response } = await parse_params_resp(
         request,
-        params.register_user as Param[]
+        api_info.REGISTER_USER_PARAMS as Param[]
     );
     if (response !== null) {
         return response;
@@ -19,21 +20,22 @@ export async function POST(request: Request) {
 
     if (user != null) {
         return Response.json(
-            { message: 'Username already exists' },
+            { message: 'Username already exists' } as GenericResponse,
             { status: 401 }
         );
     }
 
-    const result = await users_db.create_user(username, generate(password));
+    const result = await users_db.create_user(username, password);
 
     return Response.json(
         {
             user: {
-                id: result.insertedId.toString(),
                 username: username,
-            },
+                is_admin: false,
+                _id: result.insertedId.toString(),
+            } as AUser,
             message: 'Registration successful',
-        },
+        } as api_info.RegisterUserResponse,
         {
             status: 200,
         }

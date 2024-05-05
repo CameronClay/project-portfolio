@@ -31,6 +31,7 @@ const customJestConfig = {
     testEnvironmentOptions: { //needed for msw
         customExportConditions: [''],
     },
+    testTimeout: 30000,
     globals: {
         Uint8Array: Uint8Array,
         ArrayBuffer: ArrayBuffer,

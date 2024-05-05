@@ -1,7 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import * as api_middleware from '@src/lib/api/middleware';
 import { verify_user_cookie } from '@src/lib/auth';
 import { log_ext } from '@src/lib/utils/log-utils';
+import { AuthResponse, GenericResponse } from '@src/constants/api/generic';
 
 //https://nextjs.org/docs/messages/node-module-in-edge-runtime
 //Next.js Middleware runs on the server, using the edge runtime
@@ -42,7 +43,7 @@ function restrict_middleware(request: Request, response: Response): MiddlewareRe
             response = Response.json(
                 {
                     message: 'Forbidden',
-                },
+                } as GenericResponse,
                 { status: 403 }
             );
 
@@ -95,14 +96,13 @@ async function verify_identity(request: Request, response: Response): Promise<Mi
 
             //store user info in request so it can be accessed by api route (runs on server)
             const user_info_str = JSON.stringify(user_info);
-            // request.headers.set('User_Info', user_info_str); //needed for jest testing
             response.headers.set('User_Info', user_info_str); //needed for nextjs middleware
         } catch (err: unknown) {
             response = Response.json(
                 {
                     message: 'Unauthorized',
                     auth_msg: (err as Error).toString(), //set auth_msg only if jwt token is invalid or not present
-                },
+                } as AuthResponse,
                 { status: 401 }
             );
 
@@ -134,31 +134,27 @@ async function middleware_def(request: Request, response: Response): Promise<Mid
     return middleware_resp;
 }
 
-//returns true if the request should be processed, and false if it should be blocked
 export async function middleware_def_test(request: Request): Promise<MiddlewareResponse> {
     let middleware_resp = { response: Response.json({}), should_proc_req: true } as MiddlewareResponse;
     // console.log('Running middleware!!!! ' + request.url);
 
     middleware_resp = await middleware_def(request, middleware_resp.response);
-    copy_response_headers(request, middleware_resp.response);
+    copy_response_headers(request, middleware_resp.response); //copy response headers to request for jest testing
     return middleware_resp;
 }
 
 //copies response headers to the request headers
 function copy_response_headers(request: Request, response: Response) {
-    // console.log('[copy_response_headers] ' + JSON.stringify(response.headers));
+    // console.log('[copy_response_headers] ' + headers_to_string(response.headers));
     for (const [key, value] of response.headers) {
-        // console.log(`[copy_response_headers] ${key}: ${value}`);
         request.headers.set(key, value);
     }
-
-    // console.log(`[copy_response_headers] cookie: ${response.headers.get('cookie')}`);
 }
 
 //middleware runs before every request
 export async function middleware(request: Request) {
-    let middleware_resp = { response: NextResponse.next(), should_proc_req: true } as MiddlewareResponse;
     // console.log('Running middleware!!!! ' + request.url);
+    let middleware_resp = { response: NextResponse.next(), should_proc_req: true } as MiddlewareResponse;
 
     middleware_resp = await middleware_def(request, middleware_resp.response);
     if (!middleware_resp.should_proc_req) {

@@ -79,8 +79,8 @@ export async function delete_user(password: string) {
 //update currently logged in user
 export async function update_user(
     password: string,
-    new_username: string,
-    new_password: string
+    new_username?: string,
+    new_password?: string
 ) {
     let response: Response | null = null;
     try {

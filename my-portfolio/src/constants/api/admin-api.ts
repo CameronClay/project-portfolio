@@ -1,8 +1,16 @@
 import { FormInputProps, ParamLocation } from '@src/components/form';
+import { AStat } from '@src/lib/database/c_stats';
+import { AUser } from '@src/lib/database/c_users';
 
-export const get_users = [] as FormInputProps[];
+export type GetUsersResponse = {
+    users: AUser[],
+}
+export const GET_USERS_PARAMS = [] as FormInputProps[];
 
-export const get_user = [
+export type GetUserResponse = {
+    user: AUser,
+}
+export const GET_USER_PARAMS = [
     {
         name: 'user_id',
         type: 'string',
@@ -12,7 +20,10 @@ export const get_user = [
     },
 ] as FormInputProps[];
 
-export const update_user = [
+export type UpdateUserResponse = {
+    message: string,
+}
+export const UPDATE_USER_PARAMS = [
     {
         name: 'username',
         type: 'string',
@@ -45,7 +56,10 @@ export const update_user = [
     },
 ] as FormInputProps[];
 
-export const delete_user = [
+export type DeleteUserResponse = {
+    message: string,
+}
+export const DELETE_USER_PARAMS = [
     {
         name: 'username',
         type: 'string',
@@ -63,7 +77,10 @@ export const delete_user = [
     },
 ] as FormInputProps[];
 
-export const get_stat = [
+export type GetStatResponse = {
+    stat: AStat,
+}
+export const GET_STAT_PARAMS = [
     {
         name: 'entry_id',
         type: 'string',
@@ -71,8 +88,14 @@ export const get_stat = [
         input_id: 'entry_id',
         location: ParamLocation.QUERY,
     },
-];
+] as FormInputProps[];
 
-export const get_stats = [] as FormInputProps[];
+export type GetStatsResponse = {
+    stats: AStat[],
+}
+export const GET_STATS_PARAMS = [] as FormInputProps[];
 
-export const clear_stats = [] as FormInputProps[];
+export type ClearStatsResponse = {
+    message: string,
+}
+export const CLEAR_STATS_PARAMS = [] as FormInputProps[];

@@ -42,7 +42,7 @@ export enum Collection {
 //change active database and initialize indexes and validate schemas
 export async function setup_db(db: Database) {
     if (my_db != db) {
-        console.log('[setup_db]: ' + db);
+        // console.log('[setup_db]: ' + db);
         my_db = db;
 
         await create_indexes();
@@ -76,7 +76,7 @@ export async function get_db() {
     }
 
     if (connection == null) {
-        console.log('Connecting to the db...');
+        // console.log('Connecting to the db...');
         connection = await MongoClient.connect(MONGODB_URI, options);
     }
 
@@ -143,10 +143,10 @@ export async function validate_schemas() {
 
 //close database connection and prevent any further operations
 export async function close_db() {
-    console.log('[close_db] start');
+    // console.log('[close_db] start');
 
     if (connection != null) {
-        console.log('[close_db] closing connection');
+        // console.log('[close_db] closing connection');
         await connection.close();
         connection = null;
     }
@@ -154,7 +154,7 @@ export async function close_db() {
     await client?.close(true);
     client = null;
 
-    console.log('[close_db] end');
+    // console.log('[close_db] end');
 }
 
 // //--------------------mongo db setup-----------------------

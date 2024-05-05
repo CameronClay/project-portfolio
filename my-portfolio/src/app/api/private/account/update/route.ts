@@ -2,7 +2,9 @@ import * as users_db from '@src/lib/database/c_users';
 import { generate, verify, Options } from 'password-hash';
 import { validate_user_info } from '@src/lib/auth';
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
-import * as params from '@src/constants/api/public-api-params';
+import * as api_info from '@src/constants/api/main-api';
+import { GenericResponse } from '@src/constants/api/generic';
+import { ObjectId } from 'mongodb';
 
 //update currently logged in user
 export async function PATCH(request: Request) {
@@ -14,7 +16,7 @@ export async function PATCH(request: Request) {
 
     const { data, response } = await parse_params_resp(
         request,
-        params.update_user as Param[]
+        api_info.UPDATE_USER_PARAMS as Param[]
     );
     if (response !== null) {
         return response;
@@ -30,13 +32,10 @@ export async function PATCH(request: Request) {
             ? (data['new_password'] as string)
             : null;
 
-    if (password == null) {
-        return Response.json({ message: 'Missing password' }, { status: 401 });
-    }
     if (new_username == null && new_password == null) {
         return Response.json(
-            { message: 'Either new password or new username is required' },
-            { status: 401 }
+            { message: 'Either new password or new username is required' } as GenericResponse,
+            { status: 422 }
         );
     }
 
@@ -44,7 +43,7 @@ export async function PATCH(request: Request) {
 
     if (user == null) {
         return Response.json(
-            { message: `User: ${jwt_info.username} not found` },
+            { message: `User: ${jwt_info.username} not found` } as GenericResponse,
             { status: 404 }
         );
     }
@@ -53,19 +52,19 @@ export async function PATCH(request: Request) {
         const new_user = await users_db.get_user_by_username(new_username);
         if (new_user != null) {
             return Response.json(
-                { message: `User: ${new_username} already exists` },
+                { message: `User: ${new_username} already exists` } as GenericResponse,
                 { status: 401 }
             );
         }
     }
 
     //check password against hashed password
-    if (!verify(password, user.password)) {
-        return Response.json({ message: 'Invalid password' }, { status: 401 });
+    if (!verify(password, user.password as string)) {
+        return Response.json({ message: 'Invalid password' } as GenericResponse, { status: 401 });
     }
 
     const result = await users_db.update_user(
-        jwt_info.user_id,
+        new ObjectId(jwt_info.user_id),
         new_username,
         new_password ? generate(new_password) : null
     );
@@ -73,8 +72,8 @@ export async function PATCH(request: Request) {
     if (result.acknowledged && result.modifiedCount > 0) {
         return Response.json(
             {
-                message: `User: ${jwt_info.username} sucessfully updated`,
-            },
+                message: `User: ${jwt_info.username} successfully updated`,
+            } as api_info.UpdateUserResponse,
             {
                 status: 200,
             }
@@ -83,7 +82,7 @@ export async function PATCH(request: Request) {
         return Response.json(
             {
                 message: `Failed to update: ${jwt_info.username}`,
-            },
+            } as api_info.UpdateUserResponse,
             {
                 status: 500,
             }

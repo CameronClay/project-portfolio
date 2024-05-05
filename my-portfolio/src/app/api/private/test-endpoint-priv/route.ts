@@ -1,6 +1,6 @@
 import { validate_user_info } from '@src/lib/auth';
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
-import * as params from '@src/constants/api/public-api-params';
+import * as api_info from '@src/constants/api/main-api';
 
 export async function GET(request: Request) {
     const vui_res = validate_user_info(request, false);
@@ -11,14 +11,14 @@ export async function GET(request: Request) {
 
     const { data, response } = await parse_params_resp(
         request,
-        params.test_priv as Param[]
+        api_info.TEST_PRIV_PARAMS as Param[]
     );
     if (response !== null) {
         return response;
     }
 
     return Response.json(
-        { message: 'Request from private test endpoint successful' },
+        { message: 'Request from private test endpoint successful' } as api_info.TestPrivResponse,
         { status: 200 }
     );
 }

@@ -1,6 +1,11 @@
 import { FormInputProps, ParamLocation } from '@src/components/form';
+import { ObjectId } from 'mongodb';
 
-export const create_stat = [
+export type CreateStatResponse = {
+    _id: ObjectId,
+    message: string,
+};
+export const CREATE_STAT_PARAMS = [
     {
         name: 'date',
         type: 'number',

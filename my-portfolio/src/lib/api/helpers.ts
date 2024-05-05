@@ -1,6 +1,7 @@
 import { get_error_message } from '@src/lib/utils/validation';
 import { log_ext } from '@src/lib/utils/log-utils';
 import { ParamLocation } from '@src/components/form';
+import { GenericResponse } from '@src/constants/api/generic';
 
 //return error response if request fails for any reason
 //utilizes response.status if response is not null
@@ -52,27 +53,27 @@ export async function parse_params(
 
             const url = new URL(request.url);
             param_value = url.searchParams.get(param.name);
-
-            // const url = new URL(request.url);
-            // if (url.searchParams.get("user_id") == null) {
-            //     return NextResponse.json({ message: "Expected user_id" }, { status: 422 });
-            // }
         } else {
             throw new Error('Invalid ParamLocation');
         }
 
-        // const param_value = data[param.name];
-        if (param_value == null && param.required) {
-            throw new Error('Missing parameter ' + param.name);
-        }
-        if (typeof param_value != param.type) {
-            throw new Error(
-                'Invalid type for ' +
+        if (param.required) {
+            if (param_value === null || param_value === undefined) {
+                throw new Error('Missing parameter ' + param.name);
+            }
+
+            if (typeof param_value != param.type) {
+                throw new Error(
+                    'Invalid type for ' +
                     param.name +
                     ' (expected ' +
                     param.type +
+                    ')' +
+                    ' (got ' +
+                    typeof param_value +
                     ')'
-            );
+                );
+            }
         }
         data[param.name] = param_value;
     }
@@ -94,7 +95,8 @@ export async function parse_params_resp(
     try {
         data = await parse_params(request, param_info);
     } catch (error) {
-        response = Response.json({ message: error }, { status: 422 });
+        // console.log(error);
+        response = Response.json({ message: get_error_message(error) } as GenericResponse, { status: 422 });
     }
 
     return { data, response };

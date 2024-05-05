@@ -3,6 +3,7 @@
 import '@testing-library/jest-dom';
 import 'whatwg-fetch'; // used for fetch calls with msw
 import '@src/jest/jest-environment';
+import '@src/jest/jest-mocks';
 
 // import '@src/test-setup/jest-db-setup';
 // import '@src/test-setup/jest-server-setup';

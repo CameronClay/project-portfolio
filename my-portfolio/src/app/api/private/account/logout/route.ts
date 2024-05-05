@@ -1,7 +1,8 @@
 import { expire_user_cookie, validate_user_info } from '@src/lib/auth';
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
-import * as params from '@src/constants/api/public-api-params';
+import * as api_info from '@src/constants/api/main-api';
 import { PROTECTED_PATH } from '@src/constants/auth-constants';
+import { AUser } from '@src/lib/database/c_users';
 
 export async function POST(request: Request) {
     const vui_res = validate_user_info(request, false);
@@ -12,7 +13,7 @@ export async function POST(request: Request) {
 
     const { data, response } = await parse_params_resp(
         request,
-        params.logout_user as Param[]
+        api_info.LOGOUT_USER_PARAMS as Param[]
     );
     if (response !== null) {
         return response;
@@ -22,9 +23,11 @@ export async function POST(request: Request) {
         {
             message: 'Log out successful',
             user: {
-                id: jwt_info.user_id,
-            },
-        },
+                username: jwt_info.username,
+                is_admin: jwt_info.is_admin,
+                _id: jwt_info.user_id,
+            } as AUser,
+        } as api_info.LogoutUserResponse,
         {
             status: 200,
         }

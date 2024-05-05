@@ -30,8 +30,8 @@ export async function delete_user_by_username(
 export async function update_user_by_username(
     username: string,
     password: string,
-    new_username: string,
-    new_password: string
+    new_username?: string,
+    new_password?: string
 ) {
     let response: Response | null = null;
     try {
