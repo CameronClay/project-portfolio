@@ -21,9 +21,6 @@ const options = {
     maxPoolSize: process.env.MONGO_MAX_POOL_SIZE ? parseInt(process.env.MONGO_MAX_POOL_SIZE) : 1,
 };
 
-// let client: MongoClient;
-// let clientPromise: Promise<MongoClient>;
-
 export let client: MongoClient | null = null;
 export let connection: MongoClient | null = null;
 
@@ -33,7 +30,6 @@ export enum Database {
 }
 
 let my_db: Database | null = null;
-// let my_db = Database.test_db;
 export enum Collection {
     stats = 'stats',
     users = 'users',
@@ -81,10 +77,6 @@ export async function get_db() {
     }
 
     return connection.db(my_db);
-
-    // const client = await clientPromise;
-    // return (client as MongoClient).db(my_db);
-    // return client.db(my_db);
 }
 
 //creates database indexes for the active database
@@ -119,9 +111,6 @@ export async function collection_exists(collection: Collection) {
 }
 
 export async function validate_schema(collection: Collection, schema: object) {
-    const db = await get_db();
-
-    //my_db cannot be null here because it is validated in get_db
     // if (await database_exists(my_db as Database)) {
     if (await collection_exists(collection)) {
         const db = await get_db();
@@ -156,31 +145,6 @@ export async function close_db() {
 
     // console.log('[close_db] end');
 }
-
-// //--------------------mongo db setup-----------------------
-// declare global {
-//     namespace globalThis {
-//         var _mongoClientPromise: Promise<MongoClient> | null;
-//     }
-// }
-
-// if (process.env.NODE_ENV === 'development') {
-//     // In development mode, use a global variable so that the value
-//     // is preserved across module reloads caused by HMR (Hot Module Replacement).
-//     if (!global._mongoClientPromise) {
-//         //global object is a global namespace in javascript it is where global variables/functions are stored
-//         client = new MongoClient(MONGODB_URI, options);
-//         global._mongoClientPromise = client.connect();
-//     }
-//     clientPromise = global._mongoClientPromise;
-// } else {
-//     // In production mode, it's best to not use a global variable.
-//     client = new MongoClient(MONGODB_URI, options);
-//     clientPromise = client.connect();
-// }
-
-// export default clientPromise;
-
 
 client = new MongoClient(MONGODB_URI, options);
 
