@@ -53,16 +53,18 @@ export default function InfoBar() {
                 title="LinkedIn"
                 href={CONTACT_INFO.linkedin}
                 target="_blank"
+                classNameEtc='p-[0.85rem]'
             >
-                <BsLinkedin />
+                <BsLinkedin size={25} />
             </InfoBtnBasic>
 
             <InfoBtnBasic
                 title="GitHub"
                 href={CONTACT_INFO.github}
                 target="_blank"
+                classNameEtc='p-[0.75rem]'
             >
-                <FaGithubSquare />
+                <FaGithubSquare size={28} />
             </InfoBtnBasic>
         </div>
     );

@@ -48,7 +48,7 @@ export function InfoBtnBasic({
         //next/link only creates an a tag (important for Search Engine Optimization (SEO)) if a string componenet is passed in for children
         <a
             title={title}
-            className={`select-none flex items-center gap-[0.5rem] outline-none focus:scale-[1.15] hover:scale-[1.15] active:scale-105 cursor-pointer transition $bg-white p-[1rem] borderBlack text-gray-700 hover:text-gray-950 dark:bg-zinc-700 dark:text-white/60 {classNameEtc}`}
+            className={`select-none flex items-center gap-[0.25rem] outline-none focus:scale-[1.15] hover:scale-[1.15] active:scale-105 cursor-pointer transition bg-white borderBlack text-gray-700 hover:text-gray-950 dark:bg-zinc-700 dark:text-white/60 ${classNameEtc}`}
             href={href}
             download={download}
             onClick={onClick}
