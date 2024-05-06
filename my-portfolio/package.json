@@ -12,7 +12,7 @@
         "test": "jest --verbose --runInBand --passWithNoTests --detectOpenHandles",
         "test-debug": "jest --verbose --runInBand --passWithNoTests --debug --detectOpenHandles",
         "test-parallel": "jest --verbose --passWithNoTests",
-        "test:ci": "jest --verbose --ci -runInBand --passWithNoTests",
+        "test:ci": "jest --verbose -runInBand --passWithNoTests --detectOpenHandles",
         "prepare": "cd .. && husky my-portfolio/.husky",
         "prettier": "prettier --write --ignore-unknown src/**/*.{js,jsx,ts,tsx}"
     },
