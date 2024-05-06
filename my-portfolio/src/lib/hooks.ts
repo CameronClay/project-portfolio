@@ -3,7 +3,6 @@
 import { useInView } from 'react-intersection-observer';
 import { useActiveSectionContext } from '@src/context/home/active-section-context';
 import { useEffect } from 'react';
-// import { SectionName } from './types';
 
 //sets active section in header when user scrolls to it manually
 export function useSectionInView(sectionName: string, threshold = 0.75) {

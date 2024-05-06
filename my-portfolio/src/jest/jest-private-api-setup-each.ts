@@ -27,16 +27,4 @@ beforeEach(async () => {
     });
 
     expect(resp.status).toBe(200);
-
-    // //delete user before test runs as it expects fresh db for each test
-    // let dres = await users_db.delete_user(cres.insertedId.toString());
-    // expect(dres.acknowledged).toBe(true);
 });
-
-//why is this necessary? db should be getting dropped before each test
-//login user before running each test
-// afterEach(async () => {
-//     // //delete user after test runs if it still exists as it expects fresh db for each test
-//     let dres = await users_db.delete_user_by_username('admin');
-//     // expect(dres.acknowledged).toBe(true);
-// });

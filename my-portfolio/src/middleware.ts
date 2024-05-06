@@ -28,8 +28,6 @@ function restrict_middleware(request: Request, response: Response): MiddlewareRe
     // await log_ext("referer: " + request.headers.get('referer'));
     // await log_ext('----------------');
 
-    // const response: NextResponse | null = null;
-
     //should also protect middleware api path with authentication as the referer/host can be spoofed, but for the purpose of this project this is not needed
     if (request.url.startsWith(middleware_path)) {
         if (
@@ -136,7 +134,6 @@ async function middleware_def(request: Request, response: Response): Promise<Mid
 
 export async function middleware_def_test(request: Request): Promise<MiddlewareResponse> {
     let middleware_resp = { response: Response.json({}), should_proc_req: true } as MiddlewareResponse;
-    // console.log('Running middleware!!!! ' + request.url);
 
     middleware_resp = await middleware_def(request, middleware_resp.response);
     copy_response_headers(request, middleware_resp.response); //copy response headers to request for jest testing
@@ -145,7 +142,6 @@ export async function middleware_def_test(request: Request): Promise<MiddlewareR
 
 //copies response headers to the request headers
 function copy_response_headers(request: Request, response: Response) {
-    // console.log('[copy_response_headers] ' + headers_to_string(response.headers));
     for (const [key, value] of response.headers) {
         request.headers.set(key, value);
     }
@@ -153,7 +149,6 @@ function copy_response_headers(request: Request, response: Response) {
 
 //middleware runs before every request
 export async function middleware(request: Request) {
-    // console.log('Running middleware!!!! ' + request.url);
     let middleware_resp = { response: NextResponse.next(), should_proc_req: true } as MiddlewareResponse;
 
     middleware_resp = await middleware_def(request, middleware_resp.response);

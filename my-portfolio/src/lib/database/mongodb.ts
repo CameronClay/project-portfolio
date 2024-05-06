@@ -38,7 +38,6 @@ export enum Collection {
 //change active database and initialize indexes and validate schemas
 export async function setup_db(db: Database) {
     if (my_db != db) {
-        // console.log('[setup_db]: ' + db);
         my_db = db;
 
         await create_indexes();
@@ -72,7 +71,6 @@ export async function get_db() {
     }
 
     if (connection == null) {
-        // console.log('Connecting to the db...');
         connection = await MongoClient.connect(MONGODB_URI, options);
     }
 
@@ -132,18 +130,13 @@ export async function validate_schemas() {
 
 //close database connection and prevent any further operations
 export async function close_db() {
-    // console.log('[close_db] start');
-
     if (connection != null) {
-        // console.log('[close_db] closing connection');
         await connection.close();
         connection = null;
     }
 
     await client?.close(true);
     client = null;
-
-    // console.log('[close_db] end');
 }
 
 client = new MongoClient(MONGODB_URI, options);
@@ -155,9 +148,5 @@ if (!is_running_with_jest()) {
 }
 
 //having these calls globally causes jest to stall
-// void create_indexes()
-//     .catch(() => { })
-//     .then(() => { });
-// void validate_schemas()
-//     .catch(() => { })
-//     .then(() => { });
+// void create_indexes();
+// void validate_schemas();

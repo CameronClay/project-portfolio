@@ -7,9 +7,7 @@ import * as stats_db from '@src/lib/database/c_stats';
 import { store as cookieStore } from "@mswjs/cookies";
 
 function clear_cookies() {
-    // console.log('[clear_cookies] cookies=', document.cookie);
-    // console.log('[clear_cookies] cookieStore=', cookieStore);
-
+    // console.log('[clear_cookies] cookies=', document.cookie, ", cookieStore=", cookieStore);
     document.cookie.split(";").forEach((cookie) => {
         document.cookie = cookie
             .replace(/^ +/, "")

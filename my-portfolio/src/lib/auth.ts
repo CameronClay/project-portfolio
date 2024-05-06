@@ -34,8 +34,6 @@ export async function verify_jwt(token: string | undefined) {
         throw new AuthError('Requires logged in user (JWT token required)');
     }
 
-    // console.log('[verify_jwt] jwt: ' + token);
-
     try {
         const result = await jwtVerify(
             token,
@@ -56,21 +54,17 @@ export async function verify_jwt(token: string | undefined) {
 
 //Used for client to server api calls
 export async function verify_user_cookie(req: Request) {
-    // console.log('[verify_user_cookie] cookies: ' + req.headers.get('cookie'));
     const cookies = get_cookies(req);
 
     if (cookies) {
         if (get_user_token_key() in cookies) {
             const jwt_cookie = cookies[get_user_token_key()];
 
-            // console.log('[verify_user_cookie] cookie: ' + jwt_cookie);
-
             return await verify_jwt(jwt_cookie);
         }
 
         throw new Error('JWT cookie not present in request');
     } else {
-        // console.log('No cookies found in the request');
         throw new Error('Cookie not present in request');
     }
 }
@@ -101,8 +95,6 @@ export async function get_jwt_token(
         .setExpirationTime(get_jwt_exp_minutes() + ' m')
         .sign(new TextEncoder().encode(get_jwt_secret_key()));
 
-    // console.log('[get_jwt_token] jwt token: ' + token);
-
     return token;
 }
 
@@ -125,9 +117,7 @@ export function set_user_cookie(
         jwt_cookie += '; HttpOnly'; //httpOnly cookies are not accessible from javascript
         jwt_cookie += '; Secure'; //secure cookies are only sent over https
     }
-    // console.log('[set_user_cookie] cookie: ' + jwt_cookie);
 
-    //this appears to set cookie multiple times in jest tests
     res.headers.set('Set-Cookie', jwt_cookie);
 
     return res;
