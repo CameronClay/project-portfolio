@@ -13,26 +13,26 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    env:
-      SMTP_FROM: ${{ secrets.SMTP_FROM }}
-      SMTP_HOST: ${{ secrets.SMTP_HOST }}
-      SMTP_PORT: ${{ secrets.SMTP_PORT }}
-      SMTP_USER: ${{ secrets.SMTP_USER }}
-      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-      MONGODB_URI: ${{ secrets.MONGODB_URI }}
-      NEXT_PUBLIC_RUNNING_LOCAL: ${{ secrets.NEXT_PUBLIC_RUNNING_LOCAL }}
-      NEXT_PUBLIC_PROTOCOL: ${{ secrets.NEXT_PUBLIC_PROTOCOL }}
-      NEXT_PUBLIC_PORT: ${{ secrets.NEXT_PUBLIC_PORT }}
-      NEXT_PUBLIC_LOCAL_URL_BASE: ${{ secrets.NEXT_PUBLIC_LOCAL_URL_BASE }}
-      NEXT_PUBLIC_URL_BASE: ${{ secrets.NEXT_PUBLIC_URL_BASE }}
-      HOST_PFX: ${{ secrets.HOST_PFX }}
-      COOKIE_USER_TOKEN: ${{ secrets.COOKIE_USER_TOKEN }}
-      COOKIE_JWT_INFO: ${{ secrets.COOKIE_JWT_INFO }}
-      JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
-      JWT_ALGORITHM: ${{ secrets.JWT_ALGORITHM }}
-      JWT_EXP_MINUTES: ${{ secrets.JWT_EXP_MINUTES }}
-      LOGFARE_API_KEY: ${{ secrets.LOGFARE_API_KEY }}
-      LOGFARE_API_URL: ${{ secrets.LOGFARE_API_URL }}
+    # env:
+    #   SMTP_FROM: ${{ secrets.SMTP_FROM }}
+    #   SMTP_HOST: ${{ secrets.SMTP_HOST }}
+    #   SMTP_PORT: ${{ secrets.SMTP_PORT }}
+    #   SMTP_USER: ${{ secrets.SMTP_USER }}
+    #   SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+    #   MONGODB_URI: ${{ secrets.MONGODB_URI }}
+    #   NEXT_PUBLIC_RUNNING_LOCAL: ${{ secrets.NEXT_PUBLIC_RUNNING_LOCAL }}
+    #   NEXT_PUBLIC_PROTOCOL: ${{ secrets.NEXT_PUBLIC_PROTOCOL }}
+    #   NEXT_PUBLIC_PORT: ${{ secrets.NEXT_PUBLIC_PORT }}
+    #   NEXT_PUBLIC_LOCAL_URL_BASE: ${{ secrets.NEXT_PUBLIC_LOCAL_URL_BASE }}
+    #   NEXT_PUBLIC_URL_BASE: ${{ secrets.NEXT_PUBLIC_URL_BASE }}
+    #   HOST_PFX: ${{ secrets.HOST_PFX }}
+    #   COOKIE_USER_TOKEN: ${{ secrets.COOKIE_USER_TOKEN }}
+    #   COOKIE_JWT_INFO: ${{ secrets.COOKIE_JWT_INFO }}
+    #   JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+    #   JWT_ALGORITHM: ${{ secrets.JWT_ALGORITHM }}
+    #   JWT_EXP_MINUTES: ${{ secrets.JWT_EXP_MINUTES }}
+    #   LOGFARE_API_KEY: ${{ secrets.LOGFARE_API_KEY }}
+    #   LOGFARE_API_URL: ${{ secrets.LOGFARE_API_URL }}
 
     strategy:
       matrix:
@@ -54,6 +54,32 @@ jobs:
         
     - name: Install dependencies
       run: npm install
+
+    - name: 'Create .env.local file'
+
+      #can also create one secret called env_file and do this:
+      run: |
+        touch .env.local
+        echo SMTP_FROM="${{ secrets.SMTP_FROM }}" >> .env.local
+        echo SMTP_HOST="${{ secrets.SMTP_HOST }}" >> .env.local
+        echo SMTP_PORT="${{ secrets.SMTP_PORT }}" >> .env.local
+        echo SMTP_USER="${{ secrets.SMTP_USER }}" >> .env.local
+        echo SMTP_PASSWORD="${{ secrets.SMTP_PASSWORD }}" >> .env.local
+        echo MONGODB_URI="${{ secrets.MONGODB_URI }}" >> .env.local
+        echo NEXT_PUBLIC_RUNNING_LOCAL="${{ secrets.NEXT_PUBLIC_RUNNING_LOCAL }}" >> .env.local
+        echo NEXT_PUBLIC_PROTOCOL="${{ secrets.NEXT_PUBLIC_PROTOCOL }}" >> .env.local
+        echo NEXT_PUBLIC_PORT="${{ secrets.NEXT_PUBLIC_PORT }}" >> .env.local
+        echo NEXT_PUBLIC_LOCAL_URL_BASE="${{ secrets.NEXT_PUBLIC_LOCAL_URL_BASE }}" >> .env.local
+        echo NEXT_PUBLIC_URL_BASE="${{ secrets.NEXT_PUBLIC_URL_BASE }}" >> .env.local
+        echo HOST_PFX="${{ secrets.HOST_PFX }}" >> .env.local
+        echo COOKIE_USER_TOKEN="${{ secrets.COOKIE_USER_TOKEN }}" >> .env.local
+        echo COOKIE_JWT_INFO="${{ secrets.COOKIE_JWT_INFO }}" >> .env.local
+        echo JWT_SECRET_KEY="${{ secrets.JWT_SECRET_KEY }}" >> .env.local
+        echo JWT_ALGORITHM="${{ secrets.JWT_ALGORITHM }}" >> .env.local
+        echo JWT_EXP_MINUTES="${{ secrets.JWT_EXP_MINUTES }}" >> .env.local
+        echo LOGFARE_API_KEY="${{ secrets.LOGFARE_API_KEY }}" >> .env.local
+        echo LOGFARE_API_URL="${{ secrets.LOGFARE_API_URL }}" >> .env.local
+        cat .env.local
 
     - name: Build
       run: npm run build --if-present
