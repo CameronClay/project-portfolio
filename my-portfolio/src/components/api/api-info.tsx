@@ -7,17 +7,17 @@ import { useSectionInView } from '@src/lib/hooks';
 
 type APIInfoProps = {
     heading: string;
-    description: string;
+    children?: React.ReactNode;
 };
 
-export default function APIInfo({ heading, description }: APIInfoProps) {
+export default function APIInfo({ heading, children }: APIInfoProps) {
     const { ref } = useSectionInView(Section.INFO, 0.80);
 
     return (
         <section id="info" ref={ref} className="scroll-mt-[5rem] mb-[2rem]">
             <SectionHeading>{heading}</SectionHeading>
 
-            <p className="px-[0.125rem]">{description}</p>
+            {children}
         </section>
     );
 }

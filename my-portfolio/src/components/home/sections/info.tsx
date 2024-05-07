@@ -50,7 +50,20 @@ export default function Info() {
                         //`` is for string interpolation
                         //${} is a variable
                     }
+
                     <span className="">Hello, my name is</span>{' '}
+                    <span className="font-bold">{CONTACT_INFO.name}</span>. I am{' '}
+                    <span className="font-bold">software developer</span> with a{' '}
+                    <span className="font-bold">Bachelor's degree</span> in <span className="font-bold">Computer Science</span> and
+                    over a dozen years of experience programming as a hobby.{' '}
+                    Have a focus in <span className="font-bold">back-end</span> development,{' '}
+                    with some experience in front-end development.{' '}
+                    Have experience in a variety of programming languages,{' '}
+                    databases,{' '}
+                    project management tools,{' '}
+                    and more.
+
+                    {/* <span className="">Hello, my name is</span>{' '}
                     <span className="font-bold">{CONTACT_INFO.name}</span>. I am
                     a passionate{' '}
                     <span className="font-bold">software developer</span> with a{' '}
@@ -64,9 +77,9 @@ export default function Info() {
                     <span className="font-bold">
                         environment that values quality and maintainable code
                     </span>
-                    .
+                    . */}
                 </h1>
             </motion.div>
-        </section>
+        </section >
     );
 }
