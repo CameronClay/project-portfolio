@@ -3,7 +3,6 @@ import { validate_user_info } from '@src/lib/auth';
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
 import * as api_info from '@src/constants/api/admin-api';
 import { ObjectId } from 'mongodb';
-import { AStat } from '@src/lib/database/c_stats';
 import { GenericResponse } from '@src/constants/api/generic';
 
 export async function GET(request: Request) {

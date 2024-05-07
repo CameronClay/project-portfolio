@@ -1,10 +1,6 @@
 import React from 'react';
-// import clsx from 'clsx';
-// import APIEndpointFormEtc from '@src/components/api/api-endpoint/endpoint-form-etc';
-// import { FormInputProps } from '@src/components/form';
 import { RESTMethodType } from '@src/constants/api/constants';
 import APIEndpointResponse from '@src/components/api/api-endpoint/endpoint-response';
-import Link from 'next/link';
 import EndpointLinks from '@src/components/api/api-endpoint/endpoint-links';
 
 export type APIEndpointParams = {
@@ -56,13 +52,6 @@ export default function APIEndpointBase({
                     <EndpointLinks />
                 </div>
             ) : null}
-
-            {/* <APIEndpointFormEtc
-                endpoint={endpoint}
-                btn_text={btn_text}
-                parameters={parameters}
-                get_response={get_response}            
-            /> */}
 
             <APIEndpointResponse />
         </div>
