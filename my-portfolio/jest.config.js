@@ -1,13 +1,3 @@
-// //needed for jest
-// module.exports = {
-//     preset: 'ts-jest',
-//     testEnvironment: 'jest-environment-jsdom',
-//     // testEnvironment: 'jsdom',
-//     // testEnvironment: 'node',
-//     transform: {
-//         "^.+\\.(t|j)sx?$": "ts-jest"
-//     }
-// }
 const nextJest = require("next/jest");
 const createJestConfig = nextJest({
     dir: "./",
@@ -20,8 +10,7 @@ const customJestConfig = {
     testEnvironment: "./custom-test-env",
     // testEnvironment: "node",
     // testEnvironment: "jest-environment-jsdom",
-    // setupFiles: ['<rootDir>/.env.local'],
-    // maxWorkers: 1, //maximum number of workers that Jest can spawn in parallel (similar to --runInBand CI argument)
+    // maxWorkers: 1, //maximum number of workers that Jest can spawn in parallel (similar to --runInBand argument)
     globalSetup: '<rootDir>/jest.global.setup.ts',
     globalTeardown: '<rootDir>/jest.global.teardown.ts',
     setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
@@ -32,22 +21,5 @@ const customJestConfig = {
         customExportConditions: [''],
     },
     testTimeout: 30000,
-    globals: {
-        Uint8Array: Uint8Array,
-        ArrayBuffer: ArrayBuffer,
-        // 'ts-jest': {
-        //     diagnostics: {
-        //         exclude: ['**'],
-        //     }
-        // },
-    },
-    // transform: {
-    //     "^.+\\.tsx?$": [
-    //         "ts-jest",
-    //         {
-    //             diagnostics: false,
-    //         },
-    //     ],
-    // },
 };
 module.exports = createJestConfig(customJestConfig);
