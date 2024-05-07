@@ -16,7 +16,7 @@ beforeEach(async () => {
 
     //validate response
     const body = await resp.json() as LoginUserResponse;
-    expect(body.message).toMatch(/[Ll]og in successful/)
+    expect(body.message).toMatch(/[Ll]og in successful/);
     expect(body.jwt_token).toBeTruthy();
 
     const user = users_db.User.from_json(body.user);

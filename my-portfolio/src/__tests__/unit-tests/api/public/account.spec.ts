@@ -50,7 +50,7 @@ describe('public account api', () => {
 
         //validate response
         const body = await resp.json() as api_info.LoginUserResponse;
-        expect(body.message).toMatch(/[Ll]og in successful/)
+        expect(body.message).toMatch(/[Ll]og in successful/);
         expect(body.jwt_token).toBeTruthy();
 
         const user = users_db.User.from_json(body.user);
@@ -70,7 +70,7 @@ describe('public account api', () => {
 
         //validate response
         const body = await resp.json() as api_info.LoginUserResponse;
-        expect(body.message).toMatch(/[Ii]nvalid password/)
+        expect(body.message).toMatch(/[Ii]nvalid password/);
         expect(body.jwt_token).toBeFalsy();
         expect(resp.status).toBe(401);
     });
