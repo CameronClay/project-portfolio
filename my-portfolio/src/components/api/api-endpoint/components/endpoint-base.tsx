@@ -1,7 +1,7 @@
 import React from 'react';
 import { RESTMethodType } from '@src/constants/api/constants';
-import APIEndpointResponse from '@src/components/api/api-endpoint/endpoint-response';
-import EndpointLinks from '@src/components/api/api-endpoint/endpoint-links';
+import APIEndpointResponse from '@src/components/api/api-endpoint/components/endpoint-response';
+import EndpointLinks from '@src/components/api/api-endpoint/components/endpoint-links';
 
 export type APIEndpointParams = {
     method: RESTMethodType;

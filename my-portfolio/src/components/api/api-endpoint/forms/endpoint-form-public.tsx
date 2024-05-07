@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import APIEndpointFormEtc from '@src/components/api/api-endpoint/endpoint-form-etc';
+import APIEndpointFormEtc from '@src/components/api/api-endpoint/components/endpoint-form-etc';
 import * as api_tmain from '@src/lib/api/main';
 import * as api_info from '@src/constants/api/main-api';
 

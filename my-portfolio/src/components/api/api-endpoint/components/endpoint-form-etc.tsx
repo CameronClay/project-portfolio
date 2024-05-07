@@ -3,7 +3,7 @@
 import React from 'react';
 import APIEndpointForm, {
     APIEndpointFormProps,
-} from '@src/components/api/api-endpoint/endpoint-form';
+} from '@src/components/api/api-endpoint/components/endpoint-form';
 import { FormInputProps } from '@src/components/form';
 
 export default function APIEndpointFormEtc({
