@@ -5,7 +5,7 @@ import {
     DropdownContainer,
     DropdownItem,
 } from '@src/components/dropdown/dropdown';
-import { DropdownItemsList } from '@src/components/dropdown/dropdown-itemslist';
+import { DropdownItemsList } from '@src/components/dropdown/components/dropdown-itemslist';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 export default function APIDropdown() {

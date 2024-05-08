@@ -1,7 +1,7 @@
 import * as api_tmain from '@src/lib/api/main';
 
-import '@src/jest/jest-db-setup';
-import '@src/jest/jest-server-setup';
+import '@src/jest/setup/db-setup';
+import '@src/jest/setup/server-setup';
 
 describe('public misc api', () => {
     it('test-endpoint should return 200', async () => {

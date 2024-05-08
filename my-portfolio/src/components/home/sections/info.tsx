@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { useSectionInView } from '@src/lib/hooks';
 import { Section } from '@src/constants/home/section-data';
 import { CONTACT_INFO } from '@src/constants/home/contact-info';
-import SectionHeading from '@src/components/home/section-heading';
+import SectionHeading from '@src//components/home/components/section-heading';
 import InfoBar from '@src/components/info-bar';
 
 export default function Info() {

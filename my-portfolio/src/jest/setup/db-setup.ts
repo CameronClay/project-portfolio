@@ -1,9 +1,4 @@
-import { Database, get_db, setup_db, drop_db, validate_schemas, close_db, create_indexes, validate_schema } from '@src/lib/database/mongodb';
-import { get_user_token_key } from '../constants/auth-constants';
-import { PROTECTED_PATH } from '@src/constants/auth-constants';
-import * as users_db from '@src/lib/database/c_users';
-import * as stats_db from '@src/lib/database/c_stats';
-
+import { Database, setup_db, drop_db, validate_schemas, close_db, create_indexes } from '@src/lib/database/mongodb';
 import { store as cookieStore } from "@mswjs/cookies";
 
 function clear_cookies() {

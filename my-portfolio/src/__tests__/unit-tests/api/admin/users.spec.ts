@@ -1,10 +1,10 @@
 import * as api_tadmin from '@src/lib/api/admin';
 import * as users_db from '@src/lib/database/c_users';
-import * as api_info from '@/src/constants/api/admin-api';
+import * as api_info from '@src/constants/api/admin-api';
 
-import '@src/jest/jest-db-setup';
-import '@src/jest/jest-server-setup';
-import '@src/jest/jest-private-api-setup-all';
+import '@src/jest/setup/db-setup';
+import '@src/jest/setup/server-setup';
+import '@src/jest/setup/private-api-setup-all';
 
 describe('admin users api', () => {
     it('get_users should return 200 and yield users', async () => {

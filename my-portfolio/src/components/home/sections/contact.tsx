@@ -10,7 +10,7 @@ import {
     EMAIL_INFO,
 } from '@src/constants/home/email-constants';
 import { Section } from '@src/constants/home/section-data';
-import SectionHeading from '@src/components/home/section-heading';
+import SectionHeading from '@src//components/home/components/section-heading';
 import SubmitBtn from '@src/components/submit-btn';
 
 export default function Contact() {

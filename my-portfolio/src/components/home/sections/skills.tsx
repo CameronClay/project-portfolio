@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { SKILLS_DATA } from '@src/constants/home/section-data';
 import { useSectionInView } from '@src/lib/hooks';
 import { Section } from '@src/constants/home/section-data';
-import SectionHeading from '@src/components/home/section-heading';
+import SectionHeading from '@src//components/home/components/section-heading';
 
 const fadeInAnimationVariants = {
     initial: {

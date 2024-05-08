@@ -59,16 +59,18 @@ export default function Form({
                             className="flex flexrow flex-wrap"
                             key={input.input_id}
                         >
-                            <p
+                            <label
+                                htmlFor={input.input_id}
                                 className={`mr-[2rem] text-nowrap ${input_disp_width}`}
                             >
                                 {input.name}
-                            </p>
+                            </label>
 
                             {
                                 //form and id here are optional
                             }
                             <input
+                                // aria-label={input.name}
                                 id={input.input_id}
                                 name={input.input_id}
                                 type={input.input_type ?? 'text'}

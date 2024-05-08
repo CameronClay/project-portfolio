@@ -1,6 +1,6 @@
-import '@src/jest/jest-db-setup';
-import '@src/jest/jest-server-setup';
-import '@src/jest/jest-private-api-setup-all';
+import '@src/jest/setup/db-setup';
+import '@src/jest/setup/server-setup';
+import '@src/jest/setup/private-api-setup-all';
 
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
 import * as api_info from '@src/constants/api/main-api';

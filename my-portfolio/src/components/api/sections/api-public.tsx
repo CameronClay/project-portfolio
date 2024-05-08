@@ -2,7 +2,7 @@ import React from 'react';
 import Api from '@src/components/api/api';
 import { RESTMethodType } from '@src/constants/api/constants';
 import APIEndpoint from '@src/components/api/api-endpoint/endpoint';
-import * as api_forms from '@/src/components/api/api-endpoint/forms/endpoint-form-public';
+import * as api_forms from '@src/components/api/api-endpoint/forms/endpoint-form-public';
 
 //can also submit form directly to api instead of converting it to json see
 //https://stackoverflow.com/questions/41431322/how-to-convert-formdata-html5-object-to-json

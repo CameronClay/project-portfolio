@@ -1,5 +1,5 @@
 import React from 'react';
-import UserPage from '@src/components/user/user-page';
+import UserPage from '@src//components/user/page/user-page';
 
 export default function RootLayout({
     children,

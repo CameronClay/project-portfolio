@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useResponseTextContext } from '@src/context/api/api-endpoint-context';
+import { useResponseTextContext } from '@src/context/response-text-context';
 import Form, { FormInputProps } from '@src/components/form';
 import clsx from 'clsx';
 import SubmitBtn from '@src/components/submit-btn';
@@ -13,6 +13,7 @@ export type APIEndpointFormProps = {
     get_response: (forminfo: Record<string, string>) => Promise<Response>;
 };
 
+//form element that displays information about each parameter, handles response text upon submission, and redirects to login if unauthorized
 export default function APIEndpointForm({
     btn_text,
     parameters,
@@ -41,6 +42,7 @@ export default function APIEndpointForm({
             )
         );
 
+        //if request was unauthorized and requires login, redirect to redirect_str
         if (
             response.status == 401 &&
             (data as Record<string, unknown>).auth_msg !== undefined
@@ -67,10 +69,6 @@ export default function APIEndpointForm({
                     <div className="ml-[0rem] basis-full md:basis-0 md:ml-auto pr-[0.25rem]">
                         <SubmitBtn text={btn_text} />
                     </div>
-
-                    // <div className='relative left-[100%] -translate-x-[100%] pr-[0.25rem]'>
-                    //     <SubmitBtn text={btn_text}/>
-                    // </div>
                 }
                 form_inputs={parameters}
                 handle_submit={on_submit}

@@ -4,7 +4,7 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
 import stats_schema from '@/database/schemas/stats.json';
 import users_schema from '@/database/schemas/users.json';
-import { is_running_with_jest } from '@src/jest/jest-utils';
+import { is_running_with_jest } from '@src/jest/utils';
 
 if (!process.env.MONGODB_URI) {
     throw new Error('Missing MONGODB_URI in .env.local');

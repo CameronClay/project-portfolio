@@ -24,7 +24,8 @@ jest.mock('next/navigation', () => {
     /* eslint-disable-next-line @typescript-eslint/no-unsafe-return */
     return {
         ...jest.requireActual('next/navigation'),
-        useRouter: jest.fn().mockImplementation(() => ({ route: '/' }))
+        useRouter: jest.fn().mockImplementation(() => ({ route: '/' })),
+        useSearchParams: jest.fn().mockImplementation(() => ({ get: jest.fn().mockImplementation((param: string) => '/api') }))
     };
 });
 

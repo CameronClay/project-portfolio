@@ -9,10 +9,8 @@ import {
     MdOutlineZoomOut,
     MdZoomIn,
 } from 'react-icons/md';
-// import { MdOutlineZoomOut, MdZoomIn } from 'react-icons/md';
-// import { useScroll, useTransform } from 'framer-motion';
 
-function isOverflown(element: HTMLElement) {
+function is_overflown(element: HTMLElement) {
     return (
         element.scrollHeight > element.clientHeight ||
         element.scrollWidth > element.clientWidth
@@ -28,10 +26,10 @@ export default function ImageViewer() {
     };
 
     //make click outside of element close it
-    const handleOutsideClick = (e: HTMLElement) => {
+    const handle_outside_click = (e: HTMLElement) => {
         close();
     };
-    const ref = useOutsideClick(handleOutsideClick);
+    const ref = useOutsideClick(handle_outside_click);
 
     //disable page scroll when element is visible
     useEffect(() => {
@@ -45,28 +43,28 @@ export default function ImageViewer() {
     const [scale, _setScale] = useState(1);
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
-    const setScale = (scale: number) => {
+    const set_scale = (scale: number) => {
         _setScale(Math.max(Math.min(10, scale), 0.1));
     };
 
     const imageRef = useRef<HTMLImageElement>(null);
     const imageContainerRef = useRef<HTMLDivElement>(null);
-    const onZoomIn = () => {
-        setScale(scale + 0.1);
+    const on_zoom_in = () => {
+        set_scale(scale + 0.1);
     };
-    const onZoomOut = () => {
-        setScale(scale - 0.1);
-    };
-
-    const onMouseScroll = (event: WheelEvent<HTMLImageElement>) => {
-        setScale(scale + event.deltaY * 0.00125);
+    const on_zoom_out = () => {
+        set_scale(scale - 0.1);
     };
 
-    const onCenterImage = () => {
+    const on_mouse_scroll = (event: WheelEvent<HTMLImageElement>) => {
+        set_scale(scale + event.deltaY * 0.00125);
+    };
+
+    const on_center_image = () => {
         setPosition({ x: 0, y: 0 });
     };
-    const onResetImage = () => {
-        setScale(1);
+    const on_reset_image = () => {
+        set_scale(1);
         setPosition({ x: 0, y: 0 });
     };
 
@@ -110,7 +108,7 @@ export default function ImageViewer() {
 
     useEffect(() => {
         setPosition({ x: 0, y: 0 });
-        setScale(1);
+        set_scale(1);
     }, [isVisible]);
 
     return (
@@ -138,7 +136,7 @@ export default function ImageViewer() {
                     <div className="flex flex-row items-center justify-start w-full h-[2rem] bg-gray-700 mb-[1rem] px-[0.5rem] gap-x-[0.25rem] border-y-[1px] border-gray-400">
                         <button
                             title="Center Image and Reset Scale"
-                            onClick={onResetImage}
+                            onClick={on_reset_image}
                             className="flex text-center items-center justify-center h-full text-5xl text-gray-900 hover:bg-gray-400"
                         >
                             <MdOutlineFilterCenterFocus size={32} />
@@ -146,7 +144,7 @@ export default function ImageViewer() {
 
                         <button
                             title="Zoom In"
-                            onClick={onZoomIn}
+                            onClick={on_zoom_in}
                             className="flex text-center items-center justify-center h-full text-5xl text-gray-900 hover:bg-gray-400"
                         >
                             <MdZoomIn size={32} />
@@ -154,7 +152,7 @@ export default function ImageViewer() {
 
                         <button
                             title="Zoom Out"
-                            onClick={onZoomOut}
+                            onClick={on_zoom_out}
                             className="flex text-center items-center justify-center h-full text-5xl text-gray-900 hover:bg-gray-400"
                         >
                             <MdOutlineZoomOut size={32} />
@@ -162,7 +160,7 @@ export default function ImageViewer() {
                     </div>
 
                     <div
-                        onWheel={onMouseScroll}
+                        onWheel={on_mouse_scroll}
                         ref={imageContainerRef}
                         className="max-h-[100vh] overflow-hidden"
                     >

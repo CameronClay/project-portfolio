@@ -2,28 +2,28 @@
 
 import React, { useState, createContext, useContext } from 'react';
 
-type APIEndpointContextProviderProps = {
+type ResponseTextContextProviderProps = {
     children: React.ReactNode;
 };
 
-type APIEndpointContextType = {
+type ResponseTextContextType = {
     response_text: string;
     set_response_text: React.Dispatch<React.SetStateAction<string>>;
     response_text_error: string;
     set_response_text_error: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const APIEndpointContext = createContext<APIEndpointContextType | null>(null);
+const ResponseTextContext = createContext<ResponseTextContextType | null>(null);
 
 //global react element that holds the state info
-export default function APIEndpointContextProvider({
+export default function ResponseTextContextProvider({
     children,
-}: APIEndpointContextProviderProps) {
+}: ResponseTextContextProviderProps) {
     const [response_text, set_response_text] = useState('');
     const [response_text_error, set_response_text_error] = useState('');
 
     return (
-        <APIEndpointContext.Provider
+        <ResponseTextContext.Provider
             value={{
                 //first set of curly braces is so you can use javascript, second set is to denote an object
                 response_text,
@@ -33,17 +33,17 @@ export default function APIEndpointContextProvider({
             }}
         >
             {children}
-        </APIEndpointContext.Provider>
+        </ResponseTextContext.Provider>
     );
 }
 
 //custom hook (hooks are functions that start with use keyword)
 export function useResponseTextContext() {
-    const context = useContext(APIEndpointContext);
+    const context = useContext(ResponseTextContext);
 
     if (context === null) {
         const error = new Error();
-        error.message = `${useResponseTextContext.name} must be used within an ${APIEndpointContextProvider.name}. Trace: ${error.stack}`;
+        error.message = `${useResponseTextContext.name} must be used within an ${ResponseTextContextProvider.name}. Trace: ${error.stack}`;
         throw error;
     }
 

@@ -1,7 +1,7 @@
 import * as api_tmiddlware from '@src/lib/api/middleware';
 
-import '@src/jest/jest-db-setup';
-import '@src/jest/jest-server-setup';
+import '@src/jest/setup/db-setup';
+import '@src/jest/setup/server-setup';
 
 import * as api_info from '@src/constants/api/middleware-api';
 

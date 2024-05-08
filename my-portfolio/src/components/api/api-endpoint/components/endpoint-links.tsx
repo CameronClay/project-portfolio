@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+//Set of links to display within an APIEndpointForm
 export default function EndpointLinks() {
     const pathname = usePathname();
 

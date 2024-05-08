@@ -3,9 +3,9 @@ import * as stats_db from '@src/lib/database/c_stats';
 
 import * as api_info from '@src/constants/api/admin-api';
 
-import '@src/jest/jest-db-setup';
-import '@src/jest/jest-server-setup';
-import '@src/jest/jest-private-api-setup-all';
+import '@src/jest/setup/db-setup';
+import '@src/jest/setup/server-setup';
+import '@src/jest/setup/private-api-setup-all';
 
 describe('stats api', () => {
     it('get_stat should return 200', async () => {

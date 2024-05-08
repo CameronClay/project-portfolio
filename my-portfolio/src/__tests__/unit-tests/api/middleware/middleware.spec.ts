@@ -1,8 +1,8 @@
 import * as api_tadmin from '@src/lib/api/admin';
 import * as users_db from '@src/lib/database/c_users';
 
-import '@src/jest/jest-db-setup';
-import '@src/jest/jest-server-setup';
+import '@src/jest/setup/db-setup';
+import '@src/jest/setup/server-setup';
 
 describe('middleware tests', () => {
     it('get_users should return 401 when not authenticated', async () => {

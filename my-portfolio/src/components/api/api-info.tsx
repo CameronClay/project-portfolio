@@ -1,7 +1,7 @@
 'use client'; //needs to be a client component because it uses react hooks (even though it is a custom hook)
 
 import React from 'react';
-import SectionHeading from '@src/components/api/section-heading';
+import SectionHeading from '@src//components/api/section-heading';
 import { Section } from '@src/constants/api/section-data';
 import { useSectionInView } from '@src/lib/hooks';
 

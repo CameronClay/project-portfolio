@@ -1,4 +1,4 @@
-import * as stats_db from '@/src/lib/database/c_stats';
+import * as stats_db from '@src/lib/database/c_stats';
 import { parse_params_resp, Param } from '@src/lib/api/helpers';
 import * as api_info from '@src/constants/api/middleware-api';
 

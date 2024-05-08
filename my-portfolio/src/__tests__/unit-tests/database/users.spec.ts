@@ -1,4 +1,4 @@
-import '@src/jest/jest-db-setup';
+import '@src/jest/setup/db-setup';
 
 import * as users_db from '@src/lib/database/c_users';
 import { ObjectId } from 'mongodb';

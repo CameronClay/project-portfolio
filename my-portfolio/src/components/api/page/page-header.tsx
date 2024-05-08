@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { LINKS } from '@src/constants/api/section-data';
-import PageHeaderTemplate from '@src/components/page-header-template';
-import APIDropdown from '@src/components/api/api-dropdown';
+import PageHeaderTemplate from '@src//components/page/page-header-template';
+import APIDropdown from '@src//components/api/api-dropdown';
 
 export default function PageHeader() {
     return (

@@ -1,5 +1,5 @@
-import { ValidateUserInfoResponse } from '@/src/constants/api/generic';
-import { get_jwt_exp_minutes, get_user_token_key } from '@/src/constants/auth-constants';
+import { ValidateUserInfoResponse } from '@src/constants/api/generic';
+import { get_jwt_exp_minutes, get_user_token_key } from '@src/constants/auth-constants';
 import { get_jwt_token, verify_jwt, set_user_cookie, expire_user_cookie, set_auth_header, validate_user_info } from '@src/lib/auth';
 
 describe('authorization utilities', () => {

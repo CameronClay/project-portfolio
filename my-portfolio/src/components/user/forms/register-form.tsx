@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import UserForm from '@src/components/user/user-form';
+import UserForm from '@src//components/user/components/user-form';
 import * as api_tmain from '@src/lib/api/main';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';

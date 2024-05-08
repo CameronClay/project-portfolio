@@ -3,24 +3,11 @@
 import React from 'react';
 import Form from '@src/components/form';
 import SubmitBtn from '@src/components/submit-btn';
-import { useResponseTextContext } from '@/src/context/api/api-endpoint-context';
+import { useResponseTextContext } from '@src/context/response-text-context';
 import { FormInputProps } from '@src/components/form';
 import { GenericResponse } from '@src/constants/api/generic';
 
-export function UserFormSubmitBtnContainer({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
-    return (
-        //w-0 basis-[100%] to force wrapping
-        <div className="flex w-0 basis-[100%] justify-start pr-[0.25rem] mt-[0.5rem] mb-[0.25rem]">
-            {children}
-        </div>
-    );
-}
-
-export function UserResponseElement({
+function UserResponseElement({
     children,
     classNameEtc,
 }: {
@@ -36,6 +23,7 @@ export function UserResponseElement({
     return <p className={className}>{children}</p>;
 }
 
+//displays form response within an ResponseTextContextProvider
 export function UserFormResponse() {
     const { response_text, response_text_error } = useResponseTextContext();
 
@@ -63,6 +51,7 @@ export type UserFormProps = {
     get_response: (forminfo: Record<string, string>) => Promise<Response>;
 };
 
+//form where response text is updated according to response received from get_response (must have UserFormResponse and this element nested within a ResponseTextContextProvider)
 export default function UserForm({
     btn_text,
     form_inputs,
@@ -84,9 +73,9 @@ export default function UserForm({
     return (
         <Form
             submit_btn={
-                <UserFormSubmitBtnContainer>
+                <div className="flex w-0 basis-[100%] justify-start pr-[0.25rem] mt-[0.5rem] mb-[0.25rem]">
                     <SubmitBtn text={btn_text} />
-                </UserFormSubmitBtnContainer>
+                </div>
             }
             form_inputs={form_inputs}
             handle_submit={on_submit}

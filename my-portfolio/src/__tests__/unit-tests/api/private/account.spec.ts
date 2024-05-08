@@ -3,9 +3,9 @@ import * as users_db from '@src/lib/database/c_users';
 import * as api_info from '@src/constants/api/main-api';
 import { AuthResponse } from '@src/constants/api/generic';
 
-import '@src/jest/jest-db-setup';
-import '@src/jest/jest-server-setup';
-import '@src/jest/jest-private-api-setup-each';
+import '@src/jest/setup/db-setup';
+import '@src/jest/setup/server-setup';
+import '@src/jest/setup/private-api-setup-each';
 
 describe('private account api', () => {
     it('logout should return 200 when user is logged in', async () => {

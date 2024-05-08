@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import IsOpenContextProvider, {
     useIsOpenContext,
-} from '@src/components/dropdown/isopen-context';
+} from '@src//components/dropdown/components/isopen-context';
 import { useOutsideClick } from 'outsideclick-react';
 import { LinkTarget } from '@src/constants/components/constants';
 

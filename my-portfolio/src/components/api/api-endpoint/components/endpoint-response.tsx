@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
-import { useResponseTextContext } from '@src/context/api/api-endpoint-context';
+import { useResponseTextContext } from '@src/context/response-text-context';
 
+//displays form response within an ResponseTextContextProvider
 export default function APIEndpointResponse() {
     const { response_text } = useResponseTextContext();
 

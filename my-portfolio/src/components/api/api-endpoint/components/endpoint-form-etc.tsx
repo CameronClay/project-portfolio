@@ -6,6 +6,7 @@ import APIEndpointForm, {
 } from '@src/components/api/api-endpoint/components/endpoint-form';
 import { FormInputProps } from '@src/components/form';
 
+//Wraps an APIEndpointForm with extra information about each parameter input
 export default function APIEndpointFormEtc({
     btn_text,
     parameters,

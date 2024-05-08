@@ -1,6 +1,6 @@
-import '@src/jest/jest-db-setup';
+import '@src/jest/setup/db-setup';
 
-import * as stats_db from '@/src/lib/database/c_stats';
+import * as stats_db from '@src/lib/database/c_stats';
 import { ObjectId } from 'mongodb';
 
 //test stats collection functions using separate testing database

@@ -1,5 +1,5 @@
 import React from 'react';
-import UserSection from '@src/components/user/user-section';
+import UserSection from '@src//components/user/components/user-section';
 import RegisterForm from '@src/components/user/forms/register-form';
 
 export default function Login() {

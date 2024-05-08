@@ -2,8 +2,8 @@ import React from 'react';
 
 import SectionContainer from '@src/components/api/section-container';
 import APIAdmin from '@src/components/api/sections/api-admin';
-import APIInfo from '@src/components/api/api-info';
-import APIDescription from '@src/components/api/api-description';
+import APIInfo from '@src//components/api/api-info';
+import APIDescription from '@src//components/api/api-description';
 
 export default function AdminAPI() {
     return (

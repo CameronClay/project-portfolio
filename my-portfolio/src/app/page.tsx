@@ -5,9 +5,9 @@ import SectionDivider from '@src/components/section-divider';
 import Skills from '@src/components/home/sections/skills';
 // import Experience from '@src/components/experience';
 
-import SectionContainer from '@src/components/home/section-container';
-import PageHeader from '@src/components/home/page-header';
-import TopBar from '@src/components/top-bar';
+import SectionContainer from '@src//components/home/components/section-container';
+import PageHeader from '@src//components/home/page/page-header';
+import TopBar from '@src/components/page/top-bar';
 import ContextProviderElement from '@src/context/home/context-provider-element';
 import ImageViewer from '@src/components/image-viewer';
 
