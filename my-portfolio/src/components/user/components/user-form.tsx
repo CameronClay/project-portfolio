@@ -35,8 +35,7 @@ export function UserFormResponse() {
                 </UserResponseElement>
             ) : null}
 
-            {response_text_error !== undefined &&
-                response_text_error.length > 0 ? (
+            {response_text_error !== undefined && response_text_error.length > 0 ? (
                 <UserResponseElement classNameEtc="text-red-600 dark:text-red-700">
                     {response_text_error}
                 </UserResponseElement>
@@ -64,10 +63,12 @@ export default function UserForm({
         const response = await get_response(forminfo);
         const data = (await response.json()) as GenericResponse;
 
-        if (response.status == 200) {
+        if (response.status == 200) { //success response status
             set_response_text(data.message);
-        } else {
+            set_response_text_error('');
+        } else { //error response status
             set_response_text_error(data.message);
+            set_response_text('');
         }
     };
 
