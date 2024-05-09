@@ -5,7 +5,7 @@ import UserForm from '@src//components/user/components/user-form';
 import * as api_tmain from '@src/lib/api/main';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import * as api_info from '@src/constants/api/main-api';
+import { REGISTER_USER_PAGE_PARAMS } from '@src/constants/user-forms/user-forms';
 
 export default function RegisterForm() {
     const router = useRouter();
@@ -17,14 +17,15 @@ export default function RegisterForm() {
         <div>
             <UserForm
                 btn_text="Register"
-                form_inputs={api_info.REGISTER_USER_PARAMS}
+                form_inputs={REGISTER_USER_PAGE_PARAMS}
                 get_response={async (forminfo: Record<string, string>) => {
                     let resp: Response;
 
                     if (forminfo.password !== forminfo.password_repeat) {
-                        resp = Response.json({
-                            status: 401,
+                        return Response.json({
                             message: 'Passwords do not match.',
+                        }, {
+                            status: 401,
                         });
                     }
                     resp = await api_tmain.register(
