@@ -7,6 +7,27 @@ import clsx from 'clsx';
 import SubmitBtn from '@src/components/submit-btn';
 import { usePathname, useRouter } from 'next/navigation';
 
+//displays form response within an ResponseTextContextProvider
+export function APIEndpointResponse() {
+    const { response_text } = useResponseTextContext();
+
+    return (
+        <div>
+            {
+                //undefined and null are the same in typescript
+                response_text !== undefined && response_text.length > 0 ? (
+                    <div className="flex flex-col justify-start">
+                        <p>Response:</p>
+                        <p className="borderBlack100 text-wrap whitespace-pre-wrap break-words">
+                            {response_text}
+                        </p>
+                    </div>
+                ) : null
+            }
+        </div>
+    );
+}
+
 export type APIEndpointFormProps = {
     btn_text: string;
     parameters: FormInputProps[];
@@ -14,6 +35,7 @@ export type APIEndpointFormProps = {
 };
 
 //form element that displays information about each parameter, handles response text upon submission, and redirects to login if unauthorized
+//this element must be nested within a ResponseTextContextProvider and ResponseTextContextProvider should include a APIEndpointResponse for display of response text
 export default function APIEndpointForm({
     btn_text,
     parameters,

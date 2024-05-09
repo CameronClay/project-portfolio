@@ -51,7 +51,8 @@ export type UserFormProps = {
     get_response: (forminfo: Record<string, string>) => Promise<Response>;
 };
 
-//form where response text is updated according to response received from get_response (must have UserFormResponse and this element nested within a ResponseTextContextProvider)
+//form where response text is updated according to response received from get_response
+//this element must be nested within a ResponseTextContextProvider and ResponseTextContextProvider should include a UserFormResponse for display of response text
 export default function UserForm({
     btn_text,
     form_inputs,

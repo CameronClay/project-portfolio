@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormInputProps } from '@src/components/form';
 import APIEndpointBase from '@src/components/api/api-endpoint/components/endpoint-base';
 import ResponseTextContextProvider from '@src/context/response-text-context';
 import { RESTMethodType } from '@src/constants/api/constants';

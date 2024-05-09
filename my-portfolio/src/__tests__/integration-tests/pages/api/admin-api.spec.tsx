@@ -1,4 +1,3 @@
-import '@testing-library/dom';
 import { render, renderHook, screen } from '@testing-library/react';
 import React from 'react';
 import AdminAPI from '@src/app/api-info/admin/page';
