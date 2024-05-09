@@ -15,9 +15,6 @@ export default function Home() {
     return (
         <ContextProviderElement>
             {/* 
-				// two divs are for two different colors at the top of the page
-				// rounded-full makes it a circle
-
 				// absolute - Use absolute to position an element outside of the normal flow of the document, causing adjacent elements to be posiitioned as if the element doesn't exist.
 				// One spacing unit is equal to 0.25rem, which translates to 4px by default in common browsers.
 				// sm is a breakpoint which signifies small screens and larger [anything after sm: only applies on screens 640px and WIDER]

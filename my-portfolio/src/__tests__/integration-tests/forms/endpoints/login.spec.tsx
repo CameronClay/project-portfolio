@@ -10,8 +10,8 @@ import '@src/jest/setup/server-setup';
 import * as users_db from '@src/lib/database/c_users';
 import { FormLoginUser } from '@src/components/api/api-endpoint/forms/endpoint-form-public';
 import { sleep } from '@src/lib/utils/thread-utils';
-import { RESTMethodType } from '@/src/constants/api/constants';
-import APIEndpoint from '@/src/components/api/api-endpoint/endpoint';
+import { RESTMethodType } from '@src//constants/api/constants';
+import APIEndpoint from '@src//components/api/api-endpoint/endpoint';
 
 describe('RegisterForm works correctly', () => {
     const render_form = () => {
