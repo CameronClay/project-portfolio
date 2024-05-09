@@ -52,7 +52,7 @@ describe('UserForm', () => {
         });
 
         describe('When submit button is clicked without all form data present', () => {
-            it('formData present and response received', async () => {
+            it('Form does not submit', async () => {
                 render_form(get_response);
                 await ftest.fill_form_incomplete();
                 await ftest.validate_incomplete();
@@ -75,7 +75,7 @@ describe('UserForm', () => {
         });
 
         describe('When submit button is clicked without all form data present', () => {
-            it('formData present and response received', async () => {
+            it('Form does not submit', async () => {
                 render_form(get_response_error);
                 await ftest.fill_form_incomplete();
                 await ftest.validate_incomplete();

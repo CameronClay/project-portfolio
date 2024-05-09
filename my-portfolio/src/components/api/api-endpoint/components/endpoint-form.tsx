@@ -17,8 +17,8 @@ export function APIEndpointResponse() {
                 //undefined and null are the same in typescript
                 response_text !== undefined && response_text.length > 0 ? (
                     <div className="flex flex-col justify-start">
-                        <p>Response:</p>
-                        <p className="borderBlack100 text-wrap whitespace-pre-wrap break-words">
+                        <label>Response:</label>
+                        <p aria-label='Response' className="borderBlack100 text-wrap whitespace-pre-wrap break-words">
                             {response_text}
                         </p>
                     </div>

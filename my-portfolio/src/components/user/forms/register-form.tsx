@@ -19,8 +19,6 @@ export default function RegisterForm() {
                 btn_text="Register"
                 form_inputs={REGISTER_USER_PAGE_PARAMS}
                 get_response={async (forminfo: Record<string, string>) => {
-                    let resp: Response;
-
                     if (forminfo.password !== forminfo.password_repeat) {
                         return Response.json({
                             message: 'Passwords do not match.',
@@ -28,7 +26,7 @@ export default function RegisterForm() {
                             status: 401,
                         });
                     }
-                    resp = await api_tmain.register(
+                    const resp = await api_tmain.register(
                         forminfo.username,
                         forminfo.password
                     );

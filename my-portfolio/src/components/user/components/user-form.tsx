@@ -9,9 +9,11 @@ import { GenericResponse } from '@src/constants/api/generic';
 
 function UserResponseElement({
     children,
+    aria_label,
     classNameEtc,
 }: {
     children: React.ReactNode;
+    aria_label: string;
     classNameEtc?: string;
 }) {
     let className =
@@ -20,7 +22,7 @@ function UserResponseElement({
         className += ` ${classNameEtc}`;
     }
 
-    return <p className={className}>{children}</p>;
+    return <p aria-label={aria_label} className={className}>{children}</p>;
 }
 
 //displays form response within an ResponseTextContextProvider
@@ -30,13 +32,13 @@ export function UserFormResponse() {
     return (
         <div>
             {response_text !== undefined && response_text.length > 0 ? (
-                <UserResponseElement classNameEtc="text-green-600 dark:text-green-700">
+                <UserResponseElement aria_label="Response" classNameEtc="text-green-600 dark:text-green-700">
                     {response_text}
                 </UserResponseElement>
             ) : null}
 
             {response_text_error !== undefined && response_text_error.length > 0 ? (
-                <UserResponseElement classNameEtc="text-red-600 dark:text-red-700">
+                <UserResponseElement aria_label="Response Error" classNameEtc="text-red-600 dark:text-red-700">
                     {response_text_error}
                 </UserResponseElement>
             ) : null}
