@@ -14,12 +14,16 @@ import { RESTMethodType } from '@src//constants/api/constants';
 import APIEndpoint from '@src//components/api/api-endpoint/endpoint';
 
 describe('RegisterForm works correctly', () => {
+    const METHOD = RESTMethodType.POST;
+    const ENDPOINT = '/api/public/account/login';
+    const DESCRIPTION = 'Login user and cache JWT token in cookies for future requests.'
+
     const render_form = () => {
         render(
             <APIEndpoint
-                method={RESTMethodType.POST}
-                endpoint="/api/public/account/login"
-                description="Login user and cache JWT token in cookies for future requests."
+                method={METHOD}
+                endpoint={ENDPOINT}
+                description={DESCRIPTION}
                 form={<FormLoginUser />}
             />
         );
@@ -58,10 +62,19 @@ describe('RegisterForm works correctly', () => {
         expect(get_password_input()).toBeInTheDocument();
         expect(get_submit_btn()).toBeInTheDocument();
         expect(query_message_display()).not.toBeInTheDocument();
+
+        expect(screen.getByText(ENDPOINT)).toBeInTheDocument();
+        expect(screen.getByText(DESCRIPTION)).toBeInTheDocument();
+        expect(screen.getByText(METHOD)).toBeInTheDocument();
+        expect(screen.queryByText(/Authentication Required/i)).not.toBeInTheDocument();
+
+        expect(screen.queryByRole('link', { name: /Login/i })).not.toBeInTheDocument();
+        expect(screen.queryByRole('link', { name: /Register/i })).not.toBeInTheDocument();
     };
 
     const validate_complete = async () => {
         expect(await find_message_display()).toHaveTextContent(/Log in successful/i);
+        expect(await find_message_display()).toHaveTextContent(/"status":\s*200/i);
     };
 
     const validate_incomplete = async () => {
@@ -71,6 +84,7 @@ describe('RegisterForm works correctly', () => {
 
     const validate_user_doesnt_exist = async () => {
         expect(await find_message_display()).toHaveTextContent(/User not found/i);
+        expect(await find_message_display()).toHaveTextContent(/"status":\s*404/i);
     };
 
     describe('Renders correctly with positive status', () => {

@@ -16,21 +16,49 @@ export class FormTest {
     static NEGATIVE_STATUS = 500;
     static FORM_DATA: Record<string, string> = { username: 'admin', password: 'my-password', new_username: 'admin2', new_password: '' };
 
-    private static get_username_input() {
-        return screen.getByLabelText(/^username$/i);
+    public static get_username_input() {
+        return screen.getByLabelText(/^username/i);
     }
-    private static get_password_input() {
-        return screen.getByLabelText(/^password$/i);
+    public static get_password_input() {
+        return screen.getByLabelText(/^password/i);
     }
-    private static get_new_username_input() {
-        return screen.getByLabelText(/^new_username$/i);
+    public static get_new_username_input() {
+        return screen.getByLabelText(/^new_username/i);
     }
-    private static get_new_password_input() {
-        return screen.getByLabelText(/^new_password$/i);
+    public static get_new_password_input() {
+        return screen.getByLabelText(/^new_password/i);
     }
-    private static get_submit_btn() {
+    public static get_submit_btn() {
         return screen.getByRole('button', { name: /update user/i });
     }
+    //-----------------------------------
+
+    public static validate_init_elems_base() {
+        expect(FormTest.get_username_input()).toBeInTheDocument();
+        expect(FormTest.get_password_input()).toBeInTheDocument();
+        expect(FormTest.get_new_username_input()).toBeInTheDocument();
+        expect(FormTest.get_new_password_input()).toBeInTheDocument();
+
+        expect(FormTest.get_submit_btn()).toBeInTheDocument();
+    }
+
+    public static async fill_form() {
+        await user.type(screen.getByLabelText(/^username/i), FormTest.FORM_DATA.username);
+        await user.type(screen.getByLabelText(/^password/i), FormTest.FORM_DATA.password);
+        await user.type(screen.getByLabelText(/^new_username/i), FormTest.FORM_DATA.new_username);
+
+        const submit_btn = screen.getByRole('button', { name: /update user/i });
+        await user.click(submit_btn);
+    }
+
+    public static async fill_form_incomplete() {
+        await user.type(screen.getByLabelText(/^username/i), FormTest.FORM_DATA.username);
+        await user.type(screen.getByLabelText(/^new_username/i), FormTest.FORM_DATA.new_username);
+
+        const submit_btn = screen.getByRole('button', { name: /update user/i });
+        await user.click(submit_btn);
+    }
+
     //-----------------------------------
 
     constructor(
@@ -50,12 +78,7 @@ export class FormTest {
     }
 
     public validate_init_elems() {
-        expect(FormTest.get_username_input()).toBeInTheDocument();
-        expect(FormTest.get_password_input()).toBeInTheDocument();
-        expect(FormTest.get_new_username_input()).toBeInTheDocument();
-        expect(FormTest.get_new_password_input()).toBeInTheDocument();
-
-        expect(FormTest.get_submit_btn()).toBeInTheDocument();
+        FormTest.validate_init_elems_base();
 
         expect(screen.queryByText(this.negative_response)).not.toBeInTheDocument();
         expect(screen.queryByText(this.positive_response)).not.toBeInTheDocument();
@@ -91,23 +114,6 @@ export class FormTest {
         expect(this.get_response_error).not.toHaveBeenCalled();
         expect(screen.queryByText(this.negative_response)).not.toBeInTheDocument();
         expect(screen.queryByText(this.positive_response)).not.toBeInTheDocument();
-    }
-
-    public async fill_form() {
-        await user.type(screen.getByLabelText(/^username$/i), FormTest.FORM_DATA.username);
-        await user.type(screen.getByLabelText(/^password$/i), FormTest.FORM_DATA.password);
-        await user.type(screen.getByLabelText(/^new_username$/i), FormTest.FORM_DATA.new_username);
-
-        const submit_btn = screen.getByRole('button', { name: /update user/i });
-        await user.click(submit_btn);
-    }
-
-    public async fill_form_incomplete() {
-        await user.type(screen.getByLabelText(/^username$/i), FormTest.FORM_DATA.username);
-        await user.type(screen.getByLabelText(/^new_username$/i), FormTest.FORM_DATA.new_username);
-
-        const submit_btn = screen.getByRole('button', { name: /update user/i });
-        await user.click(submit_btn);
     }
 
     public clear_mocks() {

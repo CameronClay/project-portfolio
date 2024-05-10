@@ -55,7 +55,7 @@ describe('APIEndpointForm', () => {
         describe('When submit button is clicked with all form data present', () => {
             it('formData present and response received', async () => {
                 render_form(get_response);
-                await ftest.fill_form();
+                await FormTest.fill_form();
                 await ftest.validate_changes(false);
                 expect(await screen.findByText(get_status_regex(FormTest.POSITIVE_STATUS))).toBeInTheDocument();
             });
@@ -64,7 +64,7 @@ describe('APIEndpointForm', () => {
         describe('When submit button is clicked without all form data present', () => {
             it('Form does not submit', async () => {
                 render_form(get_response);
-                await ftest.fill_form_incomplete();
+                await FormTest.fill_form_incomplete();
                 await ftest.validate_incomplete();
             });
         });
@@ -79,7 +79,7 @@ describe('APIEndpointForm', () => {
         describe('When submit button is clicked with all form data present', () => {
             it('formData present and response received', async () => {
                 render_form(get_response_error);
-                await ftest.fill_form();
+                await FormTest.fill_form();
 
                 await ftest.validate_changes(true);
                 expect(await screen.findByText(get_status_regex(FormTest.NEGATIVE_STATUS))).toBeInTheDocument();
@@ -89,7 +89,7 @@ describe('APIEndpointForm', () => {
         describe('When submit button is clicked without all form data present', () => {
             it('Form does not submit', async () => {
                 render_form(get_response_error);
-                await ftest.fill_form_incomplete();
+                await FormTest.fill_form_incomplete();
                 await ftest.validate_incomplete();
             });
         });
