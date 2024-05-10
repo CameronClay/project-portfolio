@@ -4,13 +4,13 @@ My personal portfolio website, built using React and Next.js (App Router & Serve
 ### Rest API
 Features a REST API with JSON Web Token (JWT) authentication using a MongoDB database.
 
-### Deployments
-Tested with Vercel and Docker deployments.
-
-View on vercel: https://cc-portfolio-one.vercel.app
-
 ### Unit Testing and Integration Testing
 Unit and integration testing are done with jest, react-testing-library, and msw.
 
 ### GitHub actions
 Uses GitHub actions to automatically build and test the application upon pushing.
+
+### Deployments
+Tested with Vercel and Docker deployments.
+
+View on vercel: https://cc-portfolio-one.vercel.app
