@@ -10,7 +10,7 @@ Tested with Vercel and Docker deployments.
 View on vercel: https://cc-portfolio-one.vercel.app
 
 ### Unit Testing and Integration Testing
-Unit and integration testing are done with jest and react-testing-library (WIP).
+Unit and integration testing are done with jest, react-testing-library, and MSW.
 
 ### GitHub actions
 Uses GitHub actions to automatically build and test the application upon pushing.
