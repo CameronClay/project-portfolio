@@ -1,8 +1,5 @@
 # Project Portfolio Website
-My personal portfolio website.
-
-## Rest API
-Features a REST API with JSON Web Token (JWT) authentication using a MongoDB database.
+My personal portfolio website. Features a **REST API** with **JSON Web Token (JWT)** authentication using a **MongoDB** database.
 
 ### Unit Testing and Integration Testing
 Unit and integration testing are done with jest, react-testing-library, and msw.
