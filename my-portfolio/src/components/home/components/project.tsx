@@ -38,7 +38,7 @@ export default function Project({
             }}
             className="group mb-[0.75rem] sm:mb-[2rem] last:mb-[0rem]"
         >
-            <section className="max-w-[42rem] border border-black/5 rounded-lg overflow-hidden sm:pr-[2rem] relative sm:h-[24rem] bg-gray-100 hover:bg-gray-200 transition dark:text-white dark:bg-white/[10%] dark:hover:bg-white/[15%]">
+            <section className="max-w-[42rem] border border-black/5 rounded-lg overflow-hidden sm:pr-[2rem] relative sm:h-[27rem] bg-gray-100 hover:bg-gray-200 transition dark:text-white dark:bg-white/[10%] dark:hover:bg-white/[15%]">
                 <div className="flex flex-col h-full pt-[1rem] pb-[1.75rem] px-[1.25rem] sm:pl-[2.5rem] sm:pr-[0.5rem] sm:pt-[2.5rem] sm:max-w-[60%]">
                     <h3 className="text-2xl font-semibold">{title}</h3>
                     <hr className="mt-[0.25rem]" />
@@ -60,8 +60,6 @@ export default function Project({
                                 {tag}
                             </li>
                         ))}
-                    </ul>
-                    <ul className="flex flex-wrap gap-[0.5rem] mt-[0.5rem]">
                         {otherSkills.map((tag, index) => (
                             <li
                                 className="dark:bg-gray-950/[0.6] bg-gray-950/[0.6] px-[0.75rem] py-[0.26rem] text-[0.7rem] uppercase tracking-wider rounded-full text-white dark:text-white/70 border-[0.125rem] border-gray-900 dark:border-white/40"
