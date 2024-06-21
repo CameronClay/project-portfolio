@@ -9,7 +9,7 @@ import * as api_forms from '@src/components/api/api-endpoint/forms/endpoint-form
 export default function APIPublic() {
     return (
         <Api
-            in_view_threshold={0.60}
+            in_view_threshold={0.50}
         >
             <APIEndpoint
                 method={RESTMethodType.GET}
