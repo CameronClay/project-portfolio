@@ -29,7 +29,7 @@
         "framer-motion": "^11.2.11",
         "jose": "^5.4.1",
         "mongodb": "^6.7.0",
-        "next": "^14.2.21",
+        "next": "^14.2.26",
         "nodemailer": "^6.9.14",
         "outsideclick-react": "^0.2.0",
         "password-hash": "^1.2.2",
